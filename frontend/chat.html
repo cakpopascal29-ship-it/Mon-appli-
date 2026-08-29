@@ -25,3 +25,194 @@
     </svg>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
+  </svg>
+</header>
+<a href="#" class="logo-text" onclick="allerAccueil(event)">AFRIQ'S</a>
+
+<div class="chat-app">
+  <aside class="user-list" id="userList">
+    <div class="my-profile" id="myProfile"></div>
+    <div class="users-scroll" id="usersScroll"></div>
+  </aside>
+  <section class="conversation" id="conversation">
+    <div class="conv-placeholder" id="convPlaceholder">Sélectionnez un utilisateur pour commencer une conversation.</div>
+    <div class="conv-active" id="convActive" style="display:none;">
+      <div class="conv-header">
+        <button class="back-btn" id="backBtn">←</button>
+        <span class="avatar" id="convAvatar"></span>
+        <div>
+          <div class="conv-username" id="convUsername"></div>
+          <div class="conv-status" id="convStatus"></div>
+        </div>
+      </div>
+      <div class="messages" id="messages"></div>
+      <div class="typing-indicator" id="typingIndicator" style="display:none;">écrit...</div>
+      <div class="message-input-row">
+        <input type="text" id="messageInput" placeholder="Écrire un message...">
+        <button id="sendBtn">Envoyer</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+function allerAccueil(e) {
+  e.preventDefault();
+  if (localStorage.getItem('token')) {
+    window.location.href = 'chat.html';
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+const token = localStorage.getItem('token');
+let myUserId = localStorage.getItem('userId');
+
+if (!token) {
+  window.location.href = 'index.html';
+}
+
+let selectedUserId = null;
+let usersData = [];
+let typingTimeout = null;
+
+const socket = io({ auth: { token: token } });
+
+function initiale(nom) {
+  return nom ? nom.charAt(0).toUpperCase() : '?';
+}
+
+function formatHeure(dateStr) {
+  const d = new Date(dateStr);
+  return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+}
+
+async function chargerMonProfil() {
+  const res = await fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token } });
+  if (!res.ok) {
+    localStorage.clear();
+    window.location.href = 'index.html';
+    return;
+  }
+  const me = await res.json();
+  myUserId = me._id;
+  localStorage.setItem('userId', myUserId);
+  document.getElementById('myProfile').innerHTML =
+    '<span class="avatar">' + initiale(me.username) + '</span>' +
+    '<div style="flex:1"><strong>' + me.username + '</strong></div>' +
+    '<button class="logout-btn" onclick="seDeconnecter()">Déconnexion</button>';
+}
+
+function seDeconnecter() {
+  localStorage.clear();
+  window.location.href = 'index.html';
+}
+
+async function chargerUtilisateurs() {
+  const res = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+  usersData = await res.json();
+  afficherUtilisateurs();
+}
+
+function afficherUtilisateurs() {
+  usersData.sort((a, b) => new Date(b.lastSeen) - new Date(a.lastSeen));
+  const container = document.getElementById('usersScroll');
+  container.innerHTML = '';
+  usersData.forEach(u => {
+    const div = document.createElement('div');
+    div.className = 'user-item' + (u._id === selectedUserId ? ' active' : '');
+    div.onclick = () => ouvrirConversation(u._id);
+    div.innerHTML =
+      '<span class="avatar">' + initiale(u.username) + '</span>' +
+      '<div style="flex:1">' + u.username + '</div>' +
+      '<span class="status-dot ' + u.status + '"></span>';
+    container.appendChild(div);
+  });
+}
+
+async function ouvrirConversation(userId) {
+  selectedUserId = userId;
+  const user = usersData.find(u => u._id === userId);
+  document.getElementById('convPlaceholder').style.display = 'none';
+  document.getElementById('convActive').style.display = 'flex';
+  document.getElementById('conversation').classList.add('open');
+  document.getElementById('convUsername').textContent = user.username;
+  document.getElementById('convAvatar').textContent = initiale(user.username);
+  document.getElementById('convStatus').innerHTML = '<span class="status-dot ' + user.status + '"></span> ' + user.status;
+  afficherUtilisateurs();
+
+  const res = await fetch('/api/messages/' + userId, { headers: { 'Authorization': 'Bearer ' + token } });
+  const messages = await res.json();
+  const box = document.getElementById('messages');
+  box.innerHTML = '';
+  messages.forEach(m => afficherMessage(m));
+  box.scrollTop = box.scrollHeight;
+}
+
+function afficherMessage(msg) {
+  if (msg.sender !== selectedUserId && msg.receiver !== selectedUserId) return;
+  const box = document.getElementById('messages');
+  const div = document.createElement('div');
+  const estMoi = msg.sender === myUserId;
+  div.className = 'bubble ' + (estMoi ? 'message-envoye' : 'message-recu');
+  div.innerHTML = msg.message + '<span class="time">' + formatHeure(msg.timestamp) + '</span>';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function envoyerMessage() {
+  const input = document.getElementById('messageInput');
+  const message = input.value.trim();
+  if (message === '' || !selectedUserId) return;
+  socket.emit('sendMessage', { receiverId: selectedUserId, message: message });
+  input.value = '';
+}
+
+document.getElementById('sendBtn').addEventListener('click', envoyerMessage);
+document.getElementById('messageInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    envoyerMessage();
+  } else if (selectedUserId) {
+    socket.emit('typing', { receiverId: selectedUserId });
+  }
+});
+document.getElementById('backBtn').addEventListener('click', () => {
+  document.getElementById('conversation').classList.remove('open');
+});
+
+socket.on('receiveMessage', (msg) => {
+  afficherMessage(msg);
+});
+
+socket.on('userStatusUpdate', (data) => {
+  const u = usersData.find(x => x._id === data.userId);
+  if (u) {
+    u.status = data.status;
+    u.lastSeen = data.lastSeen;
+    afficherUtilisateurs();
+    if (selectedUserId === data.userId) {
+      document.getElementById('convStatus').innerHTML = '<span class="status-dot ' + data.status + '"></span> ' + data.status;
+    }
+  }
+});
+
+socket.on('typing', (data) => {
+  if (data.senderId === selectedUserId) {
+    const ind = document.getElementById('typingIndicator');
+    ind.style.display = 'block';
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => { ind.style.display = 'none'; }, 2000);
+  }
+});
+
+setInterval(() => { socket.emit('heartbeat'); }, 20000);
+
+chargerMonProfil();
+chargerUtilisateurs();
+setInterval(chargerUtilisateurs, 15000);
+</script>
+
+</body>
+      </html>
