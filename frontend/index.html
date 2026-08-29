@@ -28,7 +28,7 @@
     <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
   </svg>
 </header>
-<div class="logo-text">AFRIQ'S</div>
+<a href="#" class="logo-text" onclick="allerAccueil(event)">AFRIQ'S</a>
 
 <main>
   <div class="form-container">
@@ -51,6 +51,15 @@
 </footer>
 
 <script>
+function allerAccueil(e) {
+  e.preventDefault();
+  if (localStorage.getItem('token')) {
+    window.location.href = 'chat.html';
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
 async function seConnecter() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
@@ -64,6 +73,7 @@ async function seConnecter() {
     if (res.ok) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.username);
+      localStorage.setItem('userId', data.userId);
       window.location.href = 'chat.html';
     } else {
       alert(data.error || 'Erreur de connexion');
@@ -76,7 +86,21 @@ async function seConnecter() {
 function motDePasseOublie() {
   alert('Fonction de reinitialisation pas encore disponible. Contactez-nous via la section A propos en bas de page.');
 }
+
+(async function verifierSessionExistante() {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const res = await fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token } });
+      if (res.ok) {
+        window.location.href = 'chat.html';
+      } else {
+        localStorage.clear();
+      }
+    } catch (err) {}
+  }
+})();
 </script>
 
 </body>
-</html>
+                  </html>
