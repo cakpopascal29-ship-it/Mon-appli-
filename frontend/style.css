@@ -19,7 +19,7 @@ body {
 header {
   position: relative;
   background-color: #C6552A;
-  height: 160px;
+  height: 210px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,8 @@ header {
 .logo-circle {
   position: relative;
   z-index: 2;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,13 +307,18 @@ footer.about a {
 .message-input-row {
   display: flex;
   gap: 8px;
-  padding: 12px 15px;
+  padding: 15px;
   border-top: 1px solid #eee;
+  min-height: 70px;
+  align-items: center;
 }
 
 .message-input-row input {
   flex: 1;
   margin-bottom: 0;
+  padding: 16px;
+  font-size: 16px;
+  min-height: 50px;
 }
 
 @media (max-width: 700px) {
