@@ -8,27 +8,29 @@
 <body>
 
 <header>
-  <div class="logo-circle">
-    <svg width="100" height="100" viewBox="0 0 100 100">
-      <path fill="#FFFFFF" d="M50 5
-        C60 5 68 12 72 20
-        C76 28 78 35 75 42
-        C80 48 82 55 78 62
-        C76 68 70 72 68 78
-        C66 84 62 90 55 92
-        C50 94 48 88 46 82
-        C44 76 38 74 35 68
-        C32 62 34 56 30 50
-        C26 44 22 40 24 32
-        C26 24 32 18 38 12
-        C42 8 46 5 50 5 Z" />
-    </svg>
-  </div>
+  <a href="#" onclick="allerAccueil(event)" style="display:block; text-decoration:none;">
+    <div class="logo-circle">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <path fill="#FFFFFF" d="M50 5
+          C60 5 68 12 72 20
+          C76 28 78 35 75 42
+          C80 48 82 55 78 62
+          C76 68 70 72 68 78
+          C66 84 62 90 55 92
+          C50 94 48 88 46 82
+          C44 76 38 74 35 68
+          C32 62 34 56 30 50
+          C26 44 22 40 24 32
+          C26 24 32 18 38 12
+          C42 8 46 5 50 5 Z" />
+        <text x="50" y="53" text-anchor="middle" font-size="13" font-family="Arial, sans-serif" font-weight="bold" fill="#C6552A">AFRIQ'S</text>
+      </svg>
+    </div>
+  </a>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
     <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
   </svg>
 </header>
-<a href="#" class="logo-text" onclick="allerAccueil(event)">AFRIQ'S</a>
 
 <div class="chat-app">
   <aside class="user-list" id="userList">
@@ -156,8 +158,10 @@ function afficherMessage(msg) {
   const box = document.getElementById('messages');
   const div = document.createElement('div');
   const estMoi = msg.sender === myUserId;
+  const autreUser = usersData.find(u => u._id === selectedUserId);
+  const nomExpediteur = estMoi ? 'Moi' : (autreUser ? autreUser.username : '');
   div.className = 'bubble ' + (estMoi ? 'message-envoye' : 'message-recu');
-  div.innerHTML = msg.message + '<span class="time">' + formatHeure(msg.timestamp) + '</span>';
+  div.innerHTML = '<span class="sender-name">' + nomExpediteur + '</span>' + msg.message + '<span class="time">' + formatHeure(msg.timestamp) + '</span>';
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
@@ -215,4 +219,4 @@ setInterval(chargerUtilisateurs, 15000);
 </script>
 
 </body>
-      </html>
+</html>
