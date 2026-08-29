@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const verifierToken = require('../middleware/auth');
 
 router.post('/register', async (req, res) => {
   try {
@@ -11,7 +12,7 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Nom utilisateur et mot de passe requis' });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ username, password: hashedPassword, status: 'inactif', lastSeen: new Date() });
     await newUser.save();
     res.status(201).json({ message: 'Utilisateur cree avec succes' });
   } catch (err) {
@@ -30,11 +31,16 @@ router.post('/login', async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ error: 'Mot de passe incorrect' });
     }
-    const token = jwt.sign({ id: user._id, username: user.username }, 'secret_key', { expiresIn: '1h' });
-    res.json({ token, username: user.username });
+    user.lastSeen = new Date();
+    await user.save();
+    const token = jwt.sign({ id: user._id, username: user.username }, 'secret_key', { expiresIn: '30d' });
+    res.json({ token, username: user.username, userId: user._id });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-module.exports = router;
+router.get('/me', verifierToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
