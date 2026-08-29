@@ -124,6 +124,15 @@ io.on('connection', (socket) => {
 
 const mongoUri = process.env.MONGODB_URI;
 
-server.listen(process.env.PORT || 3000, () => {
-  console.log('Serveur demarre');
-});
+mongoose.connect(mongoUri)
+  .then(() => {
+    console.log('MongoDB connecte');
+
+    server.listen(process.env.PORT || 3000, () => {
+      console.log('Serveur demarre');
+    });
+  })
+  .catch((err) => {
+    console.error('Erreur de connexion MongoDB :', err);
+    process.exit(1);
+  });
