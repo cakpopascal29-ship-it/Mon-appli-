@@ -19,7 +19,7 @@ body {
 header {
   position: relative;
   background-color: #C6552A;
-  height: 210px;
+  height: 260px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,8 @@ header {
 .logo-circle {
   position: relative;
   z-index: 2;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,11 +59,11 @@ main {
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .password-row {
@@ -91,12 +91,12 @@ input {
 
 button.primary-btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: #C6552A;
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -157,21 +157,22 @@ footer.about a {
 }
 
 .my-profile {
-  padding: 15px;
+  padding: 18px 15px;
   border-bottom: 1px solid #eee;
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 16px;
 }
 
 .logout-btn {
   background: #C6552A;
   color: white;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .users-scroll {
@@ -182,10 +183,11 @@ footer.about a {
 .user-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 15px;
+  gap: 12px;
+  padding: 16px 15px;
   cursor: pointer;
   border-bottom: 1px solid #f5f5f5;
+  font-size: 16px;
 }
 
 .user-item:hover, .user-item.active {
@@ -193,8 +195,8 @@ footer.about a {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-color: #C6552A;
   color: white;
@@ -202,12 +204,13 @@ footer.about a {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  font-size: 18px;
   flex-shrink: 0;
 }
 
 .status-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   display: inline-block;
   margin-left: 6px;
@@ -230,6 +233,7 @@ footer.about a {
   color: #999;
   padding: 20px;
   text-align: center;
+  font-size: 16px;
 }
 
 .conv-active {
@@ -241,16 +245,26 @@ footer.about a {
 .conv-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 15px;
+  gap: 12px;
+  padding: 16px 15px;
   border-bottom: 1px solid #eee;
+}
+
+.conv-username {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.conv-status {
+  font-size: 13px;
+  color: #666;
 }
 
 .back-btn {
   display: none;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
 }
 
@@ -265,9 +279,9 @@ footer.about a {
 
 .bubble {
   width: 100%;
-  padding: 14px 18px;
+  padding: 16px 20px;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
@@ -275,7 +289,7 @@ footer.about a {
 .bubble .sender-name {
   display: block;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 13px;
   margin-bottom: 4px;
   opacity: 0.85;
 }
@@ -286,13 +300,13 @@ footer.about a {
 }
 
 .message-envoye {
-  background-color: #2b2b2b;
-  color: #f5f5f5;
+  background-color: #F4A65B;
+  color: #4a2600;
 }
 
 .bubble .time {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   opacity: 0.7;
   margin-top: 4px;
 }
@@ -306,19 +320,31 @@ footer.about a {
 
 .message-input-row {
   display: flex;
-  gap: 8px;
-  padding: 15px;
+  gap: 10px;
+  padding: 20px;
   border-top: 1px solid #eee;
-  min-height: 70px;
+  min-height: 130px;
   align-items: center;
 }
 
 .message-input-row input {
   flex: 1;
   margin-bottom: 0;
-  padding: 16px;
+  padding: 20px;
+  font-size: 18px;
+  min-height: 60px;
+}
+
+.message-input-row button {
+  padding: 16px 24px;
+  background-color: #C6552A;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
   font-size: 16px;
-  min-height: 50px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 @media (max-width: 700px) {
@@ -335,4 +361,4 @@ footer.about a {
   }
   .conversation.open { left: 0; }
   .back-btn { display: inline-block; }
-  }
+}
