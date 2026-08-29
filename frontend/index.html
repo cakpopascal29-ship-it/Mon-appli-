@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>AFRIQ'S - Connexion</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo-circle">
+    <svg width="100" height="100" viewBox="0 0 100 100">
+      <path fill="#FFFFFF" d="M50 5
+        C60 5 68 12 72 20
+        C76 28 78 35 75 42
+        C80 48 82 55 78 62
+        C76 68 70 72 68 78
+        C66 84 62 90 55 92
+        C50 94 48 88 46 82
+        C44 76 38 74 35 68
+        C32 62 34 56 30 50
+        C26 44 22 40 24 32
+        C26 24 32 18 38 12
+        C42 8 46 5 50 5 Z" />
+    </svg>
+  </div>
+  <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
+  </svg>
+</header>
+<div class="logo-text">AFRIQ'S</div>
+
+<main>
+  <div class="form-container">
+    <input type="text" id="username" placeholder="Nom d'utilisateur">
+    <div class="password-row">
+      <input type="password" id="password" placeholder="Mot de passe">
+      <button type="button" class="forgot-btn" onclick="motDePasseOublie()">?</button>
+    </div>
+    <button class="primary-btn" onclick="seConnecter()">Se connecter</button>
+    <div class="switch-link">Pas de compte ? <a href="register.html">S'inscrire</a></div>
+  </div>
+</main>
+
+<footer class="about">
+  <h3>À propos</h3>
+  <p>Email : cakpopascal29@gmail.com</p>
+  <p>WhatsApp : 0150186601</p>
+  <p>Facebook : <a href="https://www.facebook.com/profile.php?id=61593075962641" target="_blank">Notre page</a></p>
+  <p>Mise en service : 28 Août 2026</p>
+</footer>
+
+<script>
+async function seConnecter() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('username', data.username);
+      window.location.href = 'chat.html';
+    } else {
+      alert(data.error || 'Erreur de connexion');
+    }
+  } catch (err) {
+    alert('Impossible de contacter le serveur');
+  }
+}
+
+function motDePasseOublie() {
+  alert('Fonction de reinitialisation pas encore disponible. Contactez-nous via la section A propos en bas de page.');
+}
+</script>
+
+</body>
+</html>
