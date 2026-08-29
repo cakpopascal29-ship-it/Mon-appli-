@@ -122,8 +122,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://cakpopascal29_db_user:0163203021@cluster0.yxg16mf.mongodb.net/chatapp?appName=Cluster0';
-mongoose.connect(mongoUri);
+const mongoUri = process.env.MONGODB_URI;
 
 server.listen(process.env.PORT || 3000, () => {
   console.log('Serveur demarre');
