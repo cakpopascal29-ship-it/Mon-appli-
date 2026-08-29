@@ -48,6 +48,20 @@ app.get('/api/messages/:userId', verifierToken, async (req, res) => {
   }
 });
 
+app.delete('/api/users/:id', verifierToken, async (req, res) => {
+  try {
+    if (req.user.username !== "HIRO'od") {
+      return res.status(403).json({ error: 'Action reservee a l administrateur' });
+    }
+    const userId = req.params.id;
+    await Message.deleteMany({ $or: [{ sender: userId }, { receiver: userId }] });
+    await User.findByIdAndDelete(userId);
+    res.json({ message: 'Utilisateur supprime' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -123,16 +137,8 @@ io.on('connection', (socket) => {
 });
 
 const mongoUri = process.env.MONGODB_URI;
+mongoose.connect(mongoUri);
 
-mongoose.connect(mongoUri)
-  .then(() => {
-    console.log('MongoDB connecte');
-
-    server.listen(process.env.PORT || 3000, () => {
-      console.log('Serveur demarre');
-    });
-  })
-  .catch((err) => {
-    console.error('Erreur de connexion MongoDB :', err);
-    process.exit(1);
-  });
+server.listen(process.env.PORT || 3000, () => {
+  console.log('Serveur demarre');
+});
