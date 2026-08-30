@@ -918,9 +918,12 @@ mongoose.connect(mongoUri);
 SERVEUR
 ========================================================= */
 
+const PORT = process.env.PORT || 3000;
+
 server.listen(
-process.env.PORT || 3000,
-() => {
-console.log('Serveur demarre');
-}
+  PORT,
+  '0.0.0.0',
+  () => {
+    console.log(`Serveur demarre sur le port ${PORT}`);
+  }
 );
