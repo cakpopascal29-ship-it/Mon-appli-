@@ -819,19 +819,21 @@ header {
 
 
 /* ==================================================
-   BULLES
+   MESSAGES / BULLES
 ================================================== */
 
-.bubble {
-  width: auto;
+.message {
+  display: block;
+
+  width: fit-content;
 
   max-width: 78%;
 
   padding:
-    9px
-    12px
-    6px
-    12px;
+    8px
+    11px
+    5px
+    11px;
 
   border-radius: 16px;
 
@@ -842,9 +844,19 @@ header {
   word-wrap: break-word;
 
   overflow-wrap: anywhere;
+
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08);
 }
 
-.message-envoye {
+
+/* ==================================================
+   MESSAGE ENVOYÉ
+================================================== */
+
+.message-sent {
+  align-self: flex-end;
+
   background-color: #C6552A;
 
   color: #ffffff;
@@ -852,7 +864,14 @@ header {
   border-bottom-right-radius: 5px;
 }
 
-.message-recu {
+
+/* ==================================================
+   MESSAGE REÇU
+================================================== */
+
+.message-received {
+  align-self: flex-start;
+
   background-color: #E9E4DD;
 
   color: #333333;
@@ -860,20 +879,34 @@ header {
   border-bottom-left-radius: 5px;
 }
 
+
+/* ==================================================
+   TEXTE DU MESSAGE
+================================================== */
+
 .message-text {
   white-space: pre-wrap;
+
+  word-break: break-word;
 }
 
-.bubble .time {
+
+/* ==================================================
+   HEURE DU MESSAGE
+================================================== */
+
+.message-time {
   display: block;
+
+  margin-top: 3px;
 
   font-size: 9px;
 
-  opacity: 0.7;
-
-  margin-top: 4px;
+  line-height: 1;
 
   text-align: right;
+
+  opacity: 0.65;
 }
 
 
@@ -1308,25 +1341,38 @@ footer.about a {
   }
 
 
-  .bubble {
-    max-width: 84%;
+  .message {
+  max-width: 84%;
 
-    padding:
-      8px
-      10px
-      5px
-      10px;
+  padding:
+    7px
+    9px
+    5px
+    9px;
 
-    font-size: 13px;
+  font-size: 13px;
 
-    border-radius: 13px;
-  }
+  line-height: 1.35;
+
+  border-radius: 13px;
+}
 
 
-  .bubble .time {
-    font-size: 8px;
-  }
+.message-sent {
+  border-bottom-right-radius: 4px;
+}
 
+
+.message-received {
+  border-bottom-left-radius: 4px;
+}
+
+
+.message-time {
+  margin-top: 3px;
+
+  font-size: 8px;
+    }
 
   /* ==================================================
      BARRE D'ÉCRITURE
