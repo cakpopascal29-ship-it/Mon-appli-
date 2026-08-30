@@ -500,7 +500,6 @@ io.on('connection', (socket) => {
      ENVOYER MESSAGE
   ======================================================= */
 
-  socket.on(
   socket.on('sendMessage', async (data, callback) => {
 
   try {
@@ -554,6 +553,11 @@ io.on('connection', (socket) => {
 
 
     await newMessage.save();
+    if (typeof callback === 'function') {
+  callback({
+    ok: true
+  });
+    }
 
 
     /* ==============================================
