@@ -438,92 +438,219 @@ lastSeen: new Date()
 }
 );
 });
+/* =========================================================
+   CONNECTION SOCKET
+========================================================= */
 
-/* =======================================================
-ENVOYER MESSAGE
-======================================================= */
+io.on('connection', (socket) => {
 
-socket.on('sendMessage', async (data) => {
+  const userId = String(socket.userId);
 
-try {
-
-  if (!data.receiverId || !data.message) {
-    return;
-  }
-
-  const newMessage = new Message({
-    sender: userId,
-    receiver: data.receiverId,
-    message: data.message,
-    timestamp: new Date()
-  });
-
-  await newMessage.save();
-
-  /* Envoi temps réel au destinataire */
-
-  const receiverSocketId = onlineUsers.get(
-    data.receiverId
+  onlineUsers.set(
+    userId,
+    socket.id
   );
-
-  if (receiverSocketId) {
-    io.to(receiverSocketId).emit(
-      'receiveMessage',
-      newMessage
-    );
-  }
-
-  /* Confirmation chez l'expéditeur */
-
-  socket.emit(
-    'receiveMessage',
-    newMessage
-  );
-
-  /* Notification Android */
-
-  envoyerNotificationPush(
-  data.receiverId,
-  socket.username,
-  data.message
-).catch(err => {
-  console.error(
-    'Erreur notification Push:',
-    err.message
-  );
-});
-
-} catch (err) {
 
   console.log(
-    'Erreur sendMessage:',
-    err
+    'Utilisateur connecté en temps réel :',
+    userId
   );
-}
 
-});
 
-/* =======================================================
-TYPING
-======================================================= */
+  if (disconnectTimers.has(userId)) {
 
-socket.on('typing', (data) => {
+    clearTimeout(
+      disconnectTimers.get(userId)
+    );
 
-const receiverSocketId = onlineUsers.get(
-  data.receiverId
-);
+    disconnectTimers.delete(
+      userId
+    );
 
-if (receiverSocketId) {
+  }
 
-  io.to(receiverSocketId).emit(
-    'typing',
-    {
-      senderId: userId
+
+  setStatus(
+    userId,
+    'actif'
+  );
+
+
+  /* =======================================================
+     HEARTBEAT
+  ======================================================= */
+
+  socket.on(
+    'heartbeat',
+    async () => {
+
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          lastSeen:
+            new Date()
+        }
+      );
+
     }
   );
-}
 
-});
+
+  /* =======================================================
+     ENVOYER MESSAGE
+  ======================================================= */
+
+  socket.on(
+    'sendMessage',
+    async (data) => {
+
+      try {
+
+        if (
+          !data ||
+          !data.receiverId ||
+          !data.message
+        ) {
+
+          return;
+
+        }
+
+
+        const receiverId =
+          String(
+            data.receiverId
+          );
+
+
+        const newMessage =
+          new Message({
+
+            sender:
+              userId,
+
+            receiver:
+              receiverId,
+
+            message:
+              data.message.trim(),
+
+            timestamp:
+              new Date()
+
+          });
+
+
+        await newMessage.save();
+
+
+        /* ===============================================
+           ENVOI IMMÉDIAT AU DESTINATAIRE
+        =============================================== */
+
+        const receiverSocketId =
+          onlineUsers.get(
+            receiverId
+          );
+
+
+        if (receiverSocketId) {
+
+          io.to(
+            receiverSocketId
+          ).emit(
+            'receiveMessage',
+            newMessage
+          );
+
+        }
+
+
+        /* ===============================================
+           CONFIRMATION IMMÉDIATE CHEZ L'EXPÉDITEUR
+        =============================================== */
+
+        socket.emit(
+          'receiveMessage',
+          newMessage
+        );
+
+
+        /* ===============================================
+           NOTIFICATION PUSH EN ARRIÈRE-PLAN
+        =============================================== */
+
+        envoyerNotificationPush(
+          receiverId,
+          socket.username,
+          data.message
+        ).catch(
+          err => {
+
+            console.error(
+              'Erreur notification Push:',
+              err.message
+            );
+
+          }
+        );
+
+
+      } catch (err) {
+
+        console.error(
+          'Erreur sendMessage:',
+          err
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =======================================================
+     TYPING
+  ======================================================= */
+
+  socket.on(
+    'typing',
+    (data) => {
+
+      if (
+        !data ||
+        !data.receiverId
+      ) {
+
+        return;
+
+      }
+
+
+      const receiverSocketId =
+        onlineUsers.get(
+          String(
+            data.receiverId
+          )
+        );
+
+
+      if (receiverSocketId) {
+
+        io.to(
+          receiverSocketId
+        ).emit(
+          'typing',
+          {
+            senderId:
+              userId
+          }
+        );
+
+      }
+
+    }
+  );
 
 /* =======================================================
 DECONNEXION
