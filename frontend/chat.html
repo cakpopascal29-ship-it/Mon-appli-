@@ -2,43 +2,115 @@
 <html lang="fr">
 
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>AFRIQ'S - Chat</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="favicon.ico">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-  <meta name="theme-color" content="#C6552A">
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <link
+    rel="icon"
+    href="favicon.ico"
+  >
+
+  <meta
+    name="theme-color"
+    content="#C6552A"
+  >
+
 </head>
+
 
 <body>
 
-  <!-- =========================
+
+  <!-- ==================================================
        HEADER
-  ========================== -->
+  =================================================== -->
 
   <header>
 
-    <a href="#"
-       onclick="allerAccueil(event)"
-       style="display:block; text-decoration:none;">
 
-      <svg class="logo-oval"
-           width="520"
-           height="260"
-           viewBox="0 0 260 130">
+    <!-- LIGNES COURBES BLANCHES -->
+
+    <svg
+      class="header-curves"
+      viewBox="0 0 1200 320"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+
+      <path
+        d="M-50 80
+           C150 0 260 160 450 75
+           S760 20 930 100
+           S1130 180 1250 70"
+        fill="none"
+        stroke="white"
+        stroke-width="3"
+        opacity="0.18"
+      />
+
+      <path
+        d="M-80 190
+           C120 100 260 270 470 165
+           S760 100 930 195
+           S1120 270 1280 155"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        opacity="0.14"
+      />
+
+      <path
+        d="M-60 280
+           C150 190 290 340 500 245
+           S790 190 970 275
+           S1130 330 1260 240"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        opacity="0.12"
+      />
+
+    </svg>
+
+
+    <!-- LOGO -->
+
+    <a
+      href="#"
+      onclick="allerAccueil(event)"
+      class="logo-link"
+    >
+
+      <svg
+        class="logo-oval"
+        viewBox="0 0 260 130"
+      >
 
         <ellipse
           cx="130"
           cy="65"
-          rx="125"
-          ry="58"
+          rx="118"
+          ry="54"
           fill="#FFFFFF"
         />
+
 
         <text
           x="130"
@@ -55,6 +127,9 @@
 
     </a>
 
+
+    <!-- VAGUE BASSE -->
+
     <svg
       class="wave"
       viewBox="0 0 1200 40"
@@ -63,15 +138,20 @@
 
       <path
         fill="#F7EFEA"
-        d="M0,20 C50,40 100,0 150,20
-        C200,40 250,0 300,20
-        C350,40 400,0 450,20
-        C500,40 550,0 600,20
-        C650,40 700,0 750,20
-        C800,40 850,0 900,20
-        C950,40 1000,0 1050,20
-        C1100,40 1150,0 1200,20
-        L1200,40 L0,40 Z"
+        d="
+          M0,20
+          C50,40 100,0 150,20
+          C200,40 250,0 300,20
+          C350,40 400,0 450,20
+          C500,40 550,0 600,20
+          C650,40 700,0 750,20
+          C800,40 850,0 900,20
+          C950,40 1000,0 1050,20
+          C1100,40 1150,0 1200,20
+          L1200,40
+          L0,40
+          Z
+        "
       />
 
     </svg>
@@ -79,19 +159,24 @@
   </header>
 
 
-  <!-- =========================
-       APPLICATION DE CHAT
-  ========================== -->
+  <!-- ==================================================
+       APPLICATION CHAT
+  =================================================== -->
 
   <div class="chat-app">
 
 
-    <!-- LISTE DES UTILISATEURS -->
+    <!-- ==================================================
+         LISTE UTILISATEURS
+    =================================================== -->
 
     <aside
       class="user-list"
       id="userList"
     >
+
+
+      <!-- MON PROFIL -->
 
       <div
         class="my-profile"
@@ -99,15 +184,20 @@
       ></div>
 
 
+      <!-- UTILISATEURS -->
+
       <div
         class="users-scroll"
         id="usersScroll"
       ></div>
 
+
     </aside>
 
 
-    <!-- CONVERSATION -->
+    <!-- ==================================================
+         CONVERSATION
+    =================================================== -->
 
     <section
       class="conversation"
@@ -115,7 +205,7 @@
     >
 
 
-      <!-- MESSAGE AVANT SÉLECTION -->
+      <!-- PLACEHOLDER -->
 
       <div
         class="conv-placeholder"
@@ -134,7 +224,9 @@
       >
 
 
-        <!-- EN-TÊTE -->
+        <!-- ==================================================
+             EN-TÊTE DISCUSSION
+        =================================================== -->
 
         <div class="conv-header">
 
@@ -159,6 +251,7 @@
 
             <div class="conv-user-info">
 
+
               <div
                 class="conv-username"
                 id="convUsername"
@@ -170,6 +263,7 @@
                 id="convStatus"
               ></div>
 
+
             </div>
 
 
@@ -179,7 +273,9 @@
         </div>
 
 
-        <!-- MESSAGES -->
+        <!-- ==================================================
+             MESSAGES
+        =================================================== -->
 
         <div
           class="messages"
@@ -187,7 +283,9 @@
         ></div>
 
 
-        <!-- INDICATEUR ÉCRITURE -->
+        <!-- ==================================================
+             INDICATEUR
+        =================================================== -->
 
         <div
           class="typing-indicator"
@@ -198,9 +296,12 @@
         </div>
 
 
-        <!-- BARRE DE MESSAGE -->
+        <!-- ==================================================
+             BARRE MESSAGE
+        =================================================== -->
 
         <div class="message-input-row">
+
 
           <input
             type="text"
@@ -218,6 +319,7 @@
             ➤
           </button>
 
+
         </div>
 
 
@@ -230,48 +332,73 @@
   </div>
 
 
-  <!-- =========================
+  <!-- ==================================================
        FOOTER
-  ========================== -->
+  =================================================== -->
 
   <footer class="about">
 
+
     <h3>À propos</h3>
 
+
     <p class="about-desc">
-      AFRIQ'S est une messagerie pensée pour connecter les Africains et la diaspora en toute simplicité.
-      Discutez en temps réel, où que vous soyez, avec vos proches et votre communauté.
+
+      AFRIQ'S est une messagerie pensée pour connecter
+      les Africains et la diaspora en toute simplicité.
+      Discutez en temps réel, où que vous soyez,
+      avec vos proches et votre communauté.
+
     </p>
 
-    <p>Email : cakpopascal29@gmail.com</p>
-
-    <p>WhatsApp : 0150186601</p>
 
     <p>
+      Email : cakpopascal29@gmail.com
+    </p>
+
+
+    <p>
+      WhatsApp : 0150186601
+    </p>
+
+
+    <p>
+
       Facebook :
+
       <a
         href="https://www.facebook.com/profile.php?id=61593075962641"
         target="_blank"
+        rel="noopener noreferrer"
       >
         Notre page
       </a>
+
     </p>
 
-    <p>Mise en service : 28 Août 2026</p>
+
+    <p>
+      Mise en service : 28 Août 2026
+    </p>
+
 
     <p class="slogan">
       "Connecter l'Afrique, un message à la fois."
     </p>
 
+
   </footer>
 
 
-  <!-- SOCKET.IO -->
+  <!-- ==================================================
+       SOCKET.IO
+  =================================================== -->
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
 
   <script>
+
 
     /* =====================================================
        NAVIGATION
@@ -282,9 +409,13 @@
       e.preventDefault();
 
       if (localStorage.getItem('token')) {
+
         window.location.href = 'chat.html';
+
       } else {
+
         window.location.href = 'index.html';
+
       }
 
     }
@@ -294,7 +425,8 @@
        AUTHENTIFICATION
     ====================================================== */
 
-    const token = localStorage.getItem('token');
+    const token =
+      localStorage.getItem('token');
 
     const myUsername =
       localStorage.getItem('username');
@@ -308,7 +440,8 @@
 
     if (!token) {
 
-      window.location.href = 'index.html';
+      window.location.href =
+        'index.html';
 
     }
 
@@ -337,12 +470,17 @@
     });
 
 
-    socket.on('connect_error', (err) => {
-      console.error(
-        'Erreur connexion Socket.IO:',
-        err.message
-      );
-    });
+    socket.on(
+      'connect_error',
+      (err) => {
+
+        console.error(
+          'Erreur connexion Socket.IO:',
+          err.message
+        );
+
+      }
+    );
 
 
     /* =====================================================
@@ -360,7 +498,8 @@
 
     function formatHeure(dateStr) {
 
-      const d = new Date(dateStr);
+      const d =
+        new Date(dateStr);
 
       return (
         d.getHours()
@@ -398,15 +537,16 @@
 
       try {
 
-        const res = await fetch(
-          '/api/auth/me',
-          {
-            headers: {
-              'Authorization':
-                'Bearer ' + token
+        const res =
+          await fetch(
+            '/api/auth/me',
+            {
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
             }
-          }
-        );
+          );
 
 
         if (!res.ok) {
@@ -443,17 +583,23 @@
           initiale(me.username) +
           '</span>' +
 
+          '<span class="status-dot actif"></span>' +
+
           '<div class="my-profile-name">' +
+
           '<strong>' +
           echapperHTML(me.username) +
           '</strong>' +
+
           '</div>' +
 
           '<button ' +
           'class="logout-btn" ' +
           'onclick="seDeconnecter()" ' +
           'type="button">' +
+
           'Déconnexion' +
+
           '</button>';
 
       } catch (err) {
@@ -490,15 +636,16 @@
 
       try {
 
-        const res = await fetch(
-          '/api/users',
-          {
-            headers: {
-              'Authorization':
-                'Bearer ' + token
+        const res =
+          await fetch(
+            '/api/users',
+            {
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
             }
-          }
-        );
+          );
 
 
         if (!res.ok) {
@@ -538,15 +685,16 @@
 
       try {
 
-        const res = await fetch(
-          '/api/messages/unread-counts',
-          {
-            headers: {
-              'Authorization':
-                'Bearer ' + token
+        const res =
+          await fetch(
+            '/api/messages/unread-counts',
+            {
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
             }
-          }
-        );
+          );
 
 
         if (!res.ok) {
@@ -597,7 +745,9 @@
           u => {
 
             const div =
-              document.createElement('div');
+              document.createElement(
+                'div'
+              );
 
 
             div.className =
@@ -664,9 +814,11 @@
             div.addEventListener(
               'click',
               () => {
+
                 ouvrirConversation(
                   u._id
                 );
+
               }
             );
 
@@ -730,17 +882,18 @@
 
       try {
 
-        const res = await fetch(
-          '/api/users/' + userId,
-          {
-            method: 'DELETE',
+        const res =
+          await fetch(
+            '/api/users/' + userId,
+            {
+              method: 'DELETE',
 
-            headers: {
-              'Authorization':
-                'Bearer ' + token
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
             }
-          }
-        );
+          );
 
 
         if (!res.ok) {
@@ -758,8 +911,7 @@
           selectedUserId === userId
         ) {
 
-          selectedUserId =
-            null;
+          selectedUserId = null;
 
 
           document
@@ -874,6 +1026,7 @@
               : 'inactif'
           ) +
           '"></span> ' +
+
           (
             user.status === 'actif'
               ? 'En ligne'
@@ -892,16 +1045,17 @@
 
       try {
 
-        const res = await fetch(
-          '/api/messages/' +
-          userId,
-          {
-            headers: {
-              'Authorization':
-                'Bearer ' + token
+        const res =
+          await fetch(
+            '/api/messages/' +
+            userId,
+            {
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
             }
-          }
-        );
+          );
 
 
         if (!res.ok) {
@@ -927,7 +1081,6 @@
 
         box.scrollTop =
           box.scrollHeight;
-
 
       } catch (err) {
 
@@ -965,7 +1118,9 @@
       }
 
     }
-        /* =====================================================
+
+
+    /* =====================================================
        AFFICHER MESSAGE
     ====================================================== */
 
@@ -1028,7 +1183,7 @@
 
         '<span class="message-text">' +
         echapperHTML(
-          msg.message
+                msg.message
         ) +
         '</span>' +
 
@@ -1038,16 +1193,13 @@
         ) +
         '</span>';
 
-
       ligne.appendChild(
         bubble
       );
 
-
       box.appendChild(
         ligne
       );
-
 
       if (scroll) {
 
@@ -1070,20 +1222,15 @@
           'messageInput'
         );
 
-
       const message =
         input.value.trim();
-
 
       if (
         !message ||
         !selectedUserId
       ) {
-
         return;
-
       }
-
 
       socket.emit(
         'sendMessage',
@@ -1095,7 +1242,6 @@
             message
         }
       );
-
 
       input.value = '';
 
@@ -1140,7 +1286,6 @@
 
           }
 
-
           if (
             selectedUserId
           ) {
@@ -1174,14 +1319,12 @@
           selectedUserId =
             null;
 
-
           document
             .getElementById(
               'convActive'
             )
             .style.display =
               'none';
-
 
           document
             .getElementById(
@@ -1190,7 +1333,6 @@
             .style.display =
               'flex';
 
-
           afficherUtilisateurs();
 
         }
@@ -1198,26 +1340,22 @@
 
 
     /* =====================================================
-       MESSAGE TEMPS RÉEL
+       SOCKET — NOUVEAU MESSAGE
     ====================================================== */
 
     socket.on(
-      'receiveMessage',
+      'newMessage',
       (msg) => {
 
-        const conversationOuverte =
-          (
-            msg.sender === selectedUserId ||
-            msg.receiver === selectedUserId
-          );
-
-
-        const messageRecu =
-          msg.sender !== myUserId;
-
+        /*
+         * Si le message appartient
+         * à la conversation ouverte,
+         * on l'affiche immédiatement.
+         */
 
         if (
-          conversationOuverte
+          msg.sender === selectedUserId ||
+          msg.receiver === selectedUserId
         ) {
 
           afficherMessage(
@@ -1225,58 +1363,22 @@
             true
           );
 
-
-          if (
-            messageRecu
-          ) {
-
-            fetch(
-              '/api/messages/' +
-              selectedUserId +
-              '/read',
-              {
-                method: 'POST',
-
-                headers: {
-                  'Authorization':
-                    'Bearer ' +
-                    token
-                }
-              }
-            )
-              .catch(
-                err =>
-                  console.error(
-                    'Erreur lecture:',
-                    err
-                  )
-              );
-
-          }
-
-
-          return;
-
         }
 
 
+        /*
+         * Si le message est reçu
+         * d'un autre utilisateur,
+         * on augmente son compteur.
+         */
+
         if (
-          messageRecu
+          msg.receiver === myUserId &&
+          msg.sender !== selectedUserId
         ) {
 
-          const expediteurId =
-            msg.sender;
-
-
-          unreadCounts[
-            expediteurId
-          ] =
-            (
-              unreadCounts[
-                expediteurId
-              ] || 0
-            ) + 1;
-
+          unreadCounts[msg.sender] =
+            (unreadCounts[msg.sender] || 0) + 1;
 
           afficherUtilisateurs();
 
@@ -1287,60 +1389,62 @@
 
 
     /* =====================================================
-       STATUT UTILISATEUR
+       SOCKET — UTILISATEUR CONNECTÉ
     ====================================================== */
 
     socket.on(
-      'userStatusUpdate',
+      'userStatus',
       (data) => {
 
         const user =
           usersData.find(
-            u =>
-              u._id ===
-              data.userId
+            u => u._id === data.userId
           );
 
+        if (user) {
 
-        if (!user) {
-          return;
-        }
+          user.status =
+            data.status;
 
+          user.lastSeen =
+            data.lastSeen ||
+            new Date().toISOString();
 
-        user.status =
-          data.status;
-
-
-        user.lastSeen =
-          data.lastSeen;
+          afficherUtilisateurs();
 
 
-        afficherUtilisateurs();
+          /*
+           * Met également à jour
+           * l'utilisateur actuellement
+           * sélectionné.
+           */
 
+          if (
+            selectedUserId ===
+            data.userId
+          ) {
 
-        if (
-          selectedUserId ===
-          data.userId
-        ) {
+            document
+              .getElementById(
+                'convStatus'
+              )
+              .innerHTML =
 
-          document
-            .getElementById(
-              'convStatus'
-            )
-            .innerHTML =
+                '<span class="status-dot ' +
+                (
+                  data.status === 'actif'
+                    ? 'actif'
+                    : 'inactif'
+                ) +
+                '"></span> ' +
 
-              '<span class="status-dot ' +
-              (
-                data.status === 'actif'
-                  ? 'actif'
-                  : 'inactif'
-              ) +
-              '"></span> ' +
-              (
-                data.status === 'actif'
-                  ? 'En ligne'
-                  : 'Hors ligne'
-              );
+                (
+                  data.status === 'actif'
+                    ? 'En ligne'
+                    : 'Hors ligne'
+                );
+
+          }
 
         }
 
@@ -1349,7 +1453,7 @@
 
 
     /* =====================================================
-       INDICATEUR ÉCRITURE
+       SOCKET — INDICATEUR "ÉCRIT..."
     ====================================================== */
 
     socket.on(
@@ -1366,13 +1470,13 @@
         }
 
 
-        const indicateur =
+        const indicator =
           document.getElementById(
             'typingIndicator'
           );
 
 
-        indicateur.style.display =
+        indicator.style.display =
           'block';
 
 
@@ -1385,11 +1489,11 @@
           setTimeout(
             () => {
 
-              indicateur.style.display =
+              indicator.style.display =
                 'none';
 
             },
-            2000
+            1500
           );
 
       }
@@ -1397,256 +1501,28 @@
 
 
     /* =====================================================
-       HEARTBEAT
-    ====================================================== */
-
-    setInterval(
-      () => {
-
-        if (
-          socket.connected
-        ) {
-
-          socket.emit(
-            'heartbeat'
-          );
-
-        }
-
-      },
-      20000
-    );
-
-
-    /* =====================================================
-       NOTIFICATIONS PUSH
-    ====================================================== */
-
-    function urlBase64ToUint8Array(
-      base64String
-    ) {
-
-      const padding =
-        '='.repeat(
-          (
-            4 -
-            (
-              base64String.length % 4
-            )
-          ) % 4
-        );
-
-
-      const base64 =
-        (
-          base64String +
-          padding
-        )
-          .replace(
-            /-/g,
-            '+'
-          )
-          .replace(
-            /_/g,
-            '/'
-          );
-
-
-      const rawData =
-        window.atob(
-          base64
-        );
-
-
-      const outputArray =
-        new Uint8Array(
-          rawData.length
-        );
-
-
-      for (
-        let i = 0;
-        i < rawData.length;
-        i++
-      ) {
-
-        outputArray[i] =
-          rawData.charCodeAt(
-            i
-          );
-
-      }
-
-
-      return outputArray;
-
-    }
-
-
-    async function activerNotificationsPush() {
-
-      try {
-
-        if (
-          !(
-            'serviceWorker' in
-            navigator
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        if (
-          !(
-            'PushManager' in
-            window
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        const permission =
-          await Notification.requestPermission();
-
-
-        if (
-          permission !==
-          'granted'
-        ) {
-
-          return;
-
-        }
-
-
-        const registration =
-          await navigator
-            .serviceWorker
-            .ready;
-
-
-        const keyResponse =
-          await fetch(
-            '/api/notifications/vapid-public-key',
-            {
-              headers: {
-                'Authorization':
-                  'Bearer ' +
-                  token
-              }
-            }
-          );
-
-
-        if (
-          !keyResponse.ok
-        ) {
-
-          return;
-
-        }
-
-
-        const keyData =
-          await keyResponse.json();
-
-
-        let subscription =
-          await registration
-            .pushManager
-            .getSubscription();
-
-
-        if (
-          !subscription
-        ) {
-
-          subscription =
-            await registration
-              .pushManager
-              .subscribe(
-                {
-                  userVisibleOnly:
-                    true,
-
-                  applicationServerKey:
-                    urlBase64ToUint8Array(
-                      keyData.publicKey
-                    )
-                }
-              );
-
-        }
-
-
-        await fetch(
-          '/api/notifications/subscribe',
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'application/json',
-
-              'Authorization':
-                'Bearer ' +
-                token
-            },
-
-            body:
-              JSON.stringify(
-                subscription
-              )
-          }
-        );
-
-
-      } catch (err) {
-
-        console.error(
-          'Erreur notifications Push:',
-          err
-        );
-
-      }
-
-    }
-
-
-    /* =====================================================
-       ENREGISTREMENT SERVICE WORKER
+       SERVICE WORKER
     ====================================================== */
 
     async function enregistrerServiceWorker() {
 
       if (
-        !(
-          'serviceWorker' in
-          navigator
-        )
+        !('serviceWorker' in navigator)
       ) {
 
         return;
 
       }
 
-
       try {
 
-        await navigator
-          .serviceWorker
-          .register(
-            '/sw.js'
-          );
+        await navigator.serviceWorker.register(
+          '/service-worker.js'
+        );
 
-
-        await activerNotificationsPush();
+        console.log(
+          'Service Worker enregistré.'
+        );
 
       } catch (err) {
 
@@ -1667,11 +1543,14 @@
     async function demarrerApplication() {
 
       if (!token) {
+
         return;
+
       }
 
 
       await chargerMonProfil();
+
 
       await Promise.all([
         chargerUtilisateurs(),
@@ -1692,4 +1571,5 @@
   </script>
 
 </body>
+
 </html>
