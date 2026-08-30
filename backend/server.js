@@ -700,27 +700,27 @@ async function envoyerNotificationPush(
     }
 
     const payload =
-      JSON.stringify({
+  JSON.stringify({
 
-        title:
-          senderUsername,
+    title:
+      "AFRIQ'Sender",
 
-        body:
-          message,
+    body:
+      `💬 ${senderUsername} vous a envoyé un message`,
 
-        icon:
-          '/icon-192.png',
+    icon:
+      '/icon-192.png',
 
-        badge:
-          '/icon-192.png',
+    badge:
+      '/icon-192.png',
 
-        url:
-          '/chat.html',
+    url:
+      '/chat.html',
 
-        senderId:
-          receiverId
+    senderId:
+      receiverId
 
-      });
+  });
 
     const subscriptionsRestantes =
       [];
