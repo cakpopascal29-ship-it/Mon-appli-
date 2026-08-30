@@ -411,89 +411,7 @@ err.message
 }
 }
 
-/* =========================================================
-CONNECTION SOCKET
-========================================================= */
 
-io.on('connection', (socket) => {
-
-const userId = socket.userId;
-
-onlineUsers.set(userId, socket.id);
-
-if (disconnectTimers.has(userId)) {
-clearTimeout(disconnectTimers.get(userId));
-disconnectTimers.delete(userId);
-}
-
-setStatus(userId, 'actif');
-
-/* HEARTBEAT */
-
-socket.on('heartbeat', async () => {
-await User.findByIdAndUpdate(
-userId,
-{
-lastSeen: new Date()
-}
-);
-});
-/* =========================================================
-   CONNECTION SOCKET
-========================================================= */
-
-io.on('connection', (socket) => {
-
-  const userId = String(socket.userId);
-
-  onlineUsers.set(
-    userId,
-    socket.id
-  );
-
-  console.log(
-    'Utilisateur connecté en temps réel :',
-    userId
-  );
-
-
-  if (disconnectTimers.has(userId)) {
-
-    clearTimeout(
-      disconnectTimers.get(userId)
-    );
-
-    disconnectTimers.delete(
-      userId
-    );
-
-  }
-
-
-  setStatus(
-    userId,
-    'actif'
-  );
-
-
-  /* =======================================================
-     HEARTBEAT
-  ======================================================= */
-
-  socket.on(
-    'heartbeat',
-    async () => {
-
-      await User.findByIdAndUpdate(
-        userId,
-        {
-          lastSeen:
-            new Date()
-        }
-      );
-
-    }
-  );
 
 
   /* =======================================================
@@ -553,107 +471,243 @@ io.on('connection', (socket) => {
 
 
     await newMessage.save();
-    if (typeof callback === 'function') {
+
+
+/* =======================================================
+   ENVOYER LE MESSAGE AU DESTINATAIRE
+======================================================= */
+
+const receiverSocketId =
+  onlineUsers.get(
+    String(data.receiverId)
+  );
+
+
+if (receiverSocketId) {
+
+  io.to(
+    receiverSocketId
+  ).emit(
+    'receiveMessage',
+    newMessage
+  );
+
+}
+
+
+/* =======================================================
+   AFFICHER LE MESSAGE CHEZ L'EXPÉDITEUR
+======================================================= */
+
+socket.emit(
+  'receiveMessage',
+  newMessage
+);
+
+
+/* =======================================================
+   CONFIRMER AU HTML QUE L'ENVOI A RÉUSSI
+======================================================= */
+
+if (typeof callback === 'function') {
+
   callback({
     ok: true
   });
-    }
+
+}
 
 
-    /* ==============================================
-       ENVOI IMMÉDIAT AU DESTINATAIRE
-    ============================================== */
+/* =======================================================
+   NOTIFICATION PUSH EN ARRIÈRE-PLAN
+======================================================= */
 
-    const receiverSocketId =
-      onlineUsers.get(
-        String(data.receiverId)
-      );
+envoyerNotificationPush(
+  data.receiverId,
+  socket.username,
+  messageTexte
+).catch(
+  err => {
 
-
-    if (receiverSocketId) {
-
-      io.to(
-        receiverSocketId
-      ).emit(
-        'receiveMessage',
-        newMessage
-      );
-
-    }
-
-
-    /* ==============================================
-       CONFIRMATION CHEZ L'EXPÉDITEUR
-    ============================================== */
-
-    socket.emit(
-      'receiveMessage',
-      newMessage
+    console.error(
+      'Erreur notification Push:',
+      err.message
     );
 
+  }
+);
 
-    /* ==============================================
-       CONFIRMATION AU NAVIGATEUR
-    ============================================== */
+/* =========================================================
+CONNECTION SOCKET
+========================================================= */
 
-    if (typeof callback === 'function') {
+io.on('connection', (socket) => {
 
-      callback({
-        ok: true,
-        messageId:
-          String(newMessage._id)
-      });
-
-    }
+  const userId =
+    String(socket.userId);
 
 
-    /* ==============================================
-       NOTIFICATION PUSH EN ARRIÈRE-PLAN
-    ============================================== */
+  /* Enregistrer l'utilisateur connecté */
 
-    envoyerNotificationPush(
-      data.receiverId,
-      socket.username,
-      messageTexte
-    ).catch(
-      err => {
+  onlineUsers.set(
+    userId,
+    socket.id
+  );
+
+
+  console.log(
+    'Utilisateur connecté en temps réel :',
+    userId
+  );
+
+
+  /* Annuler une éventuelle déconnexion programmée */
+
+  if (
+    disconnectTimers.has(userId)
+  ) {
+
+    clearTimeout(
+      disconnectTimers.get(userId)
+    );
+
+    disconnectTimers.delete(
+      userId
+    );
+
+  }
+
+
+  /* Mettre le statut actif */
+
+  setStatus(
+    userId,
+    'actif'
+  );
+
+
+  /* =======================================================
+     HEARTBEAT
+  ======================================================= */
+
+  socket.on(
+    'heartbeat',
+    async () => {
+
+      try {
+
+        await User.findByIdAndUpdate(
+          userId,
+          {
+            lastSeen:
+              new Date()
+          }
+        );
+
+      } catch (err) {
 
         console.error(
-          'Erreur notification Push:',
+          'Erreur heartbeat:',
           err.message
         );
 
       }
-    );
-
-
-  } catch (err) {
-
-    console.error(
-      'Erreur sendMessage:',
-      err
-    );
-
-
-    if (typeof callback === 'function') {
-
-      callback({
-        ok: false,
-        error: 'Erreur serveur'
-      });
 
     }
+  );
 
-  }
 
-});
+  /* =======================================================
+     ENVOYER MESSAGE
+  ======================================================= */
+
+  socket.on(
+    'sendMessage',
+    async (data, callback) => {
+
+      try {
+
+        if (
+          !data ||
+          !data.receiverId ||
+          !data.message
+        ) {
+
+          if (
+            typeof callback ===
+            'function'
+          ) {
+
+            callback({
+              ok: false,
+              error:
+                'Données du message invalides'
+            });
+
+          }
+
+          return;
+
+        }
+
+
+        const receiverId =
+          String(
+            data.receiverId
+          );
+
+
+        const messageTexte =
+          String(
+            data.message
+          ).trim();
+
+
+        if (!messageTexte) {
+
+          if (
+            typeof callback ===
+            'function'
+          ) {
+
+            callback({
+              ok: false,
+              error:
+                'Message vide'
+            });
+
+          }
+
+          return;
+
+        }
+
+
+        /* Enregistrer le message UNE SEULE FOIS */
+
+        const newMessage =
+          new Message({
+
+            sender:
+              userId,
+
+            receiver:
+              receiverId,
+
+            message:
+              messageTexte,
+
+            timestamp:
+              new Date()
+
+          });
 
 
         await newMessage.save();
 
 
         /* ===============================================
-           ENVOI IMMÉDIAT AU DESTINATAIRE
+           ENVOI AU DESTINATAIRE
         =============================================== */
 
         const receiverSocketId =
@@ -675,7 +729,7 @@ io.on('connection', (socket) => {
 
 
         /* ===============================================
-           CONFIRMATION IMMÉDIATE CHEZ L'EXPÉDITEUR
+           AFFICHAGE CHEZ L'EXPÉDITEUR
         =============================================== */
 
         socket.emit(
@@ -685,13 +739,39 @@ io.on('connection', (socket) => {
 
 
         /* ===============================================
+           CONFIRMATION AU HTML
+        =============================================== */
+
+        if (
+          typeof callback ===
+          'function'
+        ) {
+
+          callback({
+
+            ok: true,
+
+            messageId:
+              String(
+                newMessage._id
+              )
+
+          });
+
+        }
+
+
+        /* ===============================================
            NOTIFICATION PUSH EN ARRIÈRE-PLAN
+
+           Elle ne doit PAS ralentir
+           l'envoi du message.
         =============================================== */
 
         envoyerNotificationPush(
           receiverId,
           socket.username,
-          data.message
+          messageTexte
         ).catch(
           err => {
 
@@ -711,6 +791,23 @@ io.on('connection', (socket) => {
           err
         );
 
+
+        if (
+          typeof callback ===
+          'function'
+        ) {
+
+          callback({
+
+            ok: false,
+
+            error:
+              'Erreur lors de l’envoi du message'
+
+          });
+
+        }
+
       }
 
     }
@@ -718,7 +815,7 @@ io.on('connection', (socket) => {
 
 
   /* =======================================================
-     TYPING
+     INDICATEUR "ÉCRIT..."
   ======================================================= */
 
   socket.on(
@@ -735,11 +832,15 @@ io.on('connection', (socket) => {
       }
 
 
+      const receiverId =
+        String(
+          data.receiverId
+        );
+
+
       const receiverSocketId =
         onlineUsers.get(
-          String(
-            data.receiverId
-          )
+          receiverId
         );
 
 
@@ -748,10 +849,12 @@ io.on('connection', (socket) => {
         io.to(
           receiverSocketId
         ).emit(
-          'typing',
+          'userTyping',
           {
+
             senderId:
               userId
+
           }
         );
 
@@ -759,33 +862,48 @@ io.on('connection', (socket) => {
 
     }
   );
-});
 
-/* =======================================================
-DECONNEXION
-======================================================= */
 
-socket.on('disconnect', () => {
+  /* =======================================================
+     DÉCONNEXION
+  ======================================================= */
 
-onlineUsers.delete(userId);
+  socket.on(
+    'disconnect',
+    () => {
 
-const timer = setTimeout(() => {
+      onlineUsers.delete(
+        userId
+      );
 
-  setStatus(
-    userId,
-    'inactif'
+
+      const timer =
+        setTimeout(
+          () => {
+
+            setStatus(
+              userId,
+              'inactif'
+            );
+
+            disconnectTimers.delete(
+              userId
+            );
+
+          },
+
+          10000
+        );
+
+
+      disconnectTimers.set(
+        userId,
+        timer
+      );
+
+    }
   );
 
-  disconnectTimers.delete(userId);
-
-}, 10000);
-
-disconnectTimers.set(
-  userId,
-  timer
-);
-
-});
 });
 
 /* =========================================================
