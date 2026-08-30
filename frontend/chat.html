@@ -1402,26 +1402,43 @@ function afficherMessage(
 function envoyerMessage() {
 
   const input =
-    document.getElementById('messageInput');
+    document.getElementById(
+      'messageInput'
+    );
 
   if (!input) {
-    console.error('Champ message introuvable.');
+
+    console.error(
+      'Champ message introuvable.'
+    );
+
     return;
+
   }
+
 
   const message =
     input.value.trim();
+
 
   if (!message) {
     return;
   }
 
+
   if (!selectedUserId) {
-    console.error('Aucun utilisateur sélectionné.');
+
+    console.error(
+      'Aucun utilisateur sélectionné.'
+    );
+
     return;
+
   }
 
+
   if (!socket.connected) {
+
     console.error(
       'Socket.IO n’est pas connecté au serveur.'
     );
@@ -1431,38 +1448,118 @@ function envoyerMessage() {
     );
 
     return;
+
   }
 
-  console.log('Envoi du message...');
-  console.log('Destinataire :', selectedUserId);
-  console.log('Message :', message);
 
-  console.log('ENVOI MESSAGE');
-console.log('Socket connecté :', socket.connected);
-console.log('Socket ID :', socket.id);
-console.log('Destinataire :', selectedUserId);
-console.log('Message :', message);
+  console.log(
+    'ENVOI MESSAGE'
+  );
 
-socket.emit(
-  'sendMessage',
-  {
-    receiverId: String(selectedUserId),
-    message: message
-  },
-  (response) => {
+  console.log(
+    'Socket connecté :',
+    socket.connected
+  );
 
-    console.log(
-      'Réponse serveur :',
-      response
+  console.log(
+    'Destinataire :',
+    selectedUserId
+  );
+
+  console.log(
+    'Message :',
+    message
+  );
+
+
+  /*
+  Désactive temporairement le bouton
+  pour empêcher plusieurs clics
+  */
+
+  const sendBtn =
+    document.getElementById(
+      'sendBtn'
     );
 
-  }
-);
 
-if (socket.connected) {
-  input.value = '';
+  if (sendBtn) {
+
+    sendBtn.disabled =
+      true;
+
   }
 
+
+  socket.emit(
+
+    'sendMessage',
+
+    {
+
+      receiverId:
+        String(
+          selectedUserId
+        ),
+
+      message:
+        message
+
+    },
+
+    (response) => {
+
+
+      console.log(
+        'Réponse serveur :',
+        response
+      );
+
+
+      /*
+      Le champ est vidé UNIQUEMENT
+      après confirmation du serveur
+      */
+
+      if (
+        response &&
+        response.success
+      ) {
+
+        input.value =
+          '';
+
+      }
+
+
+      /*
+      Réactive le bouton
+      */
+
+      if (sendBtn) {
+
+        sendBtn.disabled =
+          false;
+
+      }
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        console.error(
+          'Le serveur n’a pas confirmé l’envoi.'
+        );
+
+      }
+
+    }
+
+  );
+
+}
   }/* =====================================================
    ENVOYER MESSAGE
 ===================================================== */
@@ -1470,26 +1567,43 @@ if (socket.connected) {
 function envoyerMessage() {
 
   const input =
-    document.getElementById('messageInput');
+    document.getElementById(
+      'messageInput'
+    );
 
   if (!input) {
-    console.error('Champ message introuvable.');
+
+    console.error(
+      'Champ message introuvable.'
+    );
+
     return;
+
   }
+
 
   const message =
     input.value.trim();
+
 
   if (!message) {
     return;
   }
 
+
   if (!selectedUserId) {
-    console.error('Aucun utilisateur sélectionné.');
+
+    console.error(
+      'Aucun utilisateur sélectionné.'
+    );
+
     return;
+
   }
 
+
   if (!socket.connected) {
+
     console.error(
       'Socket.IO n’est pas connecté au serveur.'
     );
@@ -1499,23 +1613,118 @@ function envoyerMessage() {
     );
 
     return;
+
   }
 
-  console.log('Envoi du message...');
-  console.log('Destinataire :', selectedUserId);
-  console.log('Message :', message);
 
-  socket.emit(
-    'sendMessage',
-    {
-      receiverId: String(selectedUserId),
-      message: message
-    }
+  console.log(
+    'ENVOI MESSAGE'
   );
 
-  input.value = '';
+  console.log(
+    'Socket connecté :',
+    socket.connected
+  );
 
-}
+  console.log(
+    'Destinataire :',
+    selectedUserId
+  );
+
+  console.log(
+    'Message :',
+    message
+  );
+
+
+  /*
+  Désactive temporairement le bouton
+  pour empêcher plusieurs clics
+  */
+
+  const sendBtn =
+    document.getElementById(
+      'sendBtn'
+    );
+
+
+  if (sendBtn) {
+
+    sendBtn.disabled =
+      true;
+
+  }
+
+
+  socket.emit(
+
+    'sendMessage',
+
+    {
+
+      receiverId:
+        String(
+          selectedUserId
+        ),
+
+      message:
+        message
+
+    },
+
+    (response) => {
+
+
+      console.log(
+        'Réponse serveur :',
+        response
+      );
+
+
+      /*
+      Le champ est vidé UNIQUEMENT
+      après confirmation du serveur
+      */
+
+      if (
+        response &&
+        response.success
+      ) {
+
+        input.value =
+          '';
+
+      }
+
+
+      /*
+      Réactive le bouton
+      */
+
+      if (sendBtn) {
+
+        sendBtn.disabled =
+          false;
+
+      }
+
+
+      if (
+        !response ||
+        !response.success
+      ) {
+
+        console.error(
+          'Le serveur n’a pas confirmé l’envoi.'
+        );
+
+      }
+
+    }
+
+  );
+
+    }
 
 /* =====================================================
    BOUTON ENVOYER
