@@ -2,43 +2,73 @@
 <html lang="fr">
 
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>AFRIQ'S - Chat</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="favicon.ico">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-  <meta name="theme-color" content="#C6552A">
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <link
+    rel="icon"
+    href="favicon.ico"
+  >
+
+  <meta
+    name="theme-color"
+    content="#C6552A"
+  >
+
 </head>
+
 
 <body>
 
-  <!-- =========================
+
+  <!-- ==================================================
        HEADER PRINCIPAL
-  ========================== -->
+  ================================================== -->
 
   <header>
 
     <div class="header-curves">
+
       <span></span>
       <span></span>
       <span></span>
       <span></span>
       <span></span>
+
     </div>
 
-    <a href="#"
-       onclick="allerAccueil(event)"
-       style="display:block; text-decoration:none;">
 
-      <svg class="logo-oval"
-           width="520"
-           height="260"
-           viewBox="0 0 260 130">
+    <!-- LOGO -->
+
+    <a
+      href="#"
+      class="logo-link"
+      onclick="allerAccueil(event)"
+    >
+
+      <svg
+        class="logo-oval"
+        width="520"
+        height="260"
+        viewBox="0 0 260 130"
+      >
 
         <ellipse
           cx="130"
@@ -47,6 +77,7 @@
           ry="52"
           fill="#FFFFFF"
         />
+
 
         <text
           x="130"
@@ -60,15 +91,19 @@
           AFRIQ'S
         </text>
 
+
         <path
-          d="M45 84
-             C75 96 105 96 130 94
-             C160 92 188 88 215 76"
+          d="
+            M45 84
+            C75 96 105 96 130 94
+            C160 92 188 88 215 76
+          "
           fill="none"
           stroke="#C6552A"
           stroke-width="3"
           stroke-linecap="round"
         />
+
 
         <text
           x="130"
@@ -87,6 +122,9 @@
 
     </a>
 
+
+    <!-- VAGUE -->
+
     <svg
       class="wave"
       viewBox="0 0 1200 40"
@@ -95,15 +133,20 @@
 
       <path
         fill="#F7EFEA"
-        d="M0,20 C50,40 100,0 150,20
-        C200,40 250,0 300,20
-        C350,40 400,0 450,20
-        C500,40 550,0 600,20
-        C650,40 700,0 750,20
-        C800,40 850,0 900,20
-        C950,40 1000,0 1050,20
-        C1100,40 1150,0 1200,20
-        L1200,40 L0,40 Z"
+        d="
+          M0,20
+          C50,40 100,0 150,20
+          C200,40 250,0 300,20
+          C350,40 400,0 450,20
+          C500,40 550,0 600,20
+          C650,40 700,0 750,20
+          C800,40 850,0 900,20
+          C950,40 1000,0 1050,20
+          C1100,40 1150,0 1200,20
+          L1200,40
+          L0,40
+          Z
+        "
       />
 
     </svg>
@@ -111,21 +154,22 @@
   </header>
 
 
-  <!-- =========================
+  <!-- ==================================================
        APPLICATION CHAT
-  ========================== -->
+  ================================================== -->
 
   <div class="chat-app">
 
 
-    <!-- =========================
+    <!-- ==================================================
          COLONNE UTILISATEURS
-    ========================== -->
+    ================================================== -->
 
     <aside
       class="user-list"
       id="userList"
     >
+
 
       <!-- MON PROFIL -->
 
@@ -135,7 +179,7 @@
       ></div>
 
 
-      <!-- LISTE DES UTILISATEURS -->
+      <!-- LISTE UTILISATEURS -->
 
       <div
         class="users-scroll"
@@ -145,9 +189,9 @@
     </aside>
 
 
-    <!-- =========================
+    <!-- ==================================================
          COLONNE DISCUSSION
-    ========================== -->
+    ================================================== -->
 
     <section
       class="conversation"
@@ -155,7 +199,7 @@
     >
 
 
-      <!-- AVANT SÉLECTION -->
+      <!-- PLACEHOLDER -->
 
       <div
         class="conv-placeholder"
@@ -165,9 +209,9 @@
       </div>
 
 
-      <!-- =========================
+      <!-- ==================================================
            CONVERSATION ACTIVE
-      ========================== -->
+      ================================================== -->
 
       <div
         class="conv-active"
@@ -176,7 +220,7 @@
       >
 
 
-        <!-- EN-TÊTE DE LA DISCUSSION -->
+        <!-- EN-TÊTE DISCUSSION -->
 
         <div class="conv-header">
 
@@ -185,6 +229,7 @@
             class="back-btn"
             id="backBtn"
             type="button"
+            aria-label="Retour"
           >
             ←
           </button>
@@ -201,6 +246,7 @@
 
             <div class="conv-user-info">
 
+
               <div
                 class="conv-username"
                 id="convUsername"
@@ -212,6 +258,7 @@
                 id="convStatus"
               ></div>
 
+
             </div>
 
 
@@ -221,9 +268,9 @@
         </div>
 
 
-        <!-- =========================
-             ZONE DES MESSAGES
-        ========================== -->
+        <!-- ==================================================
+             MESSAGES
+        ================================================== -->
 
         <div
           class="messages"
@@ -231,9 +278,9 @@
         ></div>
 
 
-        <!-- =========================
+        <!-- ==================================================
              INDICATEUR ÉCRITURE
-        ========================== -->
+        ================================================== -->
 
         <div
           class="typing-indicator"
@@ -244,11 +291,12 @@
         </div>
 
 
-        <!-- =========================
+        <!-- ==================================================
              BARRE D'ÉCRITURE
-        ========================== -->
+        ================================================== -->
 
         <div class="message-input-row">
+
 
           <input
             type="text"
@@ -262,14 +310,17 @@
             id="sendBtn"
             class="send-btn"
             type="button"
+            aria-label="Envoyer"
           >
             ➤
           </button>
+
 
         </div>
 
 
       </div>
+
 
     </section>
 
@@ -277,25 +328,38 @@
   </div>
 
 
-  <!-- =========================
+  <!-- ==================================================
        FOOTER
-  ========================== -->
+  ================================================== -->
 
   <footer class="about">
 
-    <h3>À propos</h3>
+
+    <h3>
+      À propos
+    </h3>
+
 
     <p class="about-desc">
       AFRIQ'S est une messagerie pensée pour connecter les Africains et la diaspora en toute simplicité.
       Discutez en temps réel, où que vous soyez, avec vos proches et votre communauté.
     </p>
 
-    <p>Email : cakpopascal29@gmail.com</p>
-
-    <p>WhatsApp : 0150186601</p>
 
     <p>
+      Email : cakpopascal29@gmail.com
+    </p>
+
+
+    <p>
+      WhatsApp : 0150186601
+    </p>
+
+
+    <p>
+
       Facebook :
+
       <a
         href="https://www.facebook.com/profile.php?id=61593075962641"
         target="_blank"
@@ -303,25 +367,32 @@
       >
         Notre page
       </a>
+
     </p>
 
-    <p>Mise en service : 28 Août 2026</p>
+
+    <p>
+      Mise en service : 28 Août 2026
+    </p>
+
 
     <p class="slogan">
       "Connecter l'Afrique, un message à la fois."
     </p>
 
+
   </footer>
 
 
-  <!-- =========================
+  <!-- ==================================================
        SOCKET.IO
-  ========================== -->
+  ================================================== -->
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
 
   <script>
+
 
     /* =====================================================
        NAVIGATION
@@ -426,16 +497,26 @@
       const d =
         new Date(dateStr);
 
+      if (isNaN(d.getTime())) {
+        return '';
+      }
+
       return (
+
         d.getHours()
           .toString()
           .padStart(2, '0')
+
         +
+
         ':'
+
         +
+
         d.getMinutes()
           .toString()
           .padStart(2, '0')
+
       );
 
     }
@@ -500,39 +581,67 @@
         );
 
 
+        const statut =
+          me.status === 'actif'
+            ? 'actif'
+            : 'inactif';
+
+
         document
           .getElementById('myProfile')
           .innerHTML =
 
-          '<span class="avatar">' +
+          '<div class="my-profile-avatar-wrapper">' +
 
-          initiale(
-            me.username
-          ) +
+            '<span class="avatar">' +
 
-          '</span>' +
+              initiale(
+                me.username
+              ) +
+
+            '</span>' +
+
+            '<span class="status-dot ' +
+              statut +
+            '"></span>' +
+
+          '</div>' +
 
           '<div class="my-profile-name">' +
 
-          '<strong>' +
+            '<strong>' +
 
-          echapperHTML(
-            me.username
-          ) +
+              echapperHTML(
+                me.username
+              ) +
 
-          '</strong>' +
+            '</strong>' +
+
+            '<span class="my-profile-label">' +
+
+              (
+                statut === 'actif'
+                  ? 'En ligne'
+                  : 'Hors ligne'
+              ) +
+
+            '</span>' +
 
           '</div>' +
 
           '<button ' +
 
-          'class="logout-btn" ' +
+            'class="logout-btn" ' +
 
-          'onclick="seDeconnecter()" ' +
+            'onclick="seDeconnecter()" ' +
 
-          'type="button">' +
+            'type="button" ' +
 
-          'Déconnexion' +
+            'title="Déconnexion" ' +
+
+            'aria-label="Déconnexion">' +
+
+            'Déconnexion' +
 
           '</button>';
 
@@ -553,6 +662,19 @@
     ====================================================== */
 
     function seDeconnecter() {
+
+      try {
+
+        socket.disconnect();
+
+      } catch (err) {
+
+        console.error(
+          'Erreur déconnexion socket:',
+          err
+        );
+
+      }
 
       localStorage.clear();
 
@@ -668,15 +790,34 @@
         );
 
 
+      if (!container) {
+        return;
+      }
+
+
       container.innerHTML = '';
 
 
       usersData
+
         .sort(
-          (a, b) =>
-            new Date(b.lastSeen) -
-            new Date(a.lastSeen)
+          (a, b) => {
+
+            const dateA =
+              new Date(
+                a.lastSeen || 0
+              ).getTime();
+
+            const dateB =
+              new Date(
+                b.lastSeen || 0
+              ).getTime();
+
+            return dateB - dateA;
+
+          }
         )
+
         .forEach(
           u => {
 
@@ -688,6 +829,7 @@
 
             div.className =
               'user-item' +
+
               (
                 u._id === selectedUserId
                   ? ' active'
@@ -700,6 +842,7 @@
 
 
             const badge =
+
               nombreNonLu > 0
 
                 ? '<span class="unread-badge">' +
@@ -717,37 +860,43 @@
 
             div.innerHTML =
 
-              '<span class="avatar">' +
+              '<div class="user-avatar-wrapper">' +
 
-              initiale(
-                u.username
-              ) +
+                '<span class="avatar">' +
 
-              '</span>' +
+                  initiale(
+                    u.username
+                  ) +
 
-              '<div class="user-name-container">' +
+                '</span>' +
 
-              '<span class="user-name">' +
+                '<span class="status-dot ' +
 
-              echapperHTML(
-                u.username
-              ) +
+                  (
+                    u.status === 'actif'
+                      ? 'actif'
+                      : 'inactif'
+                  ) +
 
-              '</span>' +
-
-              badge +
+                '"></span>' +
 
               '</div>' +
 
-              '<span class="status-dot ' +
 
-              (
-                u.status === 'actif'
-                  ? 'actif'
-                  : 'inactif'
-              ) +
+              '<div class="user-name-container">' +
 
-              '"></span>' +
+                '<span class="user-name">' +
+
+                  echapperHTML(
+                    u.username
+                  ) +
+
+                '</span>' +
+
+                badge +
+
+              '</div>' +
+
 
               (
                 estAdmin
@@ -762,7 +911,15 @@
 
                     '" ' +
 
-                    'type="button">🗑</button>'
+                    'type="button" ' +
+
+                    'title="Supprimer" ' +
+
+                    'aria-label="Supprimer">' +
+
+                    '🗑' +
+
+                    '</button>'
 
                   : ''
               );
@@ -833,9 +990,7 @@
 
 
       if (!confirmation) {
-
         return;
-
       }
 
 
@@ -929,9 +1084,7 @@
 
 
       if (!user) {
-
         return;
-
       }
 
 
@@ -982,21 +1135,21 @@
         )
         .innerHTML =
 
-        '<span class="status-dot ' +
+          '<span class="status-dot ' +
 
-        (
-          user.status === 'actif'
-            ? 'actif'
-            : 'inactif'
-        ) +
+          (
+            user.status === 'actif'
+              ? 'actif'
+              : 'inactif'
+          ) +
 
-        '"></span> ' +
+          '"></span> ' +
 
-        (
-          user.status === 'actif'
-            ? 'En ligne'
-            : 'Hors ligne'
-        );
+          (
+            user.status === 'actif'
+              ? 'En ligne'
+              : 'Hors ligne'
+          );
 
 
       const box =
@@ -1025,6 +1178,10 @@
 
         if (!res.ok) {
 
+          console.error(
+            'Impossible de charger la conversation.'
+          );
+
           return;
 
         }
@@ -1052,386 +1209,239 @@
 
       } catch (err) {
 
-        console.error(
+                console.error(
           'Erreur chargement messages:',
           err
         );
 
       }
 
-
-      try {
-
-        await fetch(
-          '/api/messages/' +
-          userId +
-          '/read',
-          {
-            method: 'POST',
-
-            headers: {
-              'Authorization':
-                'Bearer ' + token
-            }
-          }
-        );
-
-      } catch (err) {
-
-        console.error(
-          'Erreur marquage lecture:',
-          err
-        );
-
-      }
-
     }
 
 
     /* =====================================================
-       AFFICHER MESSAGE
+       MARQUER LES MESSAGES COMME LUS
     ====================================================== */
 
-    function afficherMessage(
-      msg,
-      scroll = true
-    ) {
+    try {
 
-      if (
-        msg.sender !== selectedUserId &&
-        msg.receiver !== selectedUserId
-      ) {
-
-        return;
-
-      }
-
-
-      const box =
-        document.getElementById(
-          'messages'
-        );
-
-
-      const ligne =
-        document.createElement(
-          'div'
-        );
-
-
-      const estMoi =
-        msg.sender === myUserId;
-
-
-      ligne.className =
-        'message-line ' +
-
-        (
-          estMoi
-            ? 'message-line-envoye'
-            : 'message-line-recu'
-        );
-
-
-      const bubble =
-        document.createElement(
-          'div'
-        );
-
-
-      bubble.className =
-        'bubble ' +
-
-        (
-          estMoi
-            ? 'message-envoye'
-            : 'message-recu'
-        );
-
-
-      bubble.innerHTML =
-
-        '<span class="message-text">' +
-
-        echapperHTML(
-          msg.message
-        ) +
-
-        '</span>' +
-
-        '<span class="time">' +
-
-        formatHeure(
-          msg.timestamp
-        ) +
-
-        '</span>';
-
-
-      ligne.appendChild(
-        bubble
-      );
-
-
-      box.appendChild(
-        ligne
-      );
-
-
-      if (scroll) {
-
-        box.scrollTop =
-          box.scrollHeight;
-
-      }
-
-    }
-        /* =====================================================
-       AFFICHER MESSAGE
-    ====================================================== */
-
-    function afficherMessage(
-      msg,
-      scroll = true
-    ) {
-
-      if (
-        msg.sender !== selectedUserId &&
-        msg.receiver !== selectedUserId
-      ) {
-        return;
-      }
-
-      const box =
-        document.getElementById(
-          'messages'
-        );
-
-      const ligne =
-        document.createElement(
-          'div'
-        );
-
-      const estMoi =
-        msg.sender === myUserId;
-
-      ligne.className =
-        'message-line ' +
-        (
-          estMoi
-            ? 'message-line-envoye'
-            : 'message-line-recu'
-        );
-
-      const bubble =
-        document.createElement(
-          'div'
-        );
-
-      bubble.className =
-        'bubble ' +
-        (
-          estMoi
-            ? 'message-envoye'
-            : 'message-recu'
-        );
-
-      bubble.innerHTML =
-
-        '<span class="message-text">' +
-        echapperHTML(
-          msg.message
-        ) +
-        '</span>' +
-
-        '<span class="time">' +
-        formatHeure(
-          msg.timestamp
-        ) +
-        '</span>';
-
-      ligne.appendChild(
-        bubble
-      );
-
-      box.appendChild(
-        ligne
-      );
-
-      if (scroll) {
-
-        box.scrollTop =
-          box.scrollHeight;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       ENVOYER MESSAGE
-    ====================================================== */
-
-    function envoyerMessage() {
-
-      const input =
-        document.getElementById(
-          'messageInput'
-        );
-
-      const message =
-        input.value.trim();
-
-      if (
-        !message ||
-        !selectedUserId
-      ) {
-        return;
-      }
-
-      socket.emit(
-        'sendMessage',
+      await fetch(
+        '/api/messages/' +
+        userId +
+        '/read',
         {
-          receiverId:
-            selectedUserId,
+          method: 'POST',
 
-          message:
-            message
+          headers: {
+            'Authorization':
+              'Bearer ' + token
+          }
         }
       );
 
-      input.value = '';
+    } catch (err) {
+
+      console.error(
+        'Erreur marquage lecture:',
+        err
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     AFFICHER MESSAGE
+  ====================================================== */
+
+  function afficherMessage(
+    msg,
+    scroll = true
+  ) {
+
+    if (
+      msg.sender !== selectedUserId &&
+      msg.receiver !== selectedUserId
+    ) {
+
+      return;
 
     }
 
 
-    /* =====================================================
-       BOUTON ENVOYER
-    ====================================================== */
-
-    document
-      .getElementById(
-        'sendBtn'
-      )
-      .addEventListener(
-        'click',
-        envoyerMessage
+    const box =
+      document.getElementById(
+        'messages'
       );
 
 
-    /* =====================================================
-       CHAMP MESSAGE
-    ====================================================== */
+    const ligne =
+      document.createElement(
+        'div'
+      );
 
-    document
-      .getElementById(
+
+    const estMoi =
+      msg.sender === myUserId;
+
+
+    ligne.className =
+      'message-line ' +
+      (
+        estMoi
+          ? 'message-line-envoye'
+          : 'message-line-recu'
+      );
+
+
+    const bubble =
+      document.createElement(
+        'div'
+      );
+
+
+    bubble.className =
+      'bubble ' +
+      (
+        estMoi
+          ? 'message-envoye'
+          : 'message-recu'
+      );
+
+
+    bubble.innerHTML =
+
+      '<span class="message-text">' +
+
+      echapperHTML(
+        msg.message
+      ) +
+
+      '</span>' +
+
+      '<span class="time">' +
+
+      formatHeure(
+        msg.timestamp
+      ) +
+
+      '</span>';
+
+
+    ligne.appendChild(
+      bubble
+    );
+
+
+    box.appendChild(
+      ligne
+    );
+
+
+    if (scroll) {
+
+      box.scrollTop =
+        box.scrollHeight;
+
+    }
+
+  }
+
+
+  /* =====================================================
+     ENVOYER MESSAGE
+  ====================================================== */
+
+  function envoyerMessage() {
+
+    const input =
+      document.getElementById(
         'messageInput'
-      )
-      .addEventListener(
-        'keypress',
-        (e) => {
-
-          if (
-            e.key === 'Enter'
-          ) {
-
-            e.preventDefault();
-
-            envoyerMessage();
-
-            return;
-
-          }
-
-          if (
-            selectedUserId
-          ) {
-
-            socket.emit(
-              'typing',
-              {
-                receiverId:
-                  selectedUserId
-              }
-            );
-
-          }
-
-        }
       );
 
 
-    /* =====================================================
-       BOUTON RETOUR
-    ====================================================== */
-
-    document
-      .getElementById(
-        'backBtn'
-      )
-      .addEventListener(
-        'click',
-        () => {
-
-          selectedUserId =
-            null;
-
-          document
-            .getElementById(
-              'convActive'
-            )
-            .style.display =
-              'none';
-
-          document
-            .getElementById(
-              'convPlaceholder'
-            )
-            .style.display =
-              'flex';
-
-          afficherUtilisateurs();
-
-        }
-      );
+    const message =
+      input.value.trim();
 
 
-    /* =====================================================
-       RÉCEPTION DES MESSAGES
-    ====================================================== */
+    if (
+      !message ||
+      !selectedUserId
+    ) {
 
-    socket.on(
-      'newMessage',
-      (msg) => {
+      return;
+
+    }
+
+
+    socket.emit(
+      'sendMessage',
+      {
+        receiverId:
+          selectedUserId,
+
+        message:
+          message
+      }
+    );
+
+
+    input.value = '';
+
+  }
+
+
+  /* =====================================================
+     BOUTON ENVOYER
+  ====================================================== */
+
+  document
+    .getElementById(
+      'sendBtn'
+    )
+    .addEventListener(
+      'click',
+      envoyerMessage
+    );
+
+
+  /* =====================================================
+     CHAMP MESSAGE
+  ====================================================== */
+
+  document
+    .getElementById(
+      'messageInput'
+    )
+    .addEventListener(
+      'keydown',
+      (e) => {
 
         if (
-          (
-            msg.sender === selectedUserId &&
-            msg.receiver === myUserId
-          ) ||
-          (
-            msg.sender === myUserId &&
-            msg.receiver === selectedUserId
-          )
+          e.key === 'Enter'
         ) {
 
-          afficherMessage(
-            msg,
-            true
+          e.preventDefault();
+
+          envoyerMessage();
+
+          return;
+
+        }
+
+
+        if (
+          selectedUserId
+        ) {
+
+          socket.emit(
+            'typing',
+            {
+              receiverId:
+                selectedUserId
+            }
           );
-
-        } else {
-
-          const expediteur =
-            msg.sender;
-
-          unreadCounts[expediteur] =
-            (
-              unreadCounts[expediteur] ||
-              0
-            ) + 1;
-
-          afficherUtilisateurs();
 
         }
 
@@ -1439,173 +1449,341 @@
     );
 
 
-    /* =====================================================
-       STATUT DES UTILISATEURS
-    ====================================================== */
+  /* =====================================================
+     INDICATEUR DE FRAPPE
+  ====================================================== */
 
-    socket.on(
-      'userStatus',
-      (data) => {
+  socket.on(
+    'userTyping',
+    (data) => {
 
-        const user =
-          usersData.find(
-            u => u._id === data.userId
-          );
+      if (
+        data.senderId !==
+        selectedUserId
+      ) {
 
-        if (!user) {
-          return;
-        }
+        return;
 
-        user.status =
-          data.status;
+      }
 
-        user.lastSeen =
-          data.lastSeen ||
-          new Date().toISOString();
+
+      const indicator =
+        document.getElementById(
+          'typingIndicator'
+        );
+
+
+      indicator.style.display =
+        'block';
+
+
+      clearTimeout(
+        typingTimeout
+      );
+
+
+      typingTimeout =
+        setTimeout(
+          () => {
+
+            indicator.style.display =
+              'none';
+
+          },
+          1500
+        );
+
+    }
+  );
+
+
+  /* =====================================================
+     BOUTON RETOUR
+  ====================================================== */
+
+  document
+    .getElementById(
+      'backBtn'
+    )
+    .addEventListener(
+      'click',
+      () => {
+
+        selectedUserId =
+          null;
+
+
+        document
+          .getElementById(
+            'convActive'
+          )
+          .style.display =
+            'none';
+
+
+        document
+          .getElementById(
+            'convPlaceholder'
+          )
+          .style.display =
+            'flex';
+
 
         afficherUtilisateurs();
 
-
-        if (
-          selectedUserId ===
-          data.userId
-        ) {
-
-          document
-            .getElementById(
-              'convStatus'
-            )
-            .innerHTML =
-
-              '<span class="status-dot ' +
-              (
-                data.status === 'actif'
-                  ? 'actif'
-                  : 'inactif'
-              ) +
-              '"></span> ' +
-
-              (
-                data.status === 'actif'
-                  ? 'En ligne'
-                  : 'Hors ligne'
-              );
-
-        }
-
       }
     );
 
 
-    /* =====================================================
-       INDICATEUR "ÉCRIT..."
-    ====================================================== */
+  /* =====================================================
+     RÉCEPTION DES MESSAGES
+  ====================================================== */
 
-    socket.on(
-      'typing',
-      (data) => {
+  socket.on(
+    'newMessage',
+    (msg) => {
 
-        if (
-          data.senderId !==
-          selectedUserId
-        ) {
-          return;
-        }
+      const messageEstDansConversation =
 
-        const indicator =
-          document.getElementById(
-            'typingIndicator'
-          );
+        (
+          msg.sender === selectedUserId &&
+          msg.receiver === myUserId
+        )
 
-        indicator.style.display =
-          'block';
+        ||
 
-
-        clearTimeout(
-          typingTimeout
+        (
+          msg.sender === myUserId &&
+          msg.receiver === selectedUserId
         );
 
-
-        typingTimeout =
-          setTimeout(
-            () => {
-
-              indicator.style.display =
-                'none';
-
-            },
-            1500
-          );
-
-      }
-    );
-
-
-    /* =====================================================
-       SERVICE WORKER
-    ====================================================== */
-
-    async function enregistrerServiceWorker() {
 
       if (
-        !('serviceWorker' in navigator)
+        messageEstDansConversation
       ) {
-        return;
-      }
 
-      try {
+        afficherMessage(
+          msg,
+          true
+        );
 
-        await navigator
-          .serviceWorker
-          .register(
-            '/service-worker.js'
+
+        /*
+         * Si le message reçu appartient
+         * à la conversation actuellement ouverte,
+         * on le marque automatiquement comme lu.
+         */
+
+        if (
+          msg.sender === selectedUserId
+        ) {
+
+          fetch(
+            '/api/messages/' +
+            selectedUserId +
+            '/read',
+            {
+              method: 'POST',
+
+              headers: {
+                'Authorization':
+                  'Bearer ' + token
+              }
+            }
+          ).catch(
+            err => {
+
+              console.error(
+                'Erreur lecture automatique:',
+                err
+              );
+
+            }
           );
 
-        console.log(
-          'Service Worker enregistré.'
-        );
+        }
 
-      } catch (err) {
+      } else {
 
-        console.error(
-          'Erreur Service Worker:',
-          err
-        );
+        /*
+         * Nouveau message reçu dans
+         * une autre conversation.
+         */
+
+        const expediteur =
+          msg.sender;
+
+
+        unreadCounts[expediteur] =
+          (
+            unreadCounts[expediteur] ||
+            0
+          ) + 1;
+
+
+        afficherUtilisateurs();
 
       }
 
     }
+  );
 
 
-    /* =====================================================
-       DÉMARRAGE APPLICATION
-    ====================================================== */
+  /* =====================================================
+     MISE À JOUR DU STATUT DES UTILISATEURS
+  ====================================================== */
 
-    async function demarrerApplication() {
+  socket.on(
+    'userStatusChanged',
+    (data) => {
 
-      if (!token) {
+      const user =
+        usersData.find(
+          u =>
+            u._id ===
+            data.userId
+        );
+
+
+      if (!user) {
+
         return;
+
       }
 
-      await chargerMonProfil();
 
-      await Promise.all([
-        chargerUtilisateurs(),
-        chargerMessagesNonLus()
-      ]);
+      user.status =
+        data.status;
 
-      enregistrerServiceWorker();
+
+      user.lastSeen =
+        data.lastSeen ||
+        new Date().toISOString();
+
+
+      afficherUtilisateurs();
+
+
+      /*
+       * Mettre également à jour
+       * l'en-tête de la conversation ouverte.
+       */
+
+      if (
+        selectedUserId ===
+        data.userId
+      ) {
+
+        const status =
+          data.status === 'actif'
+            ? 'actif'
+            : 'inactif';
+
+
+        document
+          .getElementById(
+            'convStatus'
+          )
+          .innerHTML =
+
+            '<span class="status-dot ' +
+            status +
+            '"></span> ' +
+
+            (
+              status === 'actif'
+                ? 'En ligne'
+                : 'Hors ligne'
+            );
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     DÉMARRAGE APPLICATION
+  ====================================================== */
+
+  async function demarrerApplication() {
+
+    if (!token) {
+
+      return;
 
     }
 
 
-    document.addEventListener(
-      'DOMContentLoaded',
-      demarrerApplication
-    );
+    await chargerMonProfil();
 
-  </script>
+
+    await Promise.all([
+      chargerUtilisateurs(),
+      chargerMessagesNonLus()
+    ]);
+
+
+    enregistrerServiceWorker();
+
+  }
+
+
+  /* =====================================================
+     SERVICE WORKER
+  ====================================================== */
+
+  function enregistrerServiceWorker() {
+
+    if (
+      !('serviceWorker' in navigator)
+    ) {
+
+      return;
+
+    }
+
+
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then(
+        registration => {
+
+          console.log(
+            'Service Worker enregistré:',
+            registration.scope
+          );
+
+        }
+      )
+      .catch(
+        err => {
+
+          console.error(
+            'Erreur Service Worker:',
+            err
+          );
+
+        }
+      );
+
+  }
+
+
+  /* =====================================================
+     DOM PRÊT
+  ====================================================== */
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    demarrerApplication
+  );
+
+
+</script>
+
 
 </body>
 
 </html>
+      
