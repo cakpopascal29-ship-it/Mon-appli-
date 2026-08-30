@@ -2,13 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AFRIQ'S - Inscription</title>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="favicon.ico">
 <meta name="theme-color" content="#C6552A">
 </head>
-<body>
+<body class="auth-page">
 
 <header>
   <a href="#" onclick="allerAccueil(event)" style="display:block; text-decoration:none;">
@@ -24,10 +25,67 @@
 
 <main>
   <div class="form-container">
-    <input type="text" id="username" placeholder="Nom d'utilisateur">
-    <input type="password" id="password" placeholder="Mot de passe">
-    <button class="primary-btn" onclick="sInscrire()">S'inscrire</button>
-    <div class="switch-link">Déjà un compte ? <a href="index.html">Se connecter</a></div>
+
+  <h1 class="auth-title">
+    Créer un compte 🎉
+  </h1>
+
+
+  <p class="auth-subtitle">
+    Rejoignez AFRIQ'S et restez connecté
+    avec votre communauté.
+  </p>
+
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Choisissez un nom d'utilisateur"
+    autocomplete="username"
+  >
+
+
+  <div class="password-row">
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Choisissez un mot de passe"
+      autocomplete="new-password"
+    >
+
+
+    <button
+      type="button"
+      class="toggle-password-btn"
+      id="togglePasswordBtn"
+      title="Afficher le mot de passe"
+    >
+      👁
+    </button>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="primary-btn"
+    onclick="sInscrire()"
+  >
+    Créer mon compte
+  </button>
+
+
+  <div class="switch-link">
+
+    Déjà un compte ?
+
+    <a href="index.html">
+      Se connecter
+    </a>
+
+  </div>
+
   </div>
 </main>
 
@@ -42,6 +100,51 @@
 </footer>
 
 <script>
+  /* =========================
+   AFFICHER / MASQUER
+   LE MOT DE PASSE
+========================= */
+
+const passwordInput =
+  document.getElementById(
+    'password'
+  );
+
+
+const togglePasswordBtn =
+  document.getElementById(
+    'togglePasswordBtn'
+  );
+
+
+togglePasswordBtn.addEventListener(
+  'click',
+  () => {
+
+    const motDePasseVisible =
+      passwordInput.type ===
+      'text';
+
+
+    passwordInput.type =
+      motDePasseVisible
+        ? 'password'
+        : 'text';
+
+
+    togglePasswordBtn.textContent =
+      motDePasseVisible
+        ? '👁'
+        : '🙈';
+
+
+    togglePasswordBtn.title =
+      motDePasseVisible
+        ? 'Afficher le mot de passe'
+        : 'Masquer le mot de passe';
+
+  }
+);
 function allerAccueil(e) {
   e.preventDefault();
   if (localStorage.getItem('token')) {
