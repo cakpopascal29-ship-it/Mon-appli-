@@ -19,15 +19,13 @@ body {
 
 
 /* ==================================================
-   HEADER
+   HEADER PRINCIPAL
 ================================================== */
 
 header {
   position: relative;
   background-color: #C6552A;
-
-  /* DÉZOOM LÉGER */
-  height: 280px;
+  height: 320px;
 
   display: flex;
   justify-content: center;
@@ -38,21 +36,20 @@ header {
   position: relative;
   z-index: 2;
 
-  width: min(82vw, 460px);
+  width: min(90vw, 520px);
   height: auto;
-  max-width: 82vw;
+  max-width: 90vw;
 
   display: block;
 }
 
 .wave {
   position: absolute;
-
   bottom: -1px;
   left: 0;
 
   width: 100%;
-  height: 20px;
+  height: 22px;
 }
 
 
@@ -67,33 +64,31 @@ main {
   flex-direction: column;
   align-items: center;
 
-  padding: 20px;
+  padding: 24px;
 }
 
 .form-container {
   width: 100%;
   max-width: 350px;
-
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 input {
   width: 100%;
 
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 17px;
+  margin-bottom: 17px;
 
   border: 1px solid #ddd;
   border-radius: 8px;
 
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .password-row {
   display: flex;
   align-items: center;
-
-  gap: 9px;
+  gap: 10px;
 }
 
 .password-row input {
@@ -101,8 +96,8 @@ input {
 }
 
 .forgot-btn {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
 
   border-radius: 50%;
 
@@ -116,13 +111,13 @@ input {
 
   flex-shrink: 0;
 
-  margin-bottom: 15px;
+  margin-bottom: 17px;
 }
 
 button.primary-btn {
   width: 100%;
 
-  padding: 15px;
+  padding: 17px;
 
   background-color: #C6552A;
   color: white;
@@ -130,7 +125,7 @@ button.primary-btn {
   border: none;
   border-radius: 8px;
 
-  font-size: 18px;
+  font-size: 19px;
   font-weight: bold;
 
   cursor: pointer;
@@ -142,10 +137,9 @@ button.primary-btn:hover {
 
 .switch-link {
   text-align: center;
+  margin-top: 18px;
 
-  margin-top: 16px;
-
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .switch-link a {
@@ -164,17 +158,16 @@ footer.about {
 
   text-align: center;
 
-  padding: 22px 18px;
+  padding: 24px 18px;
 
   margin-top: auto;
 
-  font-size: 14px;
+  font-size: 15px;
 }
 
 footer.about h3 {
-  margin-bottom: 10px;
-
-  font-size: 16px;
+  margin-bottom: 12px;
+  font-size: 17px;
 }
 
 footer.about p {
@@ -183,20 +176,19 @@ footer.about p {
 
 footer.about a {
   color: white;
-
   text-decoration: underline;
 }
 
 .about-desc {
   max-width: 500px;
 
-  margin: 0 auto 11px auto !important;
+  margin: 0 auto 12px auto !important;
 
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .slogan {
-  margin-top: 11px !important;
+  margin-top: 12px !important;
 
   font-style: italic;
   font-weight: bold;
@@ -223,7 +215,8 @@ footer.about a {
 
 
 /* ==================================================
-   PANNEAU GAUCHE
+   COLONNE UTILISATEURS
+   26,67 %
 ================================================== */
 
 .user-list {
@@ -241,7 +234,7 @@ footer.about a {
 
 
 /* ==================================================
-   MON PROFIL — DESIGN DISTINCTIF
+   MON PROFIL — DESIGN DISTINCT
 ================================================== */
 
 .my-profile {
@@ -249,57 +242,66 @@ footer.about a {
 
   margin: 8px;
 
-  padding: 13px 9px;
+  padding: 12px 9px;
 
-  border-radius: 14px;
+  min-height: 76px;
 
   display: flex;
-  flex-direction: column;
-
   align-items: center;
 
-  gap: 6px;
+  gap: 9px;
 
   background: linear-gradient(
-    145deg,
-    #fff8f4,
-    #F7EFEA
+    135deg,
+    #fff7f2,
+    #f7efeA
   );
 
-  border: 1px solid #eadbd3;
+  border: 1px solid #ead8ce;
+
+  border-radius: 16px;
 
   box-shadow:
     0 3px 10px rgba(0, 0, 0, 0.08);
 
-  font-size: 14px;
-
-  flex-shrink: 0;
+  font-size: 16px;
 }
 
 
-/* AVATAR DE MON PROFIL */
+/* Avatar de mon profil */
 
 .my-profile .avatar {
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
 
-  font-size: 19px;
+  border-radius: 50%;
 
   background-color: #C6552A;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  font-size: 18px;
+
+  flex-shrink: 0;
 
   border: 3px solid white;
 
   box-shadow:
-    0 0 0 2px #C6552A;
+    0 2px 7px rgba(0, 0, 0, 0.15);
 }
 
 
-/* NOM */
+/* Nom de mon profil */
 
 .my-profile-name {
-  width: 100%;
+  flex: 1;
 
-  text-align: center;
+  min-width: 0;
 
   overflow: hidden;
 
@@ -309,69 +311,92 @@ footer.about a {
 }
 
 .my-profile-name strong {
+  display: block;
+
   color: #333;
 
-  font-size: 14px;
-}
+  font-size: 15px;
 
+  overflow: hidden;
 
-/* BOUTON DÉCONNEXION */
-
-.logout-btn {
-  background: transparent;
-
-  color: #C6552A;
-
-  border: 1px solid #C6552A;
-
-  padding: 5px 10px;
-
-  border-radius: 15px;
-
-  cursor: pointer;
-
-  font-size: 10px;
-
-  font-weight: bold;
-
-  transition: 0.2s;
-
-  margin-top: 2px;
-}
-
-.logout-btn:hover {
-  background-color: #C6552A;
-
-  color: white;
+  text-overflow: ellipsis;
 }
 
 
 /* ==================================================
-   LISTE UTILISATEURS
+   BOUTON DÉCONNEXION
+================================================== */
+
+.logout-btn {
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background-color: #C6552A;
+
+  color: white;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 2px 6px rgba(198, 85, 42, 0.25);
+
+  font-size: 0;
+}
+
+.logout-btn::before {
+  content: "↪";
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  transform: rotate(180deg);
+}
+
+.logout-btn:active {
+  transform: scale(0.92);
+}
+
+
+/* ==================================================
+   LISTE DES UTILISATEURS
 ================================================== */
 
 .users-scroll {
   overflow-y: auto;
 
   flex: 1;
+
+  min-height: 0;
 }
 
 .user-item {
   position: relative;
 
   display: flex;
-
   align-items: center;
 
-  gap: 8px;
+  gap: 10px;
 
-  padding: 15px 7px;
+  padding: 15px 10px;
 
   cursor: pointer;
 
   border-bottom: 1px solid #f5f5f5;
 
-  font-size: 13px;
+  font-size: 17px;
 
   min-width: 0;
 }
@@ -381,32 +406,42 @@ footer.about a {
   background-color: #F7EFEA;
 }
 
+
+/* ==================================================
+   CONTENEUR NOM + BADGE
+================================================== */
+
 .user-name-container {
   flex: 1;
 
   min-width: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
 }
 
 .user-name {
-  display: block;
+  min-width: 0;
 
   overflow: hidden;
 
   white-space: nowrap;
 
   text-overflow: ellipsis;
-
-  font-size: 12px;
 }
 
 
 /* ==================================================
-   AVATAR UTILISATEURS
+   AVATAR UTILISATEUR
 ================================================== */
 
-.user-item .avatar {
-  width: 42px;
-  height: 42px;
+.avatar {
+  width: 52px;
+  height: 52px;
 
   border-radius: 50%;
 
@@ -415,13 +450,12 @@ footer.about a {
   color: white;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   font-weight: bold;
 
-  font-size: 16px;
+  font-size: 19px;
 
   flex-shrink: 0;
 
@@ -430,23 +464,32 @@ footer.about a {
 
 
 /* ==================================================
-   POINT VERT / ROUGE SUR L'AVATAR
+   POINT DE STATUT
+   LE POINT EST SUR LE BORD DU CERCLE
 ================================================== */
 
-.user-item .status-dot {
+.user-item > .status-dot {
   position: absolute;
 
-  left: 39px;
-  bottom: 14px;
+  left: 49px;
+  bottom: 12px;
 
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
 
   border-radius: 50%;
 
-  border: 2px solid #ffffff;
+  border: 2px solid white;
 
-  z-index: 5;
+  z-index: 3;
+}
+
+.status-dot {
+  display: inline-block;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
 }
 
 .status-dot.actif {
@@ -463,32 +506,30 @@ footer.about a {
 ================================================== */
 
 .unread-badge {
-  display: inline-flex;
+  flex-shrink: 0;
 
+  min-width: 19px;
+  height: 19px;
+
+  padding: 0 5px;
+
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  min-width: 18px;
-  height: 18px;
-
-  padding: 0 4px;
-
-  margin-left: 4px;
-
-  border-radius: 12px;
+  border-radius: 10px;
 
   background-color: #C6552A;
 
   color: white;
 
-  font-size: 10px;
-
+  font-size: 11px;
   font-weight: bold;
 }
 
 
 /* ==================================================
-   SUPPRESSION
+   BOUTON SUPPRESSION
 ================================================== */
 
 .delete-user-btn {
@@ -502,7 +543,7 @@ footer.about a {
 
   cursor: pointer;
 
-  padding: 4px;
+  padding: 5px;
 
   margin-left: auto;
 
@@ -516,6 +557,7 @@ footer.about a {
 
 /* ==================================================
    PANNEAU DROIT
+   73,33 %
 ================================================== */
 
 .conversation {
@@ -529,6 +571,11 @@ footer.about a {
   background: #ffffff;
 }
 
+
+/* ==================================================
+   PLACEHOLDER
+================================================== */
+
 .conv-placeholder {
   flex: 1;
 
@@ -539,12 +586,17 @@ footer.about a {
 
   color: #999;
 
-  padding: 20px;
+  padding: 25px;
 
   text-align: center;
 
   font-size: 18px;
 }
+
+
+/* ==================================================
+   CONVERSATION ACTIVE
+================================================== */
 
 .conv-active {
   flex: 1;
@@ -559,7 +611,8 @@ footer.about a {
 
 
 /* ==================================================
-   ENTÊTE DISCUSSION — RÉDUITE
+   ENTÊTE DISCUSSION
+   HAUTEUR RÉDUITE DE 50 %
 ================================================== */
 
 .conv-header {
@@ -567,16 +620,17 @@ footer.about a {
 
   width: 100%;
 
-  /* RÉDUCTION DE LA BANDE */
+  min-height: 52px;
 
-  min-height: 68px;
+  height: 52px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  padding: 7px 10px;
+  padding: 5px 10px;
 
   border-bottom: 1px solid #eee;
 
@@ -586,34 +640,44 @@ footer.about a {
 }
 
 
-/* CENTRAGE */
+/* ==================================================
+   CENTRAGE PROFIL SÉLECTIONNÉ
+================================================== */
 
 .conv-header-center {
   display: flex;
 
-  flex-direction: column;
+  flex-direction: row;
 
   align-items: center;
+
   justify-content: center;
 
-  gap: 2px;
+  gap: 7px;
 }
 
 
-/* AVATAR DISCUSSION — PLUS PETIT */
+/* ==================================================
+   AVATAR DANS L'ENTÊTE
+   RÉDUIT PROPORTIONNELLEMENT
+================================================== */
 
 .conv-header .avatar {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
 
   font-size: 14px;
 }
 
 
-/* NOM */
+/* ==================================================
+   INFORMATIONS UTILISATEUR
+================================================== */
 
 .conv-user-info {
-  text-align: center;
+  text-align: left;
+
+  min-width: 0;
 }
 
 .conv-username {
@@ -622,22 +686,27 @@ footer.about a {
   font-weight: bold;
 
   line-height: 1.1;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
-
-
-/* STATUT */
 
 .conv-status {
   font-size: 10px;
 
   color: #666;
 
-  margin-top: 1px;
+  margin-top: 2px;
+
+  white-space: nowrap;
 }
 
 .conv-status .status-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 
   vertical-align: middle;
 }
@@ -653,6 +722,7 @@ footer.about a {
   position: absolute;
 
   left: 8px;
+
   top: 50%;
 
   transform: translateY(-50%);
@@ -661,14 +731,14 @@ footer.about a {
 
   border: none;
 
-  font-size: 24px;
+  font-size: 25px;
 
   cursor: pointer;
 }
 
 
 /* ==================================================
-   MESSAGES
+   ZONE DES MESSAGES
 ================================================== */
 
 .messages {
@@ -678,15 +748,15 @@ footer.about a {
 
   padding:
     15px
-    12px
-    95px
-    12px;
+    14px
+    100px
+    14px;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 9px;
+  gap: 10px;
 
   background: #ffffff;
 
@@ -694,7 +764,9 @@ footer.about a {
 }
 
 
-/* LIGNE */
+/* ==================================================
+   LIGNES DES MESSAGES
+================================================== */
 
 .message-line {
   width: 100%;
@@ -721,24 +793,26 @@ footer.about a {
   max-width: 78%;
 
   padding:
-    9px
-    12px
-    6px
-    12px;
+    10px
+    13px
+    7px
+    13px;
 
-  border-radius: 16px;
+  border-radius: 17px;
 
-  font-size: 15px;
+  font-size: 16px;
 
   line-height: 1.4;
 
   word-wrap: break-word;
 
   overflow-wrap: anywhere;
+
+  box-shadow: none;
 }
 
 
-/* ENVOYÉ */
+/* MESSAGE ENVOYÉ */
 
 .message-envoye {
   background-color: #C6552A;
@@ -749,7 +823,7 @@ footer.about a {
 }
 
 
-/* REÇU */
+/* MESSAGE REÇU */
 
 .message-recu {
   background-color: #E9E4DD;
@@ -760,14 +834,18 @@ footer.about a {
 }
 
 
-/* TEXTE */
+/* ==================================================
+   TEXTE
+================================================== */
 
 .message-text {
   white-space: pre-wrap;
 }
 
 
-/* HEURE */
+/* ==================================================
+   HEURE
+================================================== */
 
 .bubble .time {
   display: block;
@@ -776,14 +854,14 @@ footer.about a {
 
   opacity: 0.7;
 
-  margin-top: 3px;
+  margin-top: 4px;
 
   text-align: right;
 }
 
 
 /* ==================================================
-   INDICATEUR ÉCRIT
+   INDICATEUR ÉCRIT...
 ================================================== */
 
 .typing-indicator {
@@ -791,7 +869,7 @@ footer.about a {
 
   bottom: 78px;
 
-  left: 18px;
+  left: 20px;
 
   padding: 4px 8px;
 
@@ -801,22 +879,28 @@ footer.about a {
 
   font-style: italic;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(
+    255,
+    255,
+    255,
+    0.95
+  );
 
-  border-radius: 8px;
+  border-radius: 10px;
 
   z-index: 5;
 }
 
 
 /* ==================================================
-   BARRE D'ÉCRITURE
+   BARRE D'ÉCRITURE FLOTTANTE
 ================================================== */
 
 .message-input-row {
   position: absolute;
 
   left: 12px;
+
   right: 12px;
 
   bottom: 10px;
@@ -825,13 +909,13 @@ footer.about a {
 
   display: flex;
 
-  gap: 7px;
+  gap: 8px;
 
   padding:
-    5px
     6px
-    5px
-    12px;
+    7px
+    6px
+    13px;
 
   align-items: center;
 
@@ -840,13 +924,16 @@ footer.about a {
   border-radius: 30px;
 
   box-shadow:
-    0 3px 14px rgba(0, 0, 0, 0.16);
+    0 4px 18px
+    rgba(0, 0, 0, 0.18);
 
   border: 1px solid #e5e5e5;
 }
 
 
-/* CHAMP */
+/* ==================================================
+   CHAMP MESSAGE
+================================================== */
 
 .message-input-row input {
   flex: 1;
@@ -855,9 +942,9 @@ footer.about a {
 
   margin-bottom: 0;
 
-  padding: 10px 2px;
+  padding: 11px 3px;
 
-  font-size: 15px;
+  font-size: 16px;
 
   border: none;
 
@@ -876,8 +963,8 @@ footer.about a {
 ================================================== */
 
 .send-btn {
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
 
   border-radius: 50%;
 
@@ -887,7 +974,7 @@ footer.about a {
 
   border: none;
 
-  font-size: 18px;
+  font-size: 19px;
 
   cursor: pointer;
 
@@ -896,6 +983,7 @@ footer.about a {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 }
 
@@ -910,20 +998,6 @@ footer.about a {
 
 @media (max-width: 700px) {
 
-  /* HEADER */
-
-  header {
-    height: 250px;
-  }
-
-  .logo-oval {
-    width: 78vw;
-    max-width: 400px;
-  }
-
-
-  /* CHAT */
-
   .chat-app {
     display: flex;
 
@@ -933,7 +1007,9 @@ footer.about a {
   }
 
 
-  /* GAUCHE */
+  /* =========================
+     COLONNE GAUCHE
+  ========================== */
 
   .user-list {
     width: 26.67%;
@@ -942,7 +1018,98 @@ footer.about a {
   }
 
 
-  /* DROITE */
+  /* =========================
+     PROFIL PERSONNEL
+  ========================== */
+
+  .my-profile {
+    margin: 6px;
+
+    padding: 8px 5px;
+
+    min-height: 65px;
+
+    gap: 5px;
+
+    border-radius: 13px;
+  }
+
+  .my-profile .avatar {
+    width: 40px;
+    height: 40px;
+
+    font-size: 15px;
+
+    border-width: 2px;
+  }
+
+  .my-profile-name strong {
+    font-size: 12px;
+  }
+
+  .logout-btn {
+    width: 27px;
+    height: 27px;
+  }
+
+  .logout-btn::before {
+    font-size: 15px;
+  }
+
+
+  /* =========================
+     UTILISATEURS
+  ========================== */
+
+  .user-item {
+    gap: 6px;
+
+    padding:
+      12px
+      5px;
+
+    font-size: 13px;
+  }
+
+  .user-item .avatar {
+    width: 39px;
+    height: 39px;
+
+    font-size: 15px;
+  }
+
+
+  /* Point de statut sur avatar */
+
+  .user-item > .status-dot {
+    left: 31px;
+
+    bottom: 10px;
+
+    width: 11px;
+    height: 11px;
+
+    border-width: 2px;
+  }
+
+
+  .user-name-container {
+    gap: 3px;
+  }
+
+  .unread-badge {
+    min-width: 16px;
+    height: 16px;
+
+    padding: 0 4px;
+
+    font-size: 9px;
+  }
+
+
+  /* =========================
+     COLONNE DROITE
+  ========================== */
 
   .conversation {
     position: relative;
@@ -960,117 +1127,48 @@ footer.about a {
   }
 
 
-  /* MON PROFIL */
-
-  .my-profile {
-    margin: 6px 4px;
-
-    padding: 10px 4px;
-
-    gap: 5px;
-
-    border-radius: 11px;
-  }
-
-  .my-profile .avatar {
-    width: 40px;
-    height: 40px;
-
-    font-size: 15px;
-  }
-
-  .my-profile-name strong {
-    font-size: 11px;
-  }
-
-  .logout-btn {
-    padding: 4px 7px;
-
-    font-size: 8px;
-
-    border-radius: 12px;
-  }
-
-
-  /* UTILISATEURS */
-
-  .user-item {
-    gap: 5px;
-
-    padding:
-      12px
-      5px;
-
-    font-size: 11px;
-  }
-
-  .user-item .avatar {
-    width: 38px;
-    height: 38px;
-
-    font-size: 14px;
-  }
-
-
-  /* POINT STATUT */
-
-  .user-item .status-dot {
-    left: 35px;
-    bottom: 12px;
-
-    width: 11px;
-    height: 11px;
-
-    border-width: 2px;
-  }
-
-
-  /* NOM */
-
-  .user-name {
-    font-size: 10px;
-  }
-
-
-  /* BADGE */
-
-  .unread-badge {
-    min-width: 16px;
-    height: 16px;
-
-    padding: 0 3px;
-
-    font-size: 9px;
-  }
-
-
-  /* ENTÊTE */
+  /* =========================
+     ENTÊTE MOBILE
+  ========================== */
 
   .conv-header {
-    min-height: 68px;
+    min-height: 48px;
+
+    height: 48px;
 
     padding:
-      6px
-      6px;
+      5px
+      5px;
+  }
+
+  .conv-header-center {
+    gap: 5px;
   }
 
   .conv-header .avatar {
-    width: 34px;
-    height: 34px;
+    width: 31px;
+    height: 31px;
 
     font-size: 13px;
   }
 
   .conv-username {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .conv-status {
     font-size: 9px;
   }
 
+  .conv-status .status-dot {
+    width: 6px;
+    height: 6px;
+  }
 
-  /* MESSAGES */
+
+  /* =========================
+     MESSAGES MOBILE
+  ========================== */
 
   .messages {
     padding:
@@ -1083,7 +1181,7 @@ footer.about a {
   }
 
   .bubble {
-    max-width: 82%;
+    max-width: 84%;
 
     padding:
       9px
@@ -1101,13 +1199,16 @@ footer.about a {
   }
 
 
-  /* BARRE */
+  /* =========================
+     BARRE MESSAGE MOBILE
+  ========================== */
 
   .message-input-row {
     left: 6px;
+
     right: 6px;
 
-    bottom: 8px;
+    bottom: 7px;
 
     padding:
       5px
@@ -1120,21 +1221,23 @@ footer.about a {
 
   .message-input-row input {
     padding:
-      9px
+      10px
       2px;
 
     font-size: 14px;
   }
 
   .send-btn {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     font-size: 17px;
   }
 
 
-  /* ÉCRIT */
+  /* =========================
+     INDICATEUR ÉCRITURE
+  ========================== */
 
   .typing-indicator {
     bottom: 68px;
@@ -1142,13 +1245,19 @@ footer.about a {
     left: 10px;
 
     font-size: 10px;
+
+    padding:
+      3px
+      7px;
   }
 
 
-  /* RETOUR */
+  /* =========================
+     BOUTON RETOUR
+  ========================== */
 
   .back-btn {
     display: none;
   }
 
-  }
+    }
