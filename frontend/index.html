@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#C6552A">
 </head>
 
-<body>
+<body class="auth-page">
 
 <header>
 
@@ -65,54 +65,78 @@
 
 <main>
 
-  <div class="form-container">
+<div class="form-container">
+
+  <h1 class="auth-title">
+    Bienvenue 🎉
+  </h1>
+
+
+  <p class="auth-subtitle">
+    Connectez-vous pour retrouver vos conversations
+    et rester en contact avec votre communauté.
+  </p>
+
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Nom d'utilisateur"
+    autocomplete="username"
+  >
+
+
+  <div class="password-row">
 
     <input
-      type="text"
-      id="username"
-      placeholder="Nom d'utilisateur"
+      type="password"
+      id="password"
+      placeholder="Mot de passe"
+      autocomplete="current-password"
     >
-
-
-    <div class="password-row">
-
-      <input
-        type="password"
-        id="password"
-        placeholder="Mot de passe"
-      >
-
-      <button
-        type="button"
-        class="forgot-btn"
-        onclick="motDePasseOublie()"
-      >
-        ?
-      </button>
-
-    </div>
 
 
     <button
-      class="primary-btn"
-      onclick="seConnecter()"
+      type="button"
+      class="toggle-password-btn"
+      id="togglePasswordBtn"
+      title="Afficher le mot de passe"
     >
-      Se connecter
+      👁
     </button>
-
-
-    <div class="switch-link">
-
-      Pas de compte ?
-
-      <a href="register.html">
-        S'inscrire
-      </a>
-
-    </div>
 
   </div>
 
+
+  <button
+    type="button"
+    class="forgot-link"
+    onclick="motDePasseOublie()"
+  >
+    Mot de passe oublié ?
+  </button>
+
+
+  <button
+    type="button"
+    class="primary-btn"
+    onclick="seConnecter()"
+  >
+    Se connecter
+  </button>
+
+
+  <div class="switch-link">
+
+    Pas encore de compte ?
+
+    <a href="register.html">
+      S'inscrire
+    </a>
+
+  </div>
+
+</div>
 </main>
 
 
@@ -169,7 +193,51 @@ function allerAccueil(e) {
   }
 
 }
+/* =========================
+   AFFICHER / MASQUER
+   LE MOT DE PASSE
+========================= */
 
+const passwordInput =
+  document.getElementById(
+    'password'
+  );
+
+
+const togglePasswordBtn =
+  document.getElementById(
+    'togglePasswordBtn'
+  );
+
+
+togglePasswordBtn.addEventListener(
+  'click',
+  () => {
+
+    const motDePasseVisible =
+      passwordInput.type ===
+      'text';
+
+
+    passwordInput.type =
+      motDePasseVisible
+        ? 'password'
+        : 'text';
+
+
+    togglePasswordBtn.textContent =
+      motDePasseVisible
+        ? '👁'
+        : '🙈';
+
+
+    togglePasswordBtn.title =
+      motDePasseVisible
+        ? 'Afficher le mot de passe'
+        : 'Masquer le mot de passe';
+
+  }
+);
 
 /* =========================
    CONNEXION
