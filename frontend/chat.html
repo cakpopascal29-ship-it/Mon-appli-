@@ -1883,7 +1883,204 @@ async function enregistrerServiceWorker() {
 
 }
 
+/* =====================================================
+   NOTIFICATIONS PUSH
+===================================================== */
 
+async function activerNotificationsPush() {
+
+  try {
+
+    // Vérifier que le navigateur prend en charge les notifications
+    if (
+      !('Notification' in window) ||
+      !('serviceWorker' in navigator) ||
+      !('PushManager' in window)
+    ) {
+
+      console.log(
+        'Notifications Push non supportées par ce navigateur.'
+      );
+
+      return;
+
+    }
+
+
+    // Demander l'autorisation
+    const permission =
+      await Notification.requestPermission();
+
+
+    if (permission !== 'granted') {
+
+      console.log(
+        'Autorisation des notifications refusée.'
+      );
+
+      return;
+
+    }
+
+
+    // Récupérer le Service Worker
+    const registration =
+      await navigator.serviceWorker.ready;
+
+
+    // Récupérer la clé publique VAPID
+    const vapidResponse =
+      await fetch(
+        '/api/notifications/vapid-public-key',
+        {
+
+          headers: {
+
+            'Authorization':
+              'Bearer ' + token
+
+          }
+
+        }
+      );
+
+
+    if (!vapidResponse.ok) {
+
+      console.error(
+        'Impossible de récupérer la clé publique VAPID.'
+      );
+
+      return;
+
+    }
+
+
+    const vapidData =
+      await vapidResponse.json();
+
+
+    if (!vapidData.publicKey) {
+
+      console.error(
+        'Clé publique VAPID absente.'
+      );
+
+      return;
+
+    }
+
+
+    // Convertir la clé VAPID
+    function urlBase64ToUint8Array(base64String) {
+
+      const padding =
+        '='.repeat(
+          (4 - base64String.length % 4) % 4
+        );
+
+      const base64 =
+        (
+          base64String +
+          padding
+        )
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+
+      const rawData =
+        window.atob(base64);
+
+
+      return Uint8Array.from(
+        [...rawData].map(
+          char => char.charCodeAt(0)
+        )
+      );
+
+    }
+
+
+    // Vérifier s'il existe déjà un abonnement
+    let subscription =
+      await registration.pushManager.getSubscription();
+
+
+    // Créer l'abonnement s'il n'existe pas
+    if (!subscription) {
+
+      subscription =
+        await registration.pushManager.subscribe({
+
+          userVisibleOnly: true,
+
+          applicationServerKey:
+            urlBase64ToUint8Array(
+              vapidData.publicKey
+            )
+
+        });
+
+    }
+
+
+    // Envoyer l'abonnement au serveur
+    const subscribeResponse =
+      await fetch(
+        '/api/notifications/subscribe',
+        {
+
+          method: 'POST',
+
+          headers: {
+
+            'Content-Type':
+              'application/json',
+
+            'Authorization':
+              'Bearer ' + token
+
+          },
+
+          body:
+            JSON.stringify(
+              subscription
+            )
+
+        }
+      );
+
+
+    if (!subscribeResponse.ok) {
+
+      const erreur =
+        await subscribeResponse.text();
+
+      console.error(
+        'Erreur enregistrement Push :',
+        erreur
+      );
+
+      return;
+
+    }
+
+
+    console.log(
+      '🔔 Notifications Push activées avec succès.'
+    );
+
+
+  } catch (err) {
+
+    console.error(
+      'Erreur activation notifications Push :',
+      err
+    );
+
+  }
+
+  }
 /* =====================================================
    DÉMARRAGE APPLICATION
 ===================================================== */
@@ -1909,10 +2106,14 @@ async function demarrerApplication() {
   ]);
 
 
-  enregistrerServiceWorker();
+  // Enregistrer le Service Worker
+  await enregistrerServiceWorker();
 
-}
 
+  // Activer les notifications Push
+  await activerNotificationsPush();
+
+        }
 
 /* =====================================================
    LANCEMENT
