@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFRIQ'S — Connexion</title>
+</head>
+
+<body class="auth-page">
+
 <header>
 
   <div class="header-curves">
@@ -107,128 +116,82 @@
 
 </header>
 
-<body class="auth-page">
-
-<header>
-
-  <a href="#" onclick="allerAccueil(event)" style="display:block; text-decoration:none;">
-
-    <svg class="logo-oval" width="520" height="260" viewBox="0 0 260 130">
-
-      <ellipse
-        cx="130"
-        cy="65"
-        rx="125"
-        ry="58"
-        fill="#FFFFFF"
-      />
-
-      <text
-        x="130"
-        y="78"
-        text-anchor="middle"
-        font-size="38"
-        font-family="'Segoe Script','Brush Script MT',cursive"
-        fill="#C6552A"
-      >
-        AFRIQ'S
-      </text>
-
-    </svg>
-
-  </a>
-
-
-  <svg
-    class="wave"
-    viewBox="0 0 1200 40"
-    preserveAspectRatio="none"
-  >
-
-    <path
-      fill="#F7EFEA"
-      d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"
-    />
-
-  </svg>
-
-</header>
-
 
 <main>
 
-<div class="form-container">
+  <div class="form-container">
 
-  <h1 class="auth-title">
-    Bienvenue 🎉
-  </h1>
-
-
-  <p class="auth-subtitle">
-    Connectez-vous pour retrouver vos conversations
-    et rester en contact avec votre communauté.
-  </p>
+    <h1 class="auth-title">
+      Bienvenue 🎉
+    </h1>
 
 
-  <input
-    type="text"
-    id="username"
-    placeholder="Nom d'utilisateur"
-    autocomplete="username"
-  >
+    <p class="auth-subtitle">
+      Connectez-vous pour retrouver vos conversations
+      et rester en contact avec votre communauté.
+    </p>
 
-
-  <div class="password-row">
 
     <input
-      type="password"
-      id="password"
-      placeholder="Mot de passe"
-      autocomplete="current-password"
+      type="text"
+      id="username"
+      placeholder="Nom d'utilisateur"
+      autocomplete="username"
     >
+
+
+    <div class="password-row">
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Mot de passe"
+        autocomplete="current-password"
+      >
+
+
+      <button
+        type="button"
+        class="toggle-password-btn"
+        id="togglePasswordBtn"
+        title="Afficher le mot de passe"
+      >
+        👁
+      </button>
+
+    </div>
 
 
     <button
       type="button"
-      class="toggle-password-btn"
-      id="togglePasswordBtn"
-      title="Afficher le mot de passe"
+      class="forgot-link"
+      onclick="motDePasseOublie()"
     >
-      👁
+      Mot de passe oublié ?
     </button>
 
-  </div>
+
+    <button
+      type="button"
+      class="primary-btn"
+      onclick="seConnecter()"
+    >
+      Se connecter
+    </button>
 
 
-  <button
-    type="button"
-    class="forgot-link"
-    onclick="motDePasseOublie()"
-  >
-    Mot de passe oublié ?
-  </button>
+    <div class="switch-link">
 
+      Pas encore de compte ?
 
-  <button
-    type="button"
-    class="primary-btn"
-    onclick="seConnecter()"
-  >
-    Se connecter
-  </button>
+      <a href="register.html">
+        S'inscrire
+      </a>
 
-
-  <div class="switch-link">
-
-    Pas encore de compte ?
-
-    <a href="register.html">
-      S'inscrire
-    </a>
+    </div>
 
   </div>
 
-</div>
 </main>
 
 
@@ -285,6 +248,8 @@ function allerAccueil(e) {
   }
 
 }
+
+
 /* =========================
    AFFICHER / MASQUER
    LE MOT DE PASSE
@@ -330,6 +295,7 @@ togglePasswordBtn.addEventListener(
 
   }
 );
+
 
 /* =========================
    CONNEXION
@@ -383,12 +349,14 @@ async function seConnecter() {
       );
 
 
-      window.location.href = 'chat.html';
+      window.location.href =
+        'chat.html';
 
     } else {
 
       alert(
-        data.error || 'Erreur de connexion'
+        data.error ||
+        'Erreur de connexion'
       );
 
     }
