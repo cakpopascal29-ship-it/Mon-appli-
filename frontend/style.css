@@ -5,7 +5,8 @@
   font-family: Arial, sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -16,8 +17,9 @@ body {
   flex-direction: column;
 }
 
+
 /* =========================
-   PAGE PRINCIPALE
+   HEADER
 ========================= */
 
 header {
@@ -41,6 +43,11 @@ header {
   width: 100%;
   height: 22px;
 }
+
+
+/* =========================
+   PAGE PRINCIPALE
+========================= */
 
 main {
   flex: 1;
@@ -115,6 +122,11 @@ button.primary-btn:hover {
   font-weight: bold;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 footer.about {
   background-color: #C6552A;
   color: white;
@@ -150,9 +162,10 @@ footer.about a {
   font-weight: bold;
 }
 
-/* =========================
+
+/* ==================================================
    CHAT APP
-========================= */
+================================================== */
 
 .chat-app {
   flex: 1;
@@ -163,10 +176,11 @@ footer.about a {
   overflow: hidden;
 }
 
-/* =========================
+
+/* ==================================================
    PANNEAU GAUCHE
-   0,8 / 3 = 26,67 %
-========================= */
+   26,67 %
+================================================== */
 
 .user-list {
   width: 26.67%;
@@ -174,7 +188,11 @@ footer.about a {
   border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
+  background: #ffffff;
 }
+
+
+/* PROFIL PRINCIPAL */
 
 .my-profile {
   padding: 25px 21px;
@@ -185,6 +203,14 @@ footer.about a {
   font-size: 20px;
 }
 
+.my-profile-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .logout-btn {
   background: #C6552A;
   color: white;
@@ -193,7 +219,11 @@ footer.about a {
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
+  flex-shrink: 0;
 }
+
+
+/* LISTE */
 
 .users-scroll {
   overflow-y: auto;
@@ -208,6 +238,7 @@ footer.about a {
   cursor: pointer;
   border-bottom: 1px solid #f5f5f5;
   font-size: 20px;
+  min-width: 0;
 }
 
 .user-item:hover,
@@ -215,7 +246,17 @@ footer.about a {
   background-color: #F7EFEA;
 }
 
-/* AVATAR AGRANDI */
+.user-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/* AVATAR */
+
 .avatar {
   width: 66px;
   height: 66px;
@@ -230,12 +271,15 @@ footer.about a {
   flex-shrink: 0;
 }
 
+
+/* STATUT */
+
 .status-dot {
   width: 15px;
   height: 15px;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 8px;
+  flex-shrink: 0;
 }
 
 .status-dot.actif {
@@ -246,6 +290,9 @@ footer.about a {
   background-color: #e74c3c;
 }
 
+
+/* SUPPRESSION */
+
 .delete-user-btn {
   background: none;
   border: none;
@@ -254,21 +301,25 @@ footer.about a {
   cursor: pointer;
   padding: 6px 8px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .delete-user-btn:hover {
   color: #e74c3c;
 }
 
-/* =========================
+
+/* ==================================================
    PANNEAU DROIT
-   2,2 / 3 = 73,33 %
-========================= */
+   73,33 %
+================================================== */
 
 .conversation {
   width: 73.33%;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  background: #ffffff;
 }
 
 .conv-placeholder {
@@ -286,112 +337,287 @@ footer.about a {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  min-height: 0;
 }
 
-/* EN-TÊTE CONVERSATION */
+
+/* ==================================================
+   ENTÊTE DE LA DISCUSSION
+================================================== */
 
 .conv-header {
+  position: relative;
+  width: 100%;
+  min-height: 105px;
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 24px 25px;
+  justify-content: center;
+  padding: 15px 20px;
   border-bottom: 1px solid #eee;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+
+/*
+   Tout le contenu de l'identité est
+   véritablement centré dans la section.
+*/
+
+.conv-header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+
+/*
+   Avatar de la personne avec laquelle
+   on discute.
+*/
+
+.conv-header .avatar {
+  width: 55px;
+  height: 55px;
+  font-size: 20px;
+}
+
+
+/* NOM */
+
+.conv-user-info {
+  text-align: center;
 }
 
 .conv-username {
-  font-size: 23px;
+  font-size: 21px;
   font-weight: bold;
+  line-height: 1.15;
 }
 
+
+/* STATUT */
+
 .conv-status {
-  font-size: 17px;
+  font-size: 14px;
   color: #666;
+  margin-top: 3px;
 }
+
+.conv-status .status-dot {
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+}
+
+
+/* BOUTON RETOUR */
 
 .back-btn {
   display: none;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 28px;
   cursor: pointer;
 }
 
-/* =========================
-   MESSAGES
-========================= */
+
+/* ==================================================
+   ZONE DES MESSAGES
+================================================== */
 
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding: 0;
+
+  /*
+     Espace supplémentaire en bas pour que
+     la barre flottante ne cache jamais le
+     dernier message.
+  */
+  padding: 20px 18px 105px 18px;
+
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 12px;
+
+  background: #ffffff;
+
+  min-height: 0;
 }
+
+
+/* LIGNE DU MESSAGE */
+
+.message-line {
+  width: 100%;
+  display: flex;
+}
+
+
+/* MESSAGE REÇU = GAUCHE */
+
+.message-line-recu {
+  justify-content: flex-start;
+}
+
+
+/* MESSAGE ENVOYÉ = DROITE */
+
+.message-line-envoye {
+  justify-content: flex-end;
+}
+
+
+/* ==================================================
+   BULLES
+================================================== */
 
 .bubble {
-  width: 100%;
-  padding: 25px 30px;
-  border-radius: 0;
-  font-size: 20px;
-  line-height: 1.65;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  width: auto;
+  max-width: 78%;
+  padding: 12px 16px 8px 16px;
+
+  border-radius: 18px;
+
+  font-size: 18px;
+  line-height: 1.45;
+
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+
+  box-shadow: none;
 }
 
-.bubble .sender-name {
-  display: block;
-  font-weight: bold;
-  font-size: 17px;
-  margin-bottom: 7px;
-  opacity: 0.85;
-}
+
+/* MESSAGE ENVOYÉ */
 
 .message-envoye {
   background-color: #C6552A;
   color: #ffffff;
+
+  border-bottom-right-radius: 5px;
 }
+
+
+/* MESSAGE REÇU */
 
 .message-recu {
   background-color: #E9E4DD;
   color: #333333;
+
+  border-bottom-left-radius: 5px;
 }
+
+
+/* TEXTE */
+
+.message-text {
+  white-space: pre-wrap;
+}
+
+
+/* HEURE */
 
 .bubble .time {
   display: block;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0.7;
-  margin-top: 7px;
+  margin-top: 5px;
+  text-align: right;
 }
+
+
+/* ==================================================
+   INDICATEUR "ÉCRIT..."
+================================================== */
 
 .typing-indicator {
-  padding: 9px 22px;
-  font-size: 15px;
+  position: absolute;
+
+  bottom: 91px;
+  left: 28px;
+
+  padding: 5px 10px;
+
+  font-size: 13px;
+
   color: #999;
+
   font-style: italic;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-radius: 10px;
+
+  z-index: 5;
 }
 
-/* =========================
-   CHAMP D'ÉCRITURE
-========================= */
+
+/* ==================================================
+   BARRE D'ÉCRITURE FLOTTANTE
+================================================== */
 
 .message-input-row {
+
+  /*
+     IMPORTANT :
+     La barre est maintenant flottante.
+     Elle ne fait plus partie du flux des messages.
+  */
+
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+  bottom: 15px;
+
+  z-index: 10;
+
   display: flex;
+
   gap: 12px;
-  padding: 13px 17px;
+
+  padding: 8px 9px 8px 17px;
+
   align-items: center;
+
   background: #ffffff;
-  margin: 15px 21px 21px 21px;
+
   border-radius: 35px;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
-  border: 1px solid #eee;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.18);
+
+  border: 1px solid #e5e5e5;
 }
 
+
+/* CHAMP */
+
 .message-input-row input {
+
   flex: 1;
+
+  min-width: 0;
+
   margin-bottom: 0;
-  padding: 17px 19px;
-  font-size: 20px;
+
+  padding: 14px 4px;
+
+  font-size: 18px;
+
   border: none;
+
+  outline: none;
+
   background: transparent;
 }
 
@@ -399,26 +625,45 @@ footer.about a {
   outline: none;
 }
 
-/* BOUTON ENVOYER */
+
+/* ==================================================
+   BOUTON ENVOYER
+================================================== */
+
 .send-btn {
-  width: 60px;
-  height: 60px;
+
+  width: 56px;
+  height: 56px;
+
   border-radius: 50%;
+
   background-color: #C6552A;
+
   color: white;
+
   border: none;
-  font-size: 23px;
+
+  font-size: 22px;
+
   cursor: pointer;
+
   flex-shrink: 0;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 }
 
-/* =========================
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* ==================================================
    MOBILE
-   Les deux panneaux restent visibles
-========================= */
+================================================== */
 
 @media (max-width: 700px) {
 
@@ -428,10 +673,16 @@ footer.about a {
     overflow: hidden;
   }
 
+
+  /* GAUCHE */
+
   .user-list {
     width: 26.67%;
     min-width: 0;
   }
+
+
+  /* DROITE */
 
   .conversation {
     position: relative;
@@ -442,6 +693,88 @@ footer.about a {
     display: flex;
     background: white;
   }
+
+
+  /* ENTÊTE */
+
+  .conv-header {
+    min-height: 95px;
+    padding: 10px 8px;
+  }
+
+  .conv-header .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .conv-username {
+    font-size: 19px;
+  }
+
+  .conv-status {
+    font-size: 12px;
+  }
+
+
+  /* MESSAGES */
+
+  .messages {
+    padding:
+      15px
+      10px
+      100px
+      10px;
+
+    gap: 10px;
+  }
+
+
+  .bubble {
+    max-width: 82%;
+    padding: 11px 13px 7px 13px;
+    font-size: 17px;
+    border-radius: 16px;
+  }
+
+
+  .bubble .time {
+    font-size: 11px;
+  }
+
+
+  /* BARRE FLOTTANTE */
+
+  .message-input-row {
+    left: 8px;
+    right: 8px;
+    bottom: 10px;
+
+    padding: 6px 7px 6px 14px;
+
+    gap: 7px;
+  }
+
+
+  .message-input-row input {
+    padding: 12px 2px;
+    font-size: 16px;
+  }
+
+
+  .send-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 19px;
+  }
+
+
+  .typing-indicator {
+    bottom: 78px;
+    left: 15px;
+    font-size: 12px;
+  }
+
 
   .back-btn {
     display: none;
