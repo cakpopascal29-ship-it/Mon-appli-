@@ -1,106 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFRIQ'S - Inscription</title>
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="favicon.ico">
-<meta name="theme-color" content="#C6552A">
+
+  <title>AFRIQ'S - Inscription</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico">
+
+  <meta name="theme-color" content="#C6552A">
 </head>
+
 <body class="auth-page">
 
 <header>
-  <a href="#" onclick="allerAccueil(event)" style="display:block; text-decoration:none;">
-    <svg class="logo-oval" width="520" height="260" viewBox="0 0 260 130">
-      <ellipse cx="130" cy="65" rx="125" ry="58" fill="#FFFFFF" />
-      <text x="130" y="78" text-anchor="middle" font-size="38" font-family="'Segoe Script','Brush Script MT',cursive" fill="#C6552A">AFRIQ'S</text>
-    </svg>
-  </a>
-  <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
-    <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
-  </svg>
-</header>
 
-<main>
-  <div class="form-container">
+  <div class="header-curves">
 
-  <h1 class="auth-title">
-    Créer un compte 🎉
-  </h1>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
 
 
-  <p class="auth-subtitle">
-    Rejoignez AFRIQ'S et restez connecté
-    avec votre communauté.
-  </p>
-
-
-  <input
-    type="text"
-    id="username"
-    placeholder="Choisissez un nom d'utilisateur"
-    autocomplete="username"
+  <a
+    href="#"
+    onclick="allerAccueil(event)"
+    style="display:block; text-decoration:none;"
   >
 
+    <svg
+      class="logo-oval"
+      width="520"
+      height="260"
+      viewBox="0 0 260 130"
+    >
 
-  <div class="password-row">
+      <ellipse
+        cx="130"
+        cy="65"
+        rx="112"
+        ry="52"
+        fill="#FFFFFF"
+      />
+
+
+      <text
+        x="130"
+        y="73"
+        text-anchor="middle"
+        font-size="37"
+        font-family="'Segoe Script','Brush Script MT',cursive"
+        font-weight="bold"
+        fill="#C6552A"
+      >
+        AFRIQ'S
+      </text>
+
+
+      <path
+        d="
+          M45 84
+          C75 96 105 96 130 94
+          C160 92 188 88 215 76
+        "
+        fill="none"
+        stroke="#C6552A"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+
+
+      <text
+        x="130"
+        y="108"
+        text-anchor="middle"
+        font-size="13"
+        font-family="Arial, sans-serif"
+        font-weight="bold"
+        letter-spacing="3"
+        fill="#C6552A"
+      >
+        ender
+      </text>
+
+    </svg>
+
+  </a>
+
+
+  <svg
+    class="wave"
+    viewBox="0 0 1200 40"
+    preserveAspectRatio="none"
+  >
+
+    <path
+      fill="#F7EFEA"
+      d="
+        M0,20
+        C50,40 100,0 150,20
+        C200,40 250,0 300,20
+        C350,40 400,0 450,20
+        C500,40 550,0 600,20
+        C650,40 700,0 750,20
+        C800,40 850,0 900,20
+        C950,40 1000,0 1050,20
+        C1100,40 1150,0 1200,20
+        L1200,40
+        L0,40
+        Z
+      "
+    />
+
+  </svg>
+
+</header>
+
+
+<main>
+
+  <div class="form-container">
+
+    <h1 class="auth-title">
+      Créer un compte 🎉
+    </h1>
+
+
+    <p class="auth-subtitle">
+      Rejoignez AFRIQ'S et restez connecté
+      avec votre communauté.
+    </p>
+
 
     <input
-      type="password"
-      id="password"
-      placeholder="Choisissez un mot de passe"
-      autocomplete="new-password"
+      type="text"
+      id="username"
+      placeholder="Choisissez un nom d'utilisateur"
+      autocomplete="username"
     >
+
+
+    <div class="password-row">
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Choisissez un mot de passe"
+        autocomplete="new-password"
+      >
+
+
+      <button
+        type="button"
+        class="toggle-password-btn"
+        id="togglePasswordBtn"
+        title="Afficher le mot de passe"
+      >
+        👁
+      </button>
+
+    </div>
 
 
     <button
       type="button"
-      class="toggle-password-btn"
-      id="togglePasswordBtn"
-      title="Afficher le mot de passe"
+      class="primary-btn"
+      onclick="sInscrire()"
     >
-      👁
+      Créer mon compte
     </button>
 
-  </div>
 
+    <div class="switch-link">
 
-  <button
-    type="button"
-    class="primary-btn"
-    onclick="sInscrire()"
-  >
-    Créer mon compte
-  </button>
+      Déjà un compte ?
 
+      <a href="index.html">
+        Se connecter
+      </a>
 
-  <div class="switch-link">
-
-    Déjà un compte ?
-
-    <a href="index.html">
-      Se connecter
-    </a>
+    </div>
 
   </div>
 
-  </div>
 </main>
 
+
 <footer class="about">
+
   <h3>À propos</h3>
-  <p class="about-desc">AFRIQ'S est une messagerie pensee pour connecter les Africains et la diaspora en toute simplicite. Discutez en temps reel, ou que vous soyez, avec vos proches et votre communaute.</p>
+
+  <p class="about-desc">
+    AFRIQ'S est une messagerie pensée pour connecter les Africains et la diaspora en toute simplicité.
+    Discutez en temps réel, où que vous soyez, avec vos proches et votre communauté.
+  </p>
+
   <p>Email : cakpopascal29@gmail.com</p>
+
   <p>WhatsApp : 0150186601</p>
-  <p>Facebook : <a href="https://www.facebook.com/profile.php?id=61593075962641" target="_blank">Notre page</a></p>
+
+  <p>
+    Facebook :
+    <a
+      href="https://www.facebook.com/profile.php?id=61593075962641"
+      target="_blank"
+    >
+      Notre page
+    </a>
+  </p>
+
   <p>Mise en service : 28 Août 2026</p>
-  <p class="slogan">"Connecter l'Afrique, un message a la fois."</p>
+
+  <p class="slogan">
+    "Connecter l'Afrique, un message à la fois."
+  </p>
+
 </footer>
 
+
 <script>
-  /* =========================
+
+/* =========================
    AFFICHER / MASQUER
    LE MOT DE PASSE
 ========================= */
@@ -145,35 +272,102 @@ togglePasswordBtn.addEventListener(
 
   }
 );
+
+
+/* =========================
+   RETOUR À L'ACCUEIL
+========================= */
+
 function allerAccueil(e) {
+
   e.preventDefault();
+
   if (localStorage.getItem('token')) {
-    window.location.href = 'chat.html';
+
+    window.location.href =
+      'chat.html';
+
   } else {
-    window.location.href = 'index.html';
+
+    window.location.href =
+      'index.html';
+
   }
+
 }
 
+
+/* =========================
+   INSCRIPTION
+========================= */
+
 async function sInscrire() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+
+  const username =
+    document.getElementById(
+      'username'
+    ).value;
+
+  const password =
+    document.getElementById(
+      'password'
+    ).value;
+
+
   try {
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-    const data = await res.json();
+
+    const res =
+      await fetch(
+        '/api/auth/register',
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json'
+          },
+
+          body: JSON.stringify({
+            username,
+            password
+          })
+        }
+      );
+
+
+    const data =
+      await res.json();
+
+
     if (res.ok) {
-      alert('Compte cree avec succes. Vous pouvez vous connecter.');
-      window.location.href = 'index.html';
+
+      alert(
+        'Compte créé avec succès. Vous pouvez vous connecter.'
+      );
+
+      window.location.href =
+        'index.html';
+
     } else {
-      alert(data.error || 'Erreur lors de l inscription');
+
+      alert(
+        data.error ||
+        "Erreur lors de l'inscription"
+      );
+
     }
+
+
   } catch (err) {
-    alert('Impossible de contacter le serveur');
+
+    alert(
+      'Impossible de contacter le serveur'
+    );
+
   }
+
 }
+
 </script>
 
 </body>
