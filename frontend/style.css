@@ -7,7 +7,8 @@
 
 html,
 body {
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -25,7 +26,9 @@ body {
 header {
   position: relative;
   background-color: #C6552A;
+
   height: 205px;
+  min-height: 205px;
 
   display: flex;
   justify-content: center;
@@ -37,7 +40,7 @@ header {
 
 
 /* ==================================================
-   LIGNES COURBES DÉCORATIVES
+   COURBES DE L'ENTÊTE
 ================================================== */
 
 .header-curves {
@@ -63,29 +66,27 @@ header {
 
   border-radius: 50%;
 
-  transform: rotate(
-    -5deg
-  );
+  transform: rotate(-5deg);
 }
 
 .header-curves span:nth-child(1) {
-  top: 25px;
+  top: 20px;
 }
 
 .header-curves span:nth-child(2) {
-  top: 65px;
+  top: 60px;
 }
 
 .header-curves span:nth-child(3) {
-  top: 105px;
+  top: 100px;
 }
 
 .header-curves span:nth-child(4) {
-  top: 145px;
+  top: 140px;
 }
 
 .header-curves span:nth-child(5) {
-  top: 185px;
+  top: 180px;
 }
 
 
@@ -106,7 +107,7 @@ header {
 
 
 /* ==================================================
-   VAGUE INFÉRIEURE
+   VAGUE
 ================================================== */
 
 .wave {
@@ -123,35 +124,23 @@ header {
 
 
 /* ==================================================
-   PAGE PRINCIPALE
-================================================== */
-
-main {
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 24px;
-}
-
-
-/* ==================================================
    APPLICATION CHAT
 ================================================== */
 
 .chat-app {
-  flex: 1;
+  width: 100%;
+
+  height: calc(100vh - 205px);
+
+  min-height: 500px;
 
   display: flex;
-
-  width: 100%;
-  min-height: 0;
 
   background: #ffffff;
 
   overflow: hidden;
+
+  flex-shrink: 0;
 }
 
 
@@ -163,6 +152,7 @@ main {
   width: 26.67%;
 
   min-width: 0;
+  height: 100%;
 
   border-right: 1px solid #eee;
 
@@ -208,6 +198,8 @@ main {
   font-size: 15px;
 
   overflow: visible;
+
+  flex-shrink: 0;
 }
 
 
@@ -239,12 +231,58 @@ main {
   justify-content: center;
 
   font-weight: bold;
+
   font-size: 16px;
 
   border: 2px solid white;
+}
 
-  box-shadow:
-    0 2px 7px rgba(0,0,0,0.15);
+
+/* ==================================================
+   COMPATIBILITÉ AVATAR ANCIEN HTML
+================================================== */
+
+.my-profile > .avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background-color: #C6552A;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+
+  font-size: 16px;
+
+  flex-shrink: 0;
+}
+
+
+/* ==================================================
+   STATUT
+================================================== */
+
+.status-dot {
+  display: inline-block;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+}
+
+.status-dot.actif {
+  background-color: #2ecc71;
+}
+
+.status-dot.inactif {
+  background-color: #e74c3c;
 }
 
 
@@ -266,25 +304,6 @@ main {
   border: 2px solid white;
 
   z-index: 5;
-}
-
-
-/* ==================================================
-   STATUT
-================================================== */
-
-.status-dot {
-  display: inline-block;
-
-  border-radius: 50%;
-}
-
-.status-dot.actif {
-  background-color: #2ecc71;
-}
-
-.status-dot.inactif {
-  background-color: #e74c3c;
 }
 
 
@@ -328,7 +347,7 @@ main {
 
 
 /* ==================================================
-   BOUTON DÉCONNEXION
+   DÉCONNEXION
 ================================================== */
 
 .logout-btn {
@@ -353,9 +372,6 @@ main {
   align-items: center;
   justify-content: center;
 
-  box-shadow:
-    0 2px 6px rgba(198,85,42,0.25);
-
   font-size: 0;
 }
 
@@ -369,22 +385,25 @@ main {
   transform: rotate(180deg);
 }
 
-.logout-btn:active {
-  transform: scale(0.92);
-}
-
 
 /* ==================================================
    LISTE UTILISATEURS
 ================================================== */
 
 .users-scroll {
-  overflow-y: auto;
-
   flex: 1;
 
   min-height: 0;
+
+  overflow-y: auto;
+
+  overflow-x: hidden;
 }
+
+
+/* ==================================================
+   UTILISATEUR
+================================================== */
 
 .user-item {
   position: relative;
@@ -424,31 +443,7 @@ main {
   flex-shrink: 0;
 }
 
-.user-item .avatar {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  background-color: #C6552A;
-
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: bold;
-
-  font-size: 16px;
-}
-
-
-/*
-   Compatibilité avec l'ancien HTML :
-   avatar directement dans .user-item
-*/
-
+.user-item .avatar,
 .user-item > .avatar {
   width: 42px;
   height: 42px;
@@ -472,7 +467,7 @@ main {
 
 
 /* ==================================================
-   POINT DE STATUT UTILISATEUR
+   STATUT UTILISATEUR
 ================================================== */
 
 .user-avatar-wrapper .status-dot {
@@ -487,14 +482,12 @@ main {
   border-radius: 50%;
 
   border: 2px solid white;
-
-  z-index: 3;
 }
 
 
-/*
-   Compatibilité avec ton HTML actuel
-*/
+/* ==================================================
+   COMPATIBILITÉ AVEC TON HTML ACTUEL
+================================================== */
 
 .user-item > .status-dot {
   width: 10px;
@@ -504,16 +497,14 @@ main {
 
   border: 2px solid white;
 
-  margin-left: -17px;
-
-  margin-right: 2px;
+  margin-left: -18px;
 
   z-index: 3;
 }
 
 
 /* ==================================================
-   CONTENEUR NOM + BADGE
+   NOM UTILISATEUR
 ================================================== */
 
 .user-name-container {
@@ -524,6 +515,7 @@ main {
   overflow: hidden;
 
   display: flex;
+
   align-items: center;
 
   gap: 4px;
@@ -564,6 +556,7 @@ main {
   color: white;
 
   font-size: 10px;
+
   font-weight: bold;
 }
 
@@ -596,17 +589,19 @@ main {
 
 
 /* ==================================================
-   PANNEAU DROIT
+   PANNEAU CONVERSATION
 ================================================== */
 
 .conversation {
   width: 73.33%;
 
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 
   min-width: 0;
   min-height: 0;
+
+  display: flex;
+  flex-direction: column;
 
   background: #ffffff;
 }
@@ -618,6 +613,8 @@ main {
 
 .conv-placeholder {
   flex: 1;
+
+  min-height: 0;
 
   display: flex;
 
@@ -639,19 +636,20 @@ main {
 ================================================== */
 
 .conv-active {
-  flex: 1;
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
 
   position: relative;
-
-  min-height: 0;
 }
 
 
 /* ==================================================
-   ENTÊTE DISCUSSION
+   EN-TÊTE DISCUSSION
 ================================================== */
 
 .conv-header {
@@ -703,6 +701,7 @@ main {
   color: white;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -749,7 +748,7 @@ main {
 
 
 /* ==================================================
-   BOUTON RETOUR
+   RETOUR
 ================================================== */
 
 .back-btn {
@@ -774,11 +773,13 @@ main {
 
 
 /* ==================================================
-   MESSAGES
+   ZONE MESSAGES
 ================================================== */
 
 .messages {
   flex: 1;
+
+  min-height: 0;
 
   overflow-y: auto;
 
@@ -795,9 +796,12 @@ main {
   gap: 9px;
 
   background: #ffffff;
-
-  min-height: 0;
 }
+
+
+/* ==================================================
+   LIGNES
+================================================== */
 
 .message-line {
   width: 100%;
@@ -998,7 +1002,7 @@ main {
 
 
 /* ==================================================
-   FOOTER
+   FOOTER / À PROPOS
 ================================================== */
 
 footer.about {
@@ -1010,9 +1014,11 @@ footer.about {
 
   padding: 24px 18px;
 
-  margin-top: auto;
+  margin-top: 0;
 
   font-size: 15px;
+
+  flex-shrink: 0;
 }
 
 footer.about h3 {
@@ -1060,6 +1066,8 @@ footer.about a {
 
   header {
     height: 205px;
+
+    min-height: 205px;
   }
 
 
@@ -1071,9 +1079,13 @@ footer.about a {
 
 
   .chat-app {
-    display: flex;
-
     width: 100%;
+
+    height: calc(100vh - 205px);
+
+    min-height: 500px;
+
+    display: flex;
 
     overflow: hidden;
   }
@@ -1085,6 +1097,8 @@ footer.about a {
 
   .user-list {
     width: 26.67%;
+
+    height: 100%;
 
     min-width: 0;
   }
@@ -1115,13 +1129,12 @@ footer.about a {
   }
 
 
-  .my-profile .avatar {
+  .my-profile .avatar,
+  .my-profile > .avatar {
     width: 35px;
     height: 35px;
 
     font-size: 13px;
-
-    border-width: 2px;
   }
 
 
@@ -1215,24 +1228,27 @@ footer.about a {
 
 
   /* ==================================================
-     COLONNE DROITE
+     CONVERSATION
   ================================================== */
 
   .conversation {
-    position: relative;
-
     width: 73.33%;
 
-    height: auto;
+    height: 100%;
 
-    display: flex;
+    min-height: 0;
+  }
 
-    background: white;
+
+  .conv-active {
+    height: 100%;
+
+    min-height: 0;
   }
 
 
   /* ==================================================
-     ENTÊTE
+     ENTÊTE DISCUSSION
   ================================================== */
 
   .conv-header {
@@ -1272,7 +1288,8 @@ footer.about a {
   .conv-status .status-dot {
     width: 5px;
     height: 5px;
-  } 
+  }
+
 
   /* ==================================================
      MESSAGES
@@ -1286,6 +1303,8 @@ footer.about a {
       7px;
 
     gap: 7px;
+
+    min-height: 0;
   }
 
 
@@ -1310,7 +1329,7 @@ footer.about a {
 
 
   /* ==================================================
-     BARRE MESSAGE
+     BARRE D'ÉCRITURE
   ================================================== */
 
   .message-input-row {
