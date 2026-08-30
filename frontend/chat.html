@@ -8,60 +8,152 @@
 <link rel="icon" href="favicon.ico">
 <meta name="theme-color" content="#C6552A">
 </head>
+
 <body>
 
 <header>
   <a href="#" onclick="allerAccueil(event)" style="display:block; text-decoration:none;">
     <svg class="logo-oval" width="520" height="260" viewBox="0 0 260 130">
       <ellipse cx="130" cy="65" rx="125" ry="58" fill="#FFFFFF" />
-      <text x="130" y="78" text-anchor="middle" font-size="38" font-family="'Segoe Script','Brush Script MT',cursive" fill="#C6552A">AFRIQ'S</text>
+      <text x="130" y="78" text-anchor="middle"
+        font-size="38"
+        font-family="'Segoe Script','Brush Script MT',cursive"
+        fill="#C6552A">
+        AFRIQ'S
+      </text>
     </svg>
   </a>
+
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
-    <path fill="#F7EFEA" d="M0,20 C50,40 100,0 150,20 C200,40 250,0 300,20 C350,40 400,0 450,20 C500,40 550,0 600,20 C650,40 700,0 750,20 C800,40 850,0 900,20 C950,40 1000,0 1050,20 C1100,40 1150,0 1200,20 L1200,40 L0,40 Z"/>
+    <path fill="#F7EFEA"
+      d="M0,20 C50,40 100,0 150,20
+      C200,40 250,0 300,20
+      C350,40 400,0 450,20
+      C500,40 550,0 600,20
+      C650,40 700,0 750,20
+      C800,40 850,0 900,20
+      C950,40 1000,0 1050,20
+      C1100,40 1150,0 1200,20
+      L1200,40 L0,40 Z"/>
   </svg>
 </header>
 
+
 <div class="chat-app">
+
+  <!-- =========================
+       LISTE DES UTILISATEURS
+  ========================== -->
+
   <aside class="user-list" id="userList">
+
     <div class="my-profile" id="myProfile"></div>
+
     <div class="users-scroll" id="usersScroll"></div>
+
   </aside>
+
+
+  <!-- =========================
+       CONVERSATION
+  ========================== -->
+
   <section class="conversation" id="conversation">
-    <div class="conv-placeholder" id="convPlaceholder">Sélectionnez un utilisateur pour commencer une conversation.</div>
-    <div class="conv-active" id="convActive" style="display:none;">
-      <div class="conv-header">
-        <button class="back-btn" id="backBtn">←</button>
-        <span class="avatar" id="convAvatar"></span>
-        <div>
-          <div class="conv-username" id="convUsername"></div>
-          <div class="conv-status" id="convStatus"></div>
-        </div>
-      </div>
-      <div class="messages" id="messages"></div>
-      <div class="typing-indicator" id="typingIndicator" style="display:none;">écrit...</div>
-      <div class="message-input-row">
-        <input type="text" id="messageInput" placeholder="Écrire un message...">
-        <button id="sendBtn" class="send-btn">➤</button>
-      </div>
+
+    <div class="conv-placeholder" id="convPlaceholder">
+      Sélectionnez un utilisateur pour commencer une conversation.
     </div>
+
+
+    <div class="conv-active" id="convActive" style="display:none;">
+
+      <!-- EN-TÊTE -->
+      <div class="conv-header">
+
+        <button class="back-btn" id="backBtn">←</button>
+
+        <div class="conv-header-center">
+
+          <span class="avatar" id="convAvatar"></span>
+
+          <div class="conv-user-info">
+            <div class="conv-username" id="convUsername"></div>
+            <div class="conv-status" id="convStatus"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ZONE DES MESSAGES -->
+      <div class="messages" id="messages"></div>
+
+
+      <!-- INDICATEUR DE SAISIE -->
+      <div class="typing-indicator" id="typingIndicator" style="display:none;">
+        écrit...
+      </div>
+
+
+      <!-- ZONE D'ÉCRITURE FLOTTANTE -->
+      <div class="message-input-row">
+
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Écrire un message..."
+          autocomplete="off"
+        >
+
+        <button id="sendBtn" class="send-btn">➤</button>
+
+      </div>
+
+    </div>
+
   </section>
+
 </div>
 
+
 <footer class="about">
+
   <h3>À propos</h3>
-  <p class="about-desc">AFRIQ'S est une messagerie pensee pour connecter les Africains et la diaspora en toute simplicite. Discutez en temps reel, ou que vous soyez, avec vos proches et votre communaute.</p>
+
+  <p class="about-desc">
+    AFRIQ'S est une messagerie pensee pour connecter les Africains et la diaspora
+    en toute simplicite. Discutez en temps reel, ou que vous soyez, avec vos
+    proches et votre communaute.
+  </p>
+
   <p>Email : cakpopascal29@gmail.com</p>
   <p>WhatsApp : 0150186601</p>
-  <p>Facebook : <a href="https://www.facebook.com/profile.php?id=61593075962641" target="_blank">Notre page</a></p>
+
+  <p>
+    Facebook :
+    <a href="https://www.facebook.com/profile.php?id=61593075962641"
+       target="_blank">
+      Notre page
+    </a>
+  </p>
+
   <p>Mise en service : 28 Août 2026</p>
-  <p class="slogan">"Connecter l'Afrique, un message a la fois."</p>
+
+  <p class="slogan">
+    "Connecter l'Afrique, un message a la fois."
+  </p>
+
 </footer>
 
+
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
 <script>
+
 function allerAccueil(e) {
   e.preventDefault();
+
   if (localStorage.getItem('token')) {
     window.location.href = 'chat.html';
   } else {
@@ -69,183 +161,710 @@ function allerAccueil(e) {
   }
 }
 
+
+/* =========================
+   AUTHENTIFICATION
+========================= */
+
 const token = localStorage.getItem('token');
 const myUsername = localStorage.getItem('username');
+
 let myUserId = localStorage.getItem('userId');
+
 const estAdmin = myUsername === "HIRO'od";
 
 if (!token) {
   window.location.href = 'index.html';
 }
 
+
+/* =========================
+   VARIABLES
+========================= */
+
 let selectedUserId = null;
 let usersData = [];
 let typingTimeout = null;
 
-const socket = io({ auth: { token: token } });
+
+/* =========================
+   SOCKET.IO
+========================= */
+
+const socket = io({
+  auth: {
+    token: token
+  }
+});
+
+
+/* =========================
+   OUTILS
+========================= */
 
 function initiale(nom) {
   return nom ? nom.charAt(0).toUpperCase() : '?';
 }
 
+
 function formatHeure(dateStr) {
+
   const d = new Date(dateStr);
-  return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+
+  return d.getHours().toString().padStart(2, '0')
+    + ':'
+    + d.getMinutes().toString().padStart(2, '0');
 }
+
+
+/* =========================
+   MON PROFIL
+========================= */
 
 async function chargerMonProfil() {
-  const res = await fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token } });
+
+  const res = await fetch('/api/auth/me', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+
   if (!res.ok) {
+
     localStorage.clear();
     window.location.href = 'index.html';
+
     return;
   }
+
   const me = await res.json();
+
   myUserId = me._id;
+
   localStorage.setItem('userId', myUserId);
+
   document.getElementById('myProfile').innerHTML =
-    '<span class="avatar">' + initiale(me.username) + '</span>' +
-    '<div style="flex:1"><strong>' + me.username + '</strong></div>' +
-    '<button class="logout-btn" onclick="seDeconnecter()">Déconnexion</button>';
+
+    '<span class="avatar">'
+    + initiale(me.username)
+    + '</span>'
+
+    +
+
+    '<div class="my-profile-name">'
+    + me.username
+    + '</div>'
+
+    +
+
+    '<button class="logout-btn" onclick="seDeconnecter()">'
+    + 'Déconnexion'
+    + '</button>';
 }
 
+
 function seDeconnecter() {
+
   localStorage.clear();
+
   window.location.href = 'index.html';
 }
 
+
+/* =========================
+   UTILISATEURS
+========================= */
+
 async function chargerUtilisateurs() {
-  const res = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+
+  const res = await fetch('/api/users', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+
   usersData = await res.json();
+
   afficherUtilisateurs();
 }
+
 
 function afficherUtilisateurs() {
-  usersData.sort((a, b) => new Date(b.lastSeen) - new Date(a.lastSeen));
+
+  usersData.sort(
+    (a, b) => new Date(b.lastSeen) - new Date(a.lastSeen)
+  );
+
   const container = document.getElementById('usersScroll');
+
   container.innerHTML = '';
+
   usersData.forEach(u => {
+
     const div = document.createElement('div');
-    div.className = 'user-item' + (u._id === selectedUserId ? ' active' : '');
+
+    div.className =
+      'user-item'
+      + (u._id === selectedUserId ? ' active' : '');
+
+
     div.innerHTML =
-      '<span class="avatar">' + initiale(u.username) + '</span>' +
-      '<div style="flex:1">' + u.username + '</div>' +
-      '<span class="status-dot ' + u.status + '"></span>' +
-      (estAdmin ? '<button class="delete-user-btn" data-id="' + u._id + '">🗑</button>' : '');
-    div.querySelector('.avatar').addEventListener('click', () => ouvrirConversation(u._id));
-    div.querySelector('div').addEventListener('click', () => ouvrirConversation(u._id));
-    const delBtn = div.querySelector('.delete-user-btn');
+
+      '<span class="avatar">'
+      + initiale(u.username)
+      + '</span>'
+
+      +
+
+      '<div class="user-name">'
+      + u.username
+      + '</div>'
+
+      +
+
+      '<span class="status-dot '
+      + u.status
+      + '"></span>'
+
+      +
+
+      (
+        estAdmin
+
+        ?
+
+        '<button class="delete-user-btn" data-id="'
+        + u._id
+        + '">🗑</button>'
+
+        :
+
+        ''
+      );
+
+
+    div.addEventListener(
+      'click',
+      () => ouvrirConversation(u._id)
+    );
+
+
+    const delBtn =
+      div.querySelector('.delete-user-btn');
+
+
     if (delBtn) {
+
       delBtn.addEventListener('click', (e) => {
+
         e.stopPropagation();
-        supprimerUtilisateur(u._id, u.username);
+
+        supprimerUtilisateur(
+          u._id,
+          u.username
+        );
+
       });
+
     }
+
+
     container.appendChild(div);
+
   });
 }
+
+
+/* =========================
+   SUPPRESSION UTILISATEUR
+========================= */
 
 async function supprimerUtilisateur(userId, username) {
-  if (!confirm('Supprimer definitivement le compte de ' + username + ' ?')) return;
-  const res = await fetch('/api/users/' + userId, {
-    method: 'DELETE',
-    headers: { 'Authorization': 'Bearer ' + token }
-  });
-  if (res.ok) {
-    if (selectedUserId === userId) {
-      selectedUserId = null;
-      document.getElementById('convPlaceholder').style.display = 'flex';
-      document.getElementById('convActive').style.display = 'none';
+
+  if (
+    !confirm(
+      'Supprimer definitivement le compte de '
+      + username
+      + ' ?'
+    )
+  ) {
+    return;
+  }
+
+
+  const res = await fetch(
+    '/api/users/' + userId,
+    {
+      method: 'DELETE',
+
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
     }
+  );
+
+
+  if (res.ok) {
+
+    if (selectedUserId === userId) {
+
+      selectedUserId = null;
+
+      document.getElementById(
+        'convPlaceholder'
+      ).style.display = 'flex';
+
+      document.getElementById(
+        'convActive'
+      ).style.display = 'none';
+    }
+
     chargerUtilisateurs();
+
   } else {
+
     alert('Suppression impossible.');
+
   }
 }
+
+
+/* =========================
+   OUVRIR CONVERSATION
+========================= */
 
 async function ouvrirConversation(userId) {
+
   selectedUserId = userId;
-  const user = usersData.find(u => u._id === userId);
-  document.getElementById('convPlaceholder').style.display = 'none';
-  document.getElementById('convActive').style.display = 'flex';
-  document.getElementById('conversation').classList.add('open');
-  document.getElementById('convUsername').textContent = user.username;
-  document.getElementById('convAvatar').textContent = initiale(user.username);
-  document.getElementById('convStatus').innerHTML = '<span class="status-dot ' + user.status + '"></span> ' + user.status;
+
+  const user =
+    usersData.find(
+      u => u._id === userId
+    );
+
+
+  if (!user) return;
+
+
+  document.getElementById(
+    'convPlaceholder'
+  ).style.display = 'none';
+
+
+  document.getElementById(
+    'convActive'
+  ).style.display = 'flex';
+
+
+  document.getElementById(
+    'conversation'
+  ).classList.add('open');
+
+
+  /* NOM DE LA DISCUSSION */
+  document.getElementById(
+    'convUsername'
+  ).textContent = user.username;
+
+
+  /* AVATAR */
+  document.getElementById(
+    'convAvatar'
+  ).textContent = initiale(user.username);
+
+
+  /* STATUT */
+  document.getElementById(
+    'convStatus'
+  ).innerHTML =
+
+    '<span class="status-dot '
+    + user.status
+    + '"></span> '
+
+    +
+
+    (
+      user.status === 'actif'
+        ? 'En ligne'
+        : 'Hors ligne'
+    );
+
+
   afficherUtilisateurs();
 
-  const res = await fetch('/api/messages/' + userId, { headers: { 'Authorization': 'Bearer ' + token } });
+
+  /* CHARGEMENT DES MESSAGES */
+  const res = await fetch(
+    '/api/messages/' + userId,
+    {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+  );
+
+
   const messages = await res.json();
-  const box = document.getElementById('messages');
+
+  const box =
+    document.getElementById('messages');
+
+
   box.innerHTML = '';
-  messages.forEach(m => afficherMessage(m));
-  box.scrollTop = box.scrollHeight;
+
+
+  messages.forEach(
+    m => afficherMessage(m)
+  );
+
+
+  box.scrollTop =
+    box.scrollHeight;
 }
+
+
+/* =========================
+   AFFICHAGE DES MESSAGES
+========================= */
 
 function afficherMessage(msg) {
-  if (msg.sender !== selectedUserId && msg.receiver !== selectedUserId) return;
-  const box = document.getElementById('messages');
-  const div = document.createElement('div');
-  const estMoi = msg.sender === myUserId;
-  const autreUser = usersData.find(u => u._id === selectedUserId);
-  const nomExpediteur = estMoi ? 'Moi' : (autreUser ? autreUser.username : '');
-  div.className = 'bubble ' + (estMoi ? 'message-envoye' : 'message-recu');
-  div.innerHTML = '<span class="sender-name">' + nomExpediteur + '</span>' + msg.message + '<span class="time">' + formatHeure(msg.timestamp) + '</span>';
+
+  /*
+   * On ne montre que les messages
+   * de la conversation sélectionnée.
+   */
+
+  if (
+    msg.sender !== selectedUserId &&
+    msg.receiver !== selectedUserId
+  ) {
+    return;
+  }
+
+
+  const box =
+    document.getElementById('messages');
+
+
+  const div =
+    document.createElement('div');
+
+
+  const estMoi =
+    msg.sender === myUserId;
+
+
+  /*
+   * IMPORTANT :
+   *
+   * Plus de "Moi".
+   * Plus de nom de l'autre utilisateur.
+   *
+   * La position de la bulle indique
+   * maintenant qui parle.
+   */
+
+  div.className =
+    'message-line '
+    + (estMoi
+      ? 'message-line-envoye'
+      : 'message-line-recu');
+
+
+  const bubble =
+    document.createElement('div');
+
+
+  bubble.className =
+    'bubble '
+    + (estMoi
+      ? 'message-envoye'
+      : 'message-recu');
+
+
+  const text =
+    document.createElement('div');
+
+
+  text.className =
+    'message-text';
+
+
+  text.textContent =
+    msg.message;
+
+
+  const time =
+    document.createElement('span');
+
+
+  time.className =
+    'time';
+
+
+  time.textContent =
+    formatHeure(msg.timestamp);
+
+
+  bubble.appendChild(text);
+
+  bubble.appendChild(time);
+
+  div.appendChild(bubble);
+
   box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
+
+
+  /*
+   * On descend automatiquement
+   * vers le dernier message.
+   */
+
+  box.scrollTop =
+    box.scrollHeight;
 }
+
+
+/* =========================
+   ENVOYER MESSAGE
+========================= */
 
 function envoyerMessage() {
-  const input = document.getElementById('messageInput');
-  const message = input.value.trim();
-  if (message === '' || !selectedUserId) return;
-  socket.emit('sendMessage', { receiverId: selectedUserId, message: message });
+
+  const input =
+    document.getElementById(
+      'messageInput'
+    );
+
+
+  const message =
+    input.value.trim();
+
+
+  if (
+    message === ''
+    ||
+    !selectedUserId
+  ) {
+    return;
+  }
+
+
+  socket.emit(
+    'sendMessage',
+    {
+      receiverId: selectedUserId,
+      message: message
+    }
+  );
+
+
   input.value = '';
+
+  input.focus();
 }
 
-document.getElementById('sendBtn').addEventListener('click', envoyerMessage);
-document.getElementById('messageInput').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    envoyerMessage();
-  } else if (selectedUserId) {
-    socket.emit('typing', { receiverId: selectedUserId });
-  }
-});
-document.getElementById('backBtn').addEventListener('click', () => {
-  document.getElementById('conversation').classList.remove('open');
-});
 
-socket.on('receiveMessage', (msg) => {
-  afficherMessage(msg);
-});
+/* =========================
+   BOUTON ENVOYER
+========================= */
 
-socket.on('userStatusUpdate', (data) => {
-  const u = usersData.find(x => x._id === data.userId);
-  if (u) {
-    u.status = data.status;
-    u.lastSeen = data.lastSeen;
-    afficherUtilisateurs();
-    if (selectedUserId === data.userId) {
-      document.getElementById('convStatus').innerHTML = '<span class="status-dot ' + data.status + '"></span> ' + data.status;
+document
+  .getElementById('sendBtn')
+  .addEventListener(
+    'click',
+    envoyerMessage
+  );
+
+
+/* =========================
+   SAISIE MESSAGE
+========================= */
+
+document
+  .getElementById('messageInput')
+  .addEventListener(
+    'keypress',
+    (e) => {
+
+      if (e.key === 'Enter') {
+
+        e.preventDefault();
+
+        envoyerMessage();
+
+      } else if (selectedUserId) {
+
+        socket.emit(
+          'typing',
+          {
+            receiverId: selectedUserId
+          }
+        );
+
+      }
+
     }
-  }
-});
+  );
 
-socket.on('typing', (data) => {
-  if (data.senderId === selectedUserId) {
-    const ind = document.getElementById('typingIndicator');
-    ind.style.display = 'block';
-    clearTimeout(typingTimeout);
-    typingTimeout = setTimeout(() => { ind.style.display = 'none'; }, 2000);
-  }
-});
 
-setInterval(() => { socket.emit('heartbeat'); }, 20000);
+/* =========================
+   RETOUR
+========================= */
+
+document
+  .getElementById('backBtn')
+  .addEventListener(
+    'click',
+    () => {
+
+      document
+        .getElementById('conversation')
+        .classList.remove('open');
+
+    }
+  );
+
+
+/* =========================
+   MESSAGE EN TEMPS RÉEL
+========================= */
+
+socket.on(
+  'receiveMessage',
+  (msg) => {
+
+    afficherMessage(msg);
+
+  }
+);
+
+
+/* =========================
+   STATUT UTILISATEUR
+========================= */
+
+socket.on(
+  'userStatusUpdate',
+  (data) => {
+
+    const u =
+      usersData.find(
+        x => x._id === data.userId
+      );
+
+
+    if (u) {
+
+      u.status = data.status;
+
+      u.lastSeen = data.lastSeen;
+
+      afficherUtilisateurs();
+
+
+      if (
+        selectedUserId === data.userId
+      ) {
+
+        document.getElementById(
+          'convStatus'
+        ).innerHTML =
+
+          '<span class="status-dot '
+          + data.status
+          + '"></span> '
+
+          +
+
+          (
+            data.status === 'actif'
+              ? 'En ligne'
+              : 'Hors ligne'
+          );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================
+   INDICATEUR "ÉCRIT..."
+========================= */
+
+socket.on(
+  'typing',
+  (data) => {
+
+    if (
+      data.senderId === selectedUserId
+    ) {
+
+      const ind =
+        document.getElementById(
+          'typingIndicator'
+        );
+
+
+      ind.style.display =
+        'block';
+
+
+      clearTimeout(
+        typingTimeout
+      );
+
+
+      typingTimeout =
+        setTimeout(
+          () => {
+
+            ind.style.display =
+              'none';
+
+          },
+          2000
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   HEARTBEAT
+========================= */
+
+setInterval(
+  () => {
+
+    socket.emit('heartbeat');
+
+  },
+  20000
+);
+
+
+/* =========================
+   INITIALISATION
+========================= */
 
 chargerMonProfil();
+
 chargerUtilisateurs();
-setInterval(chargerUtilisateurs, 15000);
+
+
+setInterval(
+  chargerUtilisateurs,
+  15000
+);
+
 </script>
 
 </body>
-</html>
+  </html>
