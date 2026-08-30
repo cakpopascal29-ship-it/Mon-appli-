@@ -501,44 +501,148 @@ io.on('connection', (socket) => {
   ======================================================= */
 
   socket.on(
-    'sendMessage',
-    async (data) => {
+  socket.on('sendMessage', async (data, callback) => {
 
-      try {
+  try {
 
-        if (
-          !data ||
-          !data.receiverId ||
-          !data.message
-        ) {
+    if (
+      !data ||
+      !data.receiverId ||
+      !data.message
+    ) {
 
-          return;
+      if (typeof callback === 'function') {
 
-        }
+        callback({
+          ok: false,
+          error: 'Données du message invalides'
+        });
+
+      }
+
+      return;
+
+    }
 
 
-        const receiverId =
-          String(
-            data.receiverId
-          );
+    const messageTexte =
+      String(data.message).trim();
 
 
-        const newMessage =
-          new Message({
+    if (!messageTexte) {
 
-            sender:
-              userId,
+      if (typeof callback === 'function') {
 
-            receiver:
-              receiverId,
+        callback({
+          ok: false,
+          error: 'Message vide'
+        });
 
-            message:
-              data.message.trim(),
+      }
 
-            timestamp:
-              new Date()
+      return;
 
-          });
+    }
+
+
+    const newMessage = new Message({
+      sender: userId,
+      receiver: data.receiverId,
+      message: messageTexte,
+      timestamp: new Date()
+    });
+
+
+    await newMessage.save();
+
+
+    /* ==============================================
+       ENVOI IMMÉDIAT AU DESTINATAIRE
+    ============================================== */
+
+    const receiverSocketId =
+      onlineUsers.get(
+        String(data.receiverId)
+      );
+
+
+    if (receiverSocketId) {
+
+      io.to(
+        receiverSocketId
+      ).emit(
+        'receiveMessage',
+        newMessage
+      );
+
+    }
+
+
+    /* ==============================================
+       CONFIRMATION CHEZ L'EXPÉDITEUR
+    ============================================== */
+
+    socket.emit(
+      'receiveMessage',
+      newMessage
+    );
+
+
+    /* ==============================================
+       CONFIRMATION AU NAVIGATEUR
+    ============================================== */
+
+    if (typeof callback === 'function') {
+
+      callback({
+        ok: true,
+        messageId:
+          String(newMessage._id)
+      });
+
+    }
+
+
+    /* ==============================================
+       NOTIFICATION PUSH EN ARRIÈRE-PLAN
+    ============================================== */
+
+    envoyerNotificationPush(
+      data.receiverId,
+      socket.username,
+      messageTexte
+    ).catch(
+      err => {
+
+        console.error(
+          'Erreur notification Push:',
+          err.message
+        );
+
+      }
+    );
+
+
+  } catch (err) {
+
+    console.error(
+      'Erreur sendMessage:',
+      err
+    );
+
+
+    if (typeof callback === 'function') {
+
+      callback({
+        ok: false,
+        error: 'Erreur serveur'
+      });
+
+    }
+
+  }
+
+});
 
 
         await newMessage.save();
