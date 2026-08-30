@@ -55,12 +55,10 @@
     </div>
 
 
-    <!-- LOGO -->
-
     <a
       href="#"
-      class="logo-link"
       onclick="allerAccueil(event)"
+      style="display:block; text-decoration:none;"
     >
 
       <svg
@@ -93,11 +91,9 @@
 
 
         <path
-          d="
-            M45 84
-            C75 96 105 96 130 94
-            C160 92 188 88 215 76
-          "
+          d="M45 84
+             C75 96 105 96 130 94
+             C160 92 188 88 215 76"
           fill="none"
           stroke="#C6552A"
           stroke-width="3"
@@ -122,8 +118,6 @@
 
     </a>
 
-
-    <!-- VAGUE -->
 
     <svg
       class="wave"
@@ -152,6 +146,7 @@
     </svg>
 
   </header>
+
 
 
   <!-- ==================================================
@@ -186,7 +181,9 @@
         id="usersScroll"
       ></div>
 
+
     </aside>
+
 
 
     <!-- ==================================================
@@ -199,7 +196,7 @@
     >
 
 
-      <!-- PLACEHOLDER -->
+      <!-- MESSAGE AVANT SÉLECTION -->
 
       <div
         class="conv-placeholder"
@@ -207,6 +204,7 @@
       >
         Sélectionnez un utilisateur pour commencer une conversation.
       </div>
+
 
 
       <!-- ==================================================
@@ -229,7 +227,6 @@
             class="back-btn"
             id="backBtn"
             type="button"
-            aria-label="Retour"
           >
             ←
           </button>
@@ -268,6 +265,7 @@
         </div>
 
 
+
         <!-- ==================================================
              MESSAGES
         ================================================== -->
@@ -278,9 +276,8 @@
         ></div>
 
 
-        <!-- ==================================================
-             INDICATEUR ÉCRITURE
-        ================================================== -->
+
+        <!-- INDICATEUR ÉCRITURE -->
 
         <div
           class="typing-indicator"
@@ -289,6 +286,7 @@
         >
           écrit...
         </div>
+
 
 
         <!-- ==================================================
@@ -310,7 +308,6 @@
             id="sendBtn"
             class="send-btn"
             type="button"
-            aria-label="Envoyer"
           >
             ➤
           </button>
@@ -326,6 +323,7 @@
 
 
   </div>
+
 
 
   <!-- ==================================================
@@ -384,6 +382,7 @@
   </footer>
 
 
+
   <!-- ==================================================
        SOCKET.IO
   ================================================== -->
@@ -415,6 +414,7 @@
     }
 
 
+
     /* =====================================================
        AUTHENTIFICATION
     ====================================================== */
@@ -440,6 +440,7 @@
     }
 
 
+
     /* =====================================================
        VARIABLES
     ====================================================== */
@@ -451,6 +452,7 @@
     let unreadCounts = {};
 
     let typingTimeout = null;
+
 
 
     /* =====================================================
@@ -479,6 +481,7 @@
     );
 
 
+
     /* =====================================================
        OUTILS
     ====================================================== */
@@ -497,8 +500,14 @@
       const d =
         new Date(dateStr);
 
-      if (isNaN(d.getTime())) {
+      if (
+        Number.isNaN(
+          d.getTime()
+        )
+      ) {
+
         return '';
+
       }
 
       return (
@@ -533,6 +542,7 @@
       return div.innerHTML;
 
     }
+
 
 
     /* =====================================================
@@ -645,6 +655,7 @@
 
           '</button>';
 
+
       } catch (err) {
 
         console.error(
@@ -657,6 +668,7 @@
     }
 
 
+
     /* =====================================================
        DÉCONNEXION
     ====================================================== */
@@ -667,14 +679,7 @@
 
         socket.disconnect();
 
-      } catch (err) {
-
-        console.error(
-          'Erreur déconnexion socket:',
-          err
-        );
-
-      }
+      } catch (e) {}
 
       localStorage.clear();
 
@@ -682,6 +687,7 @@
         'index.html';
 
     }
+
 
 
     /* =====================================================
@@ -719,7 +725,15 @@
           await res.json();
 
 
+        if (!Array.isArray(usersData)) {
+
+          usersData = [];
+
+        }
+
+
         afficherUtilisateurs();
+
 
       } catch (err) {
 
@@ -731,6 +745,7 @@
       }
 
     }
+
 
 
     /* =====================================================
@@ -764,7 +779,18 @@
           await res.json();
 
 
+        if (
+          !unreadCounts ||
+          typeof unreadCounts !== 'object'
+        ) {
+
+          unreadCounts = {};
+
+        }
+
+
         afficherUtilisateurs();
+
 
       } catch (err) {
 
@@ -776,6 +802,7 @@
       }
 
     }
+
 
 
     /* =====================================================
@@ -791,185 +818,193 @@
 
 
       if (!container) {
+
         return;
+
       }
 
 
       container.innerHTML = '';
 
 
-      usersData
-
-        .sort(
+      const liste =
+        [...usersData].sort(
           (a, b) => {
 
             const dateA =
               new Date(
                 a.lastSeen || 0
-              ).getTime();
+              );
 
             const dateB =
               new Date(
                 b.lastSeen || 0
-              ).getTime();
+              );
 
             return dateB - dateA;
 
           }
-        )
+        );
 
-        .forEach(
-          u => {
 
-            const div =
-              document.createElement(
-                'div'
+      liste.forEach(
+        u => {
+
+          if (!u || !u._id) {
+
+            return;
+
+          }
+
+
+          const div =
+            document.createElement(
+              'div'
+            );
+
+
+          div.className =
+            'user-item' +
+
+            (
+              u._id === selectedUserId
+                ? ' active'
+                : ''
+            );
+
+
+          const nombreNonLu =
+            unreadCounts[u._id] || 0;
+
+
+          const badge =
+
+            nombreNonLu > 0
+
+              ? '<span class="unread-badge">' +
+
+                (
+                  nombreNonLu > 99
+                    ? '99+'
+                    : nombreNonLu
+                ) +
+
+                '</span>'
+
+              : '';
+
+
+          div.innerHTML =
+
+            '<div class="user-avatar-wrapper">' +
+
+              '<span class="avatar">' +
+
+                initiale(
+                  u.username
+                ) +
+
+              '</span>' +
+
+              '<span class="status-dot ' +
+
+                (
+                  u.status === 'actif'
+                    ? 'actif'
+                    : 'inactif'
+                ) +
+
+              '"></span>' +
+
+            '</div>' +
+
+
+            '<div class="user-name-container">' +
+
+              '<span class="user-name">' +
+
+                echapperHTML(
+                  u.username
+                ) +
+
+              '</span>' +
+
+              badge +
+
+            '</div>' +
+
+
+            (
+              estAdmin
+
+                ? '<button ' +
+
+                  'class="delete-user-btn" ' +
+
+                  'data-id="' +
+
+                  u._id +
+
+                  '" ' +
+
+                  'type="button" ' +
+
+                  'title="Supprimer">' +
+
+                  '🗑' +
+
+                  '</button>'
+
+                : ''
+            );
+
+
+          div.addEventListener(
+            'click',
+            () => {
+
+              ouvrirConversation(
+                u._id
               );
 
-
-            div.className =
-              'user-item' +
-
-              (
-                u._id === selectedUserId
-                  ? ' active'
-                  : ''
-              );
+            }
+          );
 
 
-            const nombreNonLu =
-              unreadCounts[u._id] || 0;
+          const delBtn =
+            div.querySelector(
+              '.delete-user-btn'
+            );
 
 
-            const badge =
+          if (delBtn) {
 
-              nombreNonLu > 0
-
-                ? '<span class="unread-badge">' +
-
-                  (
-                    nombreNonLu > 99
-                      ? '99+'
-                      : nombreNonLu
-                  ) +
-
-                  '</span>'
-
-                : '';
-
-
-            div.innerHTML =
-
-              '<div class="user-avatar-wrapper">' +
-
-                '<span class="avatar">' +
-
-                  initiale(
-                    u.username
-                  ) +
-
-                '</span>' +
-
-                '<span class="status-dot ' +
-
-                  (
-                    u.status === 'actif'
-                      ? 'actif'
-                      : 'inactif'
-                  ) +
-
-                '"></span>' +
-
-              '</div>' +
-
-
-              '<div class="user-name-container">' +
-
-                '<span class="user-name">' +
-
-                  echapperHTML(
-                    u.username
-                  ) +
-
-                '</span>' +
-
-                badge +
-
-              '</div>' +
-
-
-              (
-                estAdmin
-
-                  ? '<button ' +
-
-                    'class="delete-user-btn" ' +
-
-                    'data-id="' +
-
-                    u._id +
-
-                    '" ' +
-
-                    'type="button" ' +
-
-                    'title="Supprimer" ' +
-
-                    'aria-label="Supprimer">' +
-
-                    '🗑' +
-
-                    '</button>'
-
-                  : ''
-              );
-
-
-            div.addEventListener(
+            delBtn.addEventListener(
               'click',
-              () => {
+              (e) => {
 
-                ouvrirConversation(
-                  u._id
+                e.stopPropagation();
+
+                supprimerUtilisateur(
+                  u._id,
+                  u.username
                 );
 
               }
             );
 
-
-            const delBtn =
-              div.querySelector(
-                '.delete-user-btn'
-              );
-
-
-            if (delBtn) {
-
-              delBtn.addEventListener(
-                'click',
-                (e) => {
-
-                  e.stopPropagation();
-
-                  supprimerUtilisateur(
-                    u._id,
-                    u.username
-                  );
-
-                }
-              );
-
-            }
-
-
-            container.appendChild(
-              div
-            );
-
           }
-        );
+
+
+          container.appendChild(
+            div
+          );
+
+        }
+      );
 
     }
+
 
 
     /* =====================================================
@@ -990,7 +1025,9 @@
 
 
       if (!confirmation) {
+
         return;
+
       }
 
 
@@ -1049,6 +1086,7 @@
 
         await chargerUtilisateurs();
 
+
       } catch (err) {
 
         console.error(
@@ -1063,6 +1101,7 @@
       }
 
     }
+
 
 
     /* =====================================================
@@ -1084,7 +1123,9 @@
 
 
       if (!user) {
+
         return;
+
       }
 
 
@@ -1179,7 +1220,7 @@
         if (!res.ok) {
 
           console.error(
-            'Impossible de charger la conversation.'
+            'Impossible de charger la conversation'
           );
 
           return;
@@ -1191,16 +1232,20 @@
           await res.json();
 
 
-        messages.forEach(
-          msg => {
+        if (Array.isArray(messages)) {
 
-            afficherMessage(
-              msg,
-              false
-            );
+          messages.forEach(
+            msg => {
 
-          }
-        );
+              afficherMessage(
+                msg,
+                false
+              );
+
+            }
+          );
+
+        }
 
 
         box.scrollTop =
@@ -1209,581 +1254,538 @@
 
       } catch (err) {
 
-                console.error(
+        console.error(
           'Erreur chargement messages:',
           err
         );
 
       }
 
+
+      try {
+
+        await fetch(
+  '/api/messages/' +
+  userId +
+  '/read',
+  {
+    method: 'POST',
+
+    headers: {
+      'Authorization':
+        'Bearer ' + token
     }
-
-
-    /* =====================================================
-       MARQUER LES MESSAGES COMME LUS
-    ====================================================== */
-
-    try {
-
-      await fetch(
-        '/api/messages/' +
-        userId +
-        '/read',
-        {
-          method: 'POST',
-
-          headers: {
-            'Authorization':
-              'Bearer ' + token
-          }
-        }
-      );
-
-    } catch (err) {
-
-      console.error(
-        'Erreur marquage lecture:',
-        err
-      );
-
-    }
-
   }
+);
+
+} catch (err) {
+
+  console.error(
+    'Erreur marquage lecture:',
+    err
+  );
+
+}
+
+}
 
 
-  /* =====================================================
-     AFFICHER MESSAGE
-  ====================================================== */
+/* =====================================================
+   AFFICHER MESSAGE
+===================================================== */
 
-  function afficherMessage(
-    msg,
-    scroll = true
+function afficherMessage(
+  msg,
+  scroll = true
+) {
+
+  if (
+    msg.sender !== selectedUserId &&
+    msg.receiver !== selectedUserId
   ) {
+    return;
+  }
 
-    if (
-      msg.sender !== selectedUserId &&
-      msg.receiver !== selectedUserId
-    ) {
+  const box =
+    document.getElementById('messages');
 
-      return;
+  if (!box) {
+    return;
+  }
 
-    }
+  const ligne =
+    document.createElement('div');
 
+  const estMoi =
+    String(msg.sender) === String(myUserId);
 
-    const box =
-      document.getElementById(
-        'messages'
-      );
-
-
-    const ligne =
-      document.createElement(
-        'div'
-      );
-
-
-    const estMoi =
-      msg.sender === myUserId;
-
-
-    ligne.className =
-      'message-line ' +
-      (
-        estMoi
-          ? 'message-line-envoye'
-          : 'message-line-recu'
-      );
-
-
-    const bubble =
-      document.createElement(
-        'div'
-      );
-
-
-    bubble.className =
-      'bubble ' +
-      (
-        estMoi
-          ? 'message-envoye'
-          : 'message-recu'
-      );
-
-
-    bubble.innerHTML =
-
-      '<span class="message-text">' +
-
-      echapperHTML(
-        msg.message
-      ) +
-
-      '</span>' +
-
-      '<span class="time">' +
-
-      formatHeure(
-        msg.timestamp
-      ) +
-
-      '</span>';
-
-
-    ligne.appendChild(
-      bubble
+  ligne.className =
+    'message-line ' +
+    (
+      estMoi
+        ? 'message-line-envoye'
+        : 'message-line-recu'
     );
 
+  const bubble =
+    document.createElement('div');
 
-    box.appendChild(
-      ligne
+  bubble.className =
+    'bubble ' +
+    (
+      estMoi
+        ? 'message-envoye'
+        : 'message-recu'
     );
 
+  bubble.innerHTML =
 
-    if (scroll) {
+    '<span class="message-text">' +
 
-      box.scrollTop =
-        box.scrollHeight;
+    echapperHTML(
+      msg.message
+    ) +
 
-    }
+    '</span>' +
+
+    '<span class="time">' +
+
+    formatHeure(
+      msg.timestamp
+    ) +
+
+    '</span>';
+
+  ligne.appendChild(
+    bubble
+  );
+
+  box.appendChild(
+    ligne
+  );
+
+  if (scroll) {
+
+    box.scrollTop =
+      box.scrollHeight;
 
   }
 
-
-  /* =====================================================
-     ENVOYER MESSAGE
-  ====================================================== */
-
-  function envoyerMessage() {
-
-    const input =
-      document.getElementById(
-        'messageInput'
-      );
+}
 
 
-    const message =
-      input.value.trim();
+/* =====================================================
+   ENVOYER MESSAGE
+===================================================== */
 
+function envoyerMessage() {
 
-    if (
-      !message ||
-      !selectedUserId
-    ) {
-
-      return;
-
-    }
-
-
-    socket.emit(
-      'sendMessage',
-      {
-        receiverId:
-          selectedUserId,
-
-        message:
-          message
-      }
-    );
-
-
-    input.value = '';
-
-  }
-
-
-  /* =====================================================
-     BOUTON ENVOYER
-  ====================================================== */
-
-  document
-    .getElementById(
-      'sendBtn'
-    )
-    .addEventListener(
-      'click',
-      envoyerMessage
-    );
-
-
-  /* =====================================================
-     CHAMP MESSAGE
-  ====================================================== */
-
-  document
-    .getElementById(
+  const input =
+    document.getElementById(
       'messageInput'
-    )
-    .addEventListener(
-      'keydown',
-      (e) => {
-
-        if (
-          e.key === 'Enter'
-        ) {
-
-          e.preventDefault();
-
-          envoyerMessage();
-
-          return;
-
-        }
-
-
-        if (
-          selectedUserId
-        ) {
-
-          socket.emit(
-            'typing',
-            {
-              receiverId:
-                selectedUserId
-            }
-          );
-
-        }
-
-      }
     );
 
+  if (!input) {
+    return;
+  }
 
-  /* =====================================================
-     INDICATEUR DE FRAPPE
-  ====================================================== */
+  const message =
+    input.value.trim();
 
-  socket.on(
-    'userTyping',
-    (data) => {
+  if (
+    !message ||
+    !selectedUserId
+  ) {
+    return;
+  }
+
+  socket.emit(
+    'sendMessage',
+    {
+      receiverId:
+        selectedUserId,
+
+      message:
+        message
+    }
+  );
+
+  input.value = '';
+
+}
+
+
+/* =====================================================
+   BOUTON ENVOYER
+===================================================== */
+
+const sendBtn =
+  document.getElementById(
+    'sendBtn'
+  );
+
+if (sendBtn) {
+
+  sendBtn.addEventListener(
+    'click',
+    envoyerMessage
+  );
+
+}
+
+
+/* =====================================================
+   CHAMP MESSAGE
+===================================================== */
+
+const messageInput =
+  document.getElementById(
+    'messageInput'
+  );
+
+if (messageInput) {
+
+  messageInput.addEventListener(
+    'keydown',
+    (e) => {
 
       if (
-        data.senderId !==
+        e.key === 'Enter'
+      ) {
+
+        e.preventDefault();
+
+        envoyerMessage();
+
+        return;
+
+      }
+
+      if (
         selectedUserId
       ) {
 
-        return;
+        socket.emit(
+          'typing',
+          {
+            receiverId:
+              selectedUserId
+          }
+        );
 
       }
-
-
-      const indicator =
-        document.getElementById(
-          'typingIndicator'
-        );
-
-
-      indicator.style.display =
-        'block';
-
-
-      clearTimeout(
-        typingTimeout
-      );
-
-
-      typingTimeout =
-        setTimeout(
-          () => {
-
-            indicator.style.display =
-              'none';
-
-          },
-          1500
-        );
 
     }
   );
 
-
-  /* =====================================================
-     BOUTON RETOUR
-  ====================================================== */
-
-  document
-    .getElementById(
-      'backBtn'
-    )
-    .addEventListener(
-      'click',
-      () => {
-
-        selectedUserId =
-          null;
+}
 
 
-        document
-          .getElementById(
-            'convActive'
-          )
-          .style.display =
-            'none';
+/* =====================================================
+   BOUTON RETOUR
+===================================================== */
 
+const backBtn =
+  document.getElementById(
+    'backBtn'
+  );
 
-        document
-          .getElementById(
-            'convPlaceholder'
-          )
-          .style.display =
-            'flex';
+if (backBtn) {
 
+  backBtn.addEventListener(
+    'click',
+    () => {
 
-        afficherUtilisateurs();
+      selectedUserId =
+        null;
 
-      }
-    );
-
-
-  /* =====================================================
-     RÉCEPTION DES MESSAGES
-  ====================================================== */
-
-  socket.on(
-    'newMessage',
-    (msg) => {
-
-      const messageEstDansConversation =
-
-        (
-          msg.sender === selectedUserId &&
-          msg.receiver === myUserId
+      document
+        .getElementById(
+          'convActive'
         )
+        .style.display =
+          'none';
 
-        ||
-
-        (
-          msg.sender === myUserId &&
-          msg.receiver === selectedUserId
-        );
-
-
-      if (
-        messageEstDansConversation
-      ) {
-
-        afficherMessage(
-          msg,
-          true
-        );
-
-
-        /*
-         * Si le message reçu appartient
-         * à la conversation actuellement ouverte,
-         * on le marque automatiquement comme lu.
-         */
-
-        if (
-          msg.sender === selectedUserId
-        ) {
-
-          fetch(
-            '/api/messages/' +
-            selectedUserId +
-            '/read',
-            {
-              method: 'POST',
-
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          ).catch(
-            err => {
-
-              console.error(
-                'Erreur lecture automatique:',
-                err
-              );
-
-            }
-          );
-
-        }
-
-      } else {
-
-        /*
-         * Nouveau message reçu dans
-         * une autre conversation.
-         */
-
-        const expediteur =
-          msg.sender;
-
-
-        unreadCounts[expediteur] =
-          (
-            unreadCounts[expediteur] ||
-            0
-          ) + 1;
-
-
-        afficherUtilisateurs();
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     MISE À JOUR DU STATUT DES UTILISATEURS
-  ====================================================== */
-
-  socket.on(
-    'userStatusChanged',
-    (data) => {
-
-      const user =
-        usersData.find(
-          u =>
-            u._id ===
-            data.userId
-        );
-
-
-      if (!user) {
-
-        return;
-
-      }
-
-
-      user.status =
-        data.status;
-
-
-      user.lastSeen =
-        data.lastSeen ||
-        new Date().toISOString();
-
+      document
+        .getElementById(
+          'convPlaceholder'
+        )
+        .style.display =
+          'flex';
 
       afficherUtilisateurs();
 
+    }
+  );
 
-      /*
-       * Mettre également à jour
-       * l'en-tête de la conversation ouverte.
-       */
-
-      if (
-        selectedUserId ===
-        data.userId
-      ) {
-
-        const status =
-          data.status === 'actif'
-            ? 'actif'
-            : 'inactif';
+}
 
 
-        document
-          .getElementById(
-            'convStatus'
-          )
-          .innerHTML =
+/* =====================================================
+   RÉCEPTION DES MESSAGES
+===================================================== */
 
-            '<span class="status-dot ' +
-            status +
-            '"></span> ' +
+socket.on(
+  'newMessage',
+  (msg) => {
 
-            (
-              status === 'actif'
-                ? 'En ligne'
-                : 'Hors ligne'
-            );
+    const senderId =
+      String(msg.sender);
+
+    const receiverId =
+      String(msg.receiver);
+
+    const currentUserId =
+      String(myUserId);
+
+    const currentSelectedId =
+      selectedUserId
+        ? String(selectedUserId)
+        : null;
+
+
+    /* -----------------------------------------------
+       MESSAGE DANS LA CONVERSATION OUVERTE
+    ------------------------------------------------ */
+
+    if (
+
+      (
+        senderId === currentSelectedId &&
+        receiverId === currentUserId
+      )
+
+      ||
+
+      (
+        senderId === currentUserId &&
+        receiverId === currentSelectedId
+      )
+
+    ) {
+
+      afficherMessage(
+        msg,
+        true
+      );
+
+      return;
+
+    }
+
+
+    /* -----------------------------------------------
+       NOUVEAU MESSAGE D'UNE AUTRE PERSONNE
+    ------------------------------------------------ */
+
+    const expediteur =
+      msg.sender;
+
+    unreadCounts[expediteur] =
+      (
+        unreadCounts[expediteur] || 0
+      ) + 1;
+
+    afficherUtilisateurs();
+
+  }
+);
+
+
+/* =====================================================
+   INDICATEUR "ÉCRIT..."
+===================================================== */
+
+socket.on(
+  'userTyping',
+  (data) => {
+
+    if (
+      !selectedUserId
+    ) {
+      return;
+    }
+
+    if (
+      String(data.senderId) !==
+      String(selectedUserId)
+    ) {
+      return;
+    }
+
+    const indicator =
+      document.getElementById(
+        'typingIndicator'
+      );
+
+    if (!indicator) {
+      return;
+    }
+
+    indicator.style.display =
+      'block';
+
+    clearTimeout(
+      typingTimeout
+    );
+
+    typingTimeout =
+      setTimeout(
+        () => {
+
+          indicator.style.display =
+            'none';
+
+        },
+        1500
+      );
+
+  }
+);
+
+
+/* =====================================================
+   ACTUALISATION DU STATUT DES UTILISATEURS
+===================================================== */
+
+socket.on(
+  'userStatus',
+  (data) => {
+
+    if (!data) {
+      return;
+    }
+
+    const user =
+      usersData.find(
+        u =>
+          String(u._id) ===
+          String(data.userId)
+      );
+
+    if (!user) {
+      return;
+    }
+
+    user.status =
+      data.status;
+
+    user.lastSeen =
+      new Date();
+
+    afficherUtilisateurs();
+
+
+    /* Mise à jour de l'en-tête
+       si cette personne est sélectionnée */
+
+    if (
+      selectedUserId &&
+      String(selectedUserId) ===
+      String(data.userId)
+    ) {
+
+      const status =
+        data.status === 'actif'
+          ? 'actif'
+          : 'inactif';
+
+      const statusElement =
+        document.getElementById(
+          'convStatus'
+        );
+
+      if (statusElement) {
+
+        statusElement.innerHTML =
+
+          '<span class="status-dot ' +
+          status +
+          '"></span> ' +
+
+          (
+            status === 'actif'
+              ? 'En ligne'
+              : 'Hors ligne'
+          );
 
       }
 
     }
-  );
-
-
-  /* =====================================================
-     DÉMARRAGE APPLICATION
-  ====================================================== */
-
-  async function demarrerApplication() {
-
-    if (!token) {
-
-      return;
-
-    }
-
-
-    await chargerMonProfil();
-
-
-    await Promise.all([
-      chargerUtilisateurs(),
-      chargerMessagesNonLus()
-    ]);
-
-
-    enregistrerServiceWorker();
 
   }
+);
 
 
-  /* =====================================================
-     SERVICE WORKER
-  ====================================================== */
+/* =====================================================
+   DÉMARRAGE APPLICATION
+===================================================== */
 
-  function enregistrerServiceWorker() {
+async function demarrerApplication() {
 
-    if (
-      !('serviceWorker' in navigator)
-    ) {
+  if (!token) {
+    return;
+  }
 
-      return;
+  await chargerMonProfil();
 
-    }
+  await Promise.all([
+    chargerUtilisateurs(),
+    chargerMessagesNonLus()
+  ]);
+
+  enregistrerServiceWorker();
+
+}
 
 
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then(
-        registration => {
+/* =====================================================
+   SERVICE WORKER
+===================================================== */
 
-          console.log(
-            'Service Worker enregistré:',
-            registration.scope
-          );
+async function enregistrerServiceWorker() {
 
-        }
-      )
-      .catch(
-        err => {
+  if (
+    !('serviceWorker' in navigator)
+  ) {
+    return;
+  }
 
-          console.error(
-            'Erreur Service Worker:',
-            err
-          );
+  try {
 
-        }
+    const registration =
+      await navigator.serviceWorker.register(
+        '/service-worker.js'
       );
 
+    console.log(
+      'Service Worker enregistré:',
+      registration.scope
+    );
+
+  } catch (err) {
+
+    console.error(
+      'Erreur Service Worker:',
+      err
+    );
+
   }
 
+}
 
-  /* =====================================================
-     DOM PRÊT
-  ====================================================== */
 
-  document.addEventListener(
-    'DOMContentLoaded',
-    demarrerApplication
-  );
+/* =====================================================
+   LANCEMENT
+===================================================== */
 
+document.addEventListener(
+  'DOMContentLoaded',
+  demarrerApplication
+);
 
 </script>
-
 
 </body>
 
 </html>
-      
