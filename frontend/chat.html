@@ -479,7 +479,29 @@
 
       }
     );
+socket.on(
+  'connect',
+  () => {
 
+    console.log(
+      'Socket.IO connecté :',
+      socket.id
+    );
+
+  }
+);
+
+socket.on(
+  'disconnect',
+  (reason) => {
+
+    console.error(
+      'Socket.IO déconnecté :',
+      reason
+    );
+
+  }
+);
 
 
     /* =====================================================
@@ -1373,7 +1395,6 @@ function afficherMessage(
 
 }
 
-
 /* =====================================================
    ENVOYER MESSAGE
 ===================================================== */
@@ -1381,39 +1402,104 @@ function afficherMessage(
 function envoyerMessage() {
 
   const input =
-    document.getElementById(
-      'messageInput'
-    );
+    document.getElementById('messageInput');
 
   if (!input) {
+    console.error('Champ message introuvable.');
     return;
   }
 
   const message =
     input.value.trim();
 
-  if (
-    !message ||
-    !selectedUserId
-  ) {
+  if (!message) {
     return;
   }
+
+  if (!selectedUserId) {
+    console.error('Aucun utilisateur sélectionné.');
+    return;
+  }
+
+  if (!socket.connected) {
+    console.error(
+      'Socket.IO n’est pas connecté au serveur.'
+    );
+
+    alert(
+      'Connexion au serveur perdue. Actualise la page.'
+    );
+
+    return;
+  }
+
+  console.log('Envoi du message...');
+  console.log('Destinataire :', selectedUserId);
+  console.log('Message :', message);
 
   socket.emit(
     'sendMessage',
     {
-      receiverId:
-        selectedUserId,
+      receiverId: String(selectedUserId),
+      message: message
+    }
+  );
 
-      message:
-        message
+  input.value = '';
+
+  }/* =====================================================
+   ENVOYER MESSAGE
+===================================================== */
+
+function envoyerMessage() {
+
+  const input =
+    document.getElementById('messageInput');
+
+  if (!input) {
+    console.error('Champ message introuvable.');
+    return;
+  }
+
+  const message =
+    input.value.trim();
+
+  if (!message) {
+    return;
+  }
+
+  if (!selectedUserId) {
+    console.error('Aucun utilisateur sélectionné.');
+    return;
+  }
+
+  if (!socket.connected) {
+    console.error(
+      'Socket.IO n’est pas connecté au serveur.'
+    );
+
+    alert(
+      'Connexion au serveur perdue. Actualise la page.'
+    );
+
+    return;
+  }
+
+  console.log('Envoi du message...');
+  console.log('Destinataire :', selectedUserId);
+  console.log('Message :', message);
+
+  socket.emit(
+    'sendMessage',
+    {
+      receiverId: String(selectedUserId),
+      message: message
     }
   );
 
   input.value = '';
 
 }
-
 
 /* =====================================================
    BOUTON ENVOYER
