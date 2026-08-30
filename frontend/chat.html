@@ -1,1575 +1,1313 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>AFRIQ'S - Chat</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
-  <link
-    rel="manifest"
-    href="manifest.json"
-  >
-
-  <link
-    rel="icon"
-    href="favicon.ico"
-  >
-
-  <meta
-    name="theme-color"
-    content="#C6552A"
-  >
-
-</head>
-
-
-<body>
-
-
-  <!-- ==================================================
-       HEADER
-  =================================================== -->
-
-  <header>
-
-
-    <!-- LIGNES COURBES BLANCHES -->
-
-    <svg
-      class="header-curves"
-      viewBox="0 0 1200 320"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-
-      <path
-        d="M-50 80
-           C150 0 260 160 450 75
-           S760 20 930 100
-           S1130 180 1250 70"
-        fill="none"
-        stroke="white"
-        stroke-width="3"
-        opacity="0.18"
-      />
-
-      <path
-        d="M-80 190
-           C120 100 260 270 470 165
-           S760 100 930 195
-           S1120 270 1280 155"
-        fill="none"
-        stroke="white"
-        stroke-width="2"
-        opacity="0.14"
-      />
-
-      <path
-        d="M-60 280
-           C150 190 290 340 500 245
-           S790 190 970 275
-           S1130 330 1260 240"
-        fill="none"
-        stroke="white"
-        stroke-width="2"
-        opacity="0.12"
-      />
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    </svg>
+html,
+body {
+  height: 100%;
+}
 
+body {
+  background-color: #F7EFEA;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    <!-- LOGO -->
 
-    <a
-      href="#"
-      onclick="allerAccueil(event)"
-      class="logo-link"
-    >
+/* ==================================================
+   HEADER PRINCIPAL
+================================================== */
 
-      <svg
-        class="logo-oval"
-        viewBox="0 0 260 130"
-      >
+header {
+  position: relative;
+  background-color: #C6552A;
+  height: 320px;
 
-        <ellipse
-          cx="130"
-          cy="65"
-          rx="118"
-          ry="54"
-          fill="#FFFFFF"
-        />
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  overflow: hidden;
+}
 
-        <text
-          x="130"
-          y="78"
-          text-anchor="middle"
-          font-size="38"
-          font-family="'Segoe Script','Brush Script MT',cursive"
-          fill="#C6552A"
-        >
-          AFRIQ'S
-        </text>
 
-      </svg>
+/* ==================================================
+   LIGNES COURBES BLANCHES DU FOND
+================================================== */
 
-    </a>
+.header-curves {
+  position: absolute;
+  inset: 0;
 
+  width: 100%;
+  height: 100%;
 
-    <!-- VAGUE BASSE -->
+  z-index: 0;
 
-    <svg
-      class="wave"
-      viewBox="0 0 1200 40"
-      preserveAspectRatio="none"
-    >
+  pointer-events: none;
+}
 
-      <path
-        fill="#F7EFEA"
-        d="
-          M0,20
-          C50,40 100,0 150,20
-          C200,40 250,0 300,20
-          C350,40 400,0 450,20
-          C500,40 550,0 600,20
-          C650,40 700,0 750,20
-          C800,40 850,0 900,20
-          C950,40 1000,0 1050,20
-          C1100,40 1150,0 1200,20
-          L1200,40
-          L0,40
-          Z
-        "
-      />
 
-    </svg>
+/* ==================================================
+   LOGO OVALE
+================================================== */
 
-  </header>
+.logo-link {
+  position: relative;
+  z-index: 3;
 
+  display: block;
 
-  <!-- ==================================================
-       APPLICATION CHAT
-  =================================================== -->
+  width: min(78vw, 430px);
 
-  <div class="chat-app">
+  text-decoration: none;
+}
 
+.logo-oval {
+  display: block;
 
-    <!-- ==================================================
-         LISTE UTILISATEURS
-    =================================================== -->
+  width: 100%;
+  height: auto;
+}
 
-    <aside
-      class="user-list"
-      id="userList"
-    >
 
+/* Vague inférieure */
 
-      <!-- MON PROFIL -->
+.wave {
+  position: absolute;
 
-      <div
-        class="my-profile"
-        id="myProfile"
-      ></div>
+  bottom: -1px;
+  left: 0;
 
+  width: 100%;
+  height: 22px;
 
-      <!-- UTILISATEURS -->
+  z-index: 4;
+}
 
-      <div
-        class="users-scroll"
-        id="usersScroll"
-      ></div>
 
+/* ==================================================
+   PAGE PRINCIPALE
+================================================== */
 
-    </aside>
+main {
+  flex: 1;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    <!-- ==================================================
-         CONVERSATION
-    =================================================== -->
+  padding: 24px;
+}
 
-    <section
-      class="conversation"
-      id="conversation"
-    >
+.form-container {
+  width: 100%;
+  max-width: 350px;
 
+  margin-top: 24px;
+}
 
-      <!-- PLACEHOLDER -->
+input {
+  width: 100%;
 
-      <div
-        class="conv-placeholder"
-        id="convPlaceholder"
-      >
-        Sélectionnez un utilisateur pour commencer une conversation.
-      </div>
+  padding: 17px;
 
+  margin-bottom: 17px;
 
-      <!-- CONVERSATION ACTIVE -->
+  border: 1px solid #ddd;
+  border-radius: 8px;
 
-      <div
-        class="conv-active"
-        id="convActive"
-        style="display:none;"
-      >
+  font-size: 18px;
+}
 
+.password-row {
+  display: flex;
+  align-items: center;
 
-        <!-- ==================================================
-             EN-TÊTE DISCUSSION
-        =================================================== -->
+  gap: 10px;
+}
 
-        <div class="conv-header">
+.password-row input {
+  flex: 1;
+}
 
+.forgot-btn {
+  width: 44px;
+  height: 44px;
 
-          <button
-            class="back-btn"
-            id="backBtn"
-            type="button"
-          >
-            ←
-          </button>
+  border-radius: 50%;
 
+  background-color: #E24B4A;
 
-          <div class="conv-header-center">
+  color: white;
 
+  border: none;
 
-            <span
-              class="avatar"
-              id="convAvatar"
-            ></span>
+  font-weight: bold;
 
+  cursor: pointer;
 
-            <div class="conv-user-info">
+  flex-shrink: 0;
 
+  margin-bottom: 17px;
+}
 
-              <div
-                class="conv-username"
-                id="convUsername"
-              ></div>
+button.primary-btn {
+  width: 100%;
 
+  padding: 17px;
 
-              <div
-                class="conv-status"
-                id="convStatus"
-              ></div>
+  background-color: #C6552A;
 
+  color: white;
 
-            </div>
+  border: none;
 
+  border-radius: 8px;
 
-          </div>
+  font-size: 19px;
 
+  font-weight: bold;
 
-        </div>
+  cursor: pointer;
+}
 
+button.primary-btn:hover {
+  background-color: #a8461f;
+}
 
-        <!-- ==================================================
-             MESSAGES
-        =================================================== -->
+.switch-link {
+  text-align: center;
 
-        <div
-          class="messages"
-          id="messages"
-        ></div>
+  margin-top: 18px;
 
+  font-size: 16px;
+}
 
-        <!-- ==================================================
-             INDICATEUR
-        =================================================== -->
+.switch-link a {
+  color: #C6552A;
 
-        <div
-          class="typing-indicator"
-          id="typingIndicator"
-          style="display:none;"
-        >
-          écrit...
-        </div>
+  font-weight: bold;
+}
 
 
-        <!-- ==================================================
-             BARRE MESSAGE
-        =================================================== -->
+/* ==================================================
+   FOOTER
+================================================== */
 
-        <div class="message-input-row">
+footer.about {
+  background-color: #C6552A;
 
+  color: white;
 
-          <input
-            type="text"
-            id="messageInput"
-            placeholder="Écrire un message..."
-            autocomplete="off"
-          >
+  text-align: center;
 
+  padding: 24px 18px;
 
-          <button
-            id="sendBtn"
-            class="send-btn"
-            type="button"
-          >
-            ➤
-          </button>
+  margin-top: auto;
 
+  font-size: 15px;
+}
 
-        </div>
+footer.about h3 {
+  margin-bottom: 12px;
 
+  font-size: 17px;
+}
 
-      </div>
+footer.about p {
+  margin: 5px 0;
+}
 
+footer.about a {
+  color: white;
 
-    </section>
+  text-decoration: underline;
+}
 
+.about-desc {
+  max-width: 500px;
 
-  </div>
+  margin: 0 auto 12px auto !important;
 
+  line-height: 1.6;
+}
 
-  <!-- ==================================================
-       FOOTER
-  =================================================== -->
+.slogan {
+  margin-top: 12px !important;
 
-  <footer class="about">
+  font-style: italic;
 
+  font-weight: bold;
+}
 
-    <h3>À propos</h3>
 
+/* ==================================================
+   APPLICATION CHAT
+================================================== */
 
-    <p class="about-desc">
+.chat-app {
+  flex: 1;
 
-      AFRIQ'S est une messagerie pensée pour connecter
-      les Africains et la diaspora en toute simplicité.
-      Discutez en temps réel, où que vous soyez,
-      avec vos proches et votre communauté.
+  display: flex;
 
-    </p>
+  width: 100%;
 
+  min-height: 500px;
 
-    <p>
-      Email : cakpopascal29@gmail.com
-    </p>
+  background: white;
 
+  overflow: hidden;
+}
 
-    <p>
-      WhatsApp : 0150186601
-    </p>
 
+/* ==================================================
+   COLONNE UTILISATEURS
+   26,67 %
+================================================== */
 
-    <p>
+.user-list {
+  width: 26.67%;
 
-      Facebook :
+  min-width: 0;
 
-      <a
-        href="https://www.facebook.com/profile.php?id=61593075962641"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Notre page
-      </a>
+  border-right: 1px solid #eee;
 
-    </p>
+  display: flex;
 
+  flex-direction: column;
 
-    <p>
-      Mise en service : 28 Août 2026
-    </p>
+  background: #ffffff;
+}
 
 
-    <p class="slogan">
-      "Connecter l'Afrique, un message à la fois."
-    </p>
+/* ==================================================
+   MON PROFIL — DESIGN DISTINCT
+================================================== */
 
+.my-profile {
+  position: relative;
 
-  </footer>
+  margin: 8px;
 
+  padding: 12px 9px;
 
-  <!-- ==================================================
-       SOCKET.IO
-  =================================================== -->
+  min-height: 76px;
 
-  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  display: flex;
 
+  align-items: center;
 
-  <script>
+  gap: 9px;
 
+  background: linear-gradient(
+    135deg,
+    #fff7f2,
+    #f7efea
+  );
 
-    /* =====================================================
-       NAVIGATION
-    ====================================================== */
+  border: 1px solid #ead8ce;
 
-    function allerAccueil(e) {
+  border-radius: 16px;
 
-      e.preventDefault();
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.08);
 
-      if (localStorage.getItem('token')) {
+  font-size: 16px;
+}
 
-        window.location.href = 'chat.html';
 
-      } else {
+/* ==================================================
+   AVATAR DE MON PROFIL
+================================================== */
 
-        window.location.href = 'index.html';
+.my-profile .avatar {
+  width: 48px;
+  height: 48px;
 
-      }
+  border-radius: 50%;
 
-    }
+  background-color: #C6552A;
 
+  color: white;
 
-    /* =====================================================
-       AUTHENTIFICATION
-    ====================================================== */
+  display: flex;
 
-    const token =
-      localStorage.getItem('token');
+  align-items: center;
+  justify-content: center;
 
-    const myUsername =
-      localStorage.getItem('username');
+  font-weight: bold;
 
-    let myUserId =
-      localStorage.getItem('userId');
+  font-size: 18px;
 
-    const estAdmin =
-      myUsername === "HIRO'od";
+  flex-shrink: 0;
 
+  border: 3px solid white;
 
-    if (!token) {
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.15);
+}
 
-      window.location.href =
-        'index.html';
+.my-profile-name {
+  flex: 1;
 
-    }
+  min-width: 0;
 
+  overflow: hidden;
 
-    /* =====================================================
-       VARIABLES
-    ====================================================== */
+  white-space: nowrap;
 
-    let selectedUserId = null;
+  text-overflow: ellipsis;
+}
 
-    let usersData = [];
+.my-profile-name strong {
+  display: block;
 
-    let unreadCounts = {};
+  color: #333;
 
-    let typingTimeout = null;
+  font-size: 15px;
 
+  overflow: hidden;
 
-    /* =====================================================
-       SOCKET.IO
-    ====================================================== */
+  text-overflow: ellipsis;
+}
 
-    const socket = io({
-      auth: {
-        token: token
-      }
-    });
 
+/* ==================================================
+   POINT DE STATUT DU PROFIL PERSONNEL
+================================================== */
 
-    socket.on(
-      'connect_error',
-      (err) => {
+.my-profile > .status-dot {
+  position: absolute;
 
-        console.error(
-          'Erreur connexion Socket.IO:',
-          err.message
-        );
+  left: 48px;
+  bottom: 14px;
 
-      }
-    );
+  width: 13px;
+  height: 13px;
 
+  border-radius: 50%;
 
-    /* =====================================================
-       OUTILS
-    ====================================================== */
+  border: 2px solid white;
 
-    function initiale(nom) {
+  z-index: 5;
+}
 
-      return nom
-        ? nom.charAt(0).toUpperCase()
-        : '?';
 
-    }
+/* ==================================================
+   BOUTON DÉCONNEXION
+================================================== */
 
+.logout-btn {
+  width: 32px;
+  height: 32px;
 
-    function formatHeure(dateStr) {
+  padding: 0;
 
-      const d =
-        new Date(dateStr);
+  flex-shrink: 0;
 
-      return (
-        d.getHours()
-          .toString()
-          .padStart(2, '0')
-        +
-        ':'
-        +
-        d.getMinutes()
-          .toString()
-          .padStart(2, '0')
-      );
+  border: none;
 
-    }
+  border-radius: 50%;
 
+  background-color: #C6552A;
 
-    function echapperHTML(texte) {
+  color: white;
 
-      const div =
-        document.createElement('div');
+  cursor: pointer;
 
-      div.textContent =
-        texte || '';
+  display: flex;
 
-      return div.innerHTML;
+  align-items: center;
+  justify-content: center;
 
-    }
+  box-shadow:
+    0 2px 6px rgba(198, 85, 42, 0.25);
 
+  font-size: 0;
+}
 
-    /* =====================================================
-       MON PROFIL
-    ====================================================== */
+.logout-btn::before {
+  content: "↪";
 
-    async function chargerMonProfil() {
+  font-size: 18px;
 
-      try {
+  font-weight: bold;
 
-        const res =
-          await fetch(
-            '/api/auth/me',
-            {
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          );
+  transform: rotate(180deg);
+}
 
+.logout-btn:active {
+  transform: scale(0.92);
+}
 
-        if (!res.ok) {
 
-          localStorage.clear();
+/* ==================================================
+   LISTE DES UTILISATEURS
+================================================== */
 
-          window.location.href =
-            'index.html';
+.users-scroll {
+  overflow-y: auto;
 
-          return;
+  flex: 1;
 
-        }
+  min-height: 0;
+}
 
+.user-item {
+  position: relative;
 
-        const me =
-          await res.json();
+  display: flex;
 
+  align-items: center;
 
-        myUserId =
-          me._id;
+  gap: 10px;
 
+  padding: 15px 10px;
 
-        localStorage.setItem(
-          'userId',
-          myUserId
-        );
+  cursor: pointer;
 
+  border-bottom: 1px solid #f5f5f5;
 
-        document
-          .getElementById('myProfile')
-          .innerHTML =
+  font-size: 17px;
 
-          '<span class="avatar">' +
-          initiale(me.username) +
-          '</span>' +
+  min-width: 0;
+}
 
-          '<span class="status-dot actif"></span>' +
+.user-item:hover,
+.user-item.active {
+  background-color: #F7EFEA;
+}
 
-          '<div class="my-profile-name">' +
 
-          '<strong>' +
-          echapperHTML(me.username) +
-          '</strong>' +
+/* ==================================================
+   NOM + BADGE
+================================================== */
 
-          '</div>' +
+.user-name-container {
+  flex: 1;
 
-          '<button ' +
-          'class="logout-btn" ' +
-          'onclick="seDeconnecter()" ' +
-          'type="button">' +
+  min-width: 0;
 
-          'Déconnexion' +
+  overflow: hidden;
 
-          '</button>';
+  display: flex;
 
-      } catch (err) {
+  align-items: center;
 
-        console.error(
-          'Erreur chargement profil:',
-          err
-        );
+  gap: 5px;
+}
 
-      }
+.user-name {
+  min-width: 0;
 
-    }
+  overflow: hidden;
 
+  white-space: nowrap;
 
-    /* =====================================================
-       DÉCONNEXION
-    ====================================================== */
+  text-overflow: ellipsis;
+}
 
-    function seDeconnecter() {
 
-      localStorage.clear();
+/* ==================================================
+   AVATAR UTILISATEUR
+================================================== */
 
-      window.location.href =
-        'index.html';
+.avatar {
+  width: 52px;
+  height: 52px;
 
-    }
+  border-radius: 50%;
 
+  background-color: #C6552A;
 
-    /* =====================================================
-       CHARGER UTILISATEURS
-    ====================================================== */
+  color: white;
 
-    async function chargerUtilisateurs() {
+  display: flex;
 
-      try {
+  align-items: center;
+  justify-content: center;
 
-        const res =
-          await fetch(
-            '/api/users',
-            {
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          );
+  font-weight: bold;
 
+  font-size: 19px;
 
-        if (!res.ok) {
+  flex-shrink: 0;
 
-          console.error(
-            'Impossible de charger les utilisateurs'
-          );
+  position: relative;
+}
 
-          return;
 
-        }
+/* ==================================================
+   POINT DE STATUT
+   SUR LE BORD DE L'AVATAR
+================================================== */
 
+.user-item > .status-dot {
+  position: absolute;
 
-        usersData =
-          await res.json();
+  left: 48px;
+  bottom: 12px;
 
+  width: 13px;
+  height: 13px;
 
-        afficherUtilisateurs();
+  border-radius: 50%;
 
-      } catch (err) {
+  border: 2px solid white;
 
-        console.error(
-          'Erreur chargement utilisateurs:',
-          err
-        );
+  z-index: 3;
+}
 
-      }
+.status-dot {
+  display: inline-block;
 
-    }
+  border-radius: 50%;
 
+  flex-shrink: 0;
+}
 
-    /* =====================================================
-       MESSAGES NON LUS
-    ====================================================== */
+.status-dot.actif {
+  background-color: #2ecc71;
+}
 
-    async function chargerMessagesNonLus() {
+.status-dot.inactif {
+  background-color: #e74c3c;
+}
 
-      try {
 
-        const res =
-          await fetch(
-            '/api/messages/unread-counts',
-            {
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          );
+/* ==================================================
+   BADGE MESSAGES NON LUS
+================================================== */
 
+.unread-badge {
+  flex-shrink: 0;
 
-        if (!res.ok) {
-          return;
-        }
+  min-width: 19px;
+  height: 19px;
 
+  padding: 0 5px;
 
-        unreadCounts =
-          await res.json();
+  display: flex;
 
+  align-items: center;
+  justify-content: center;
 
-        afficherUtilisateurs();
+  border-radius: 10px;
 
-      } catch (err) {
+  background-color: #C6552A;
 
-        console.error(
-          'Erreur messages non lus:',
-          err
-        );
+  color: white;
 
-      }
+  font-size: 11px;
 
-    }
+  font-weight: bold;
+}
 
 
-    /* =====================================================
-       AFFICHER UTILISATEURS
-    ====================================================== */
+/* ==================================================
+   SUPPRESSION
+================================================== */
 
-    function afficherUtilisateurs() {
+.delete-user-btn {
+  background: none;
 
-      const container =
-        document.getElementById(
-          'usersScroll'
-        );
+  border: none;
 
+  color: #999;
 
-      container.innerHTML = '';
+  font-size: 17px;
 
+  cursor: pointer;
 
-      usersData
-        .sort(
-          (a, b) =>
-            new Date(b.lastSeen) -
-            new Date(a.lastSeen)
-        )
-        .forEach(
-          u => {
+  padding: 5px;
 
-            const div =
-              document.createElement(
-                'div'
-              );
+  margin-left: auto;
 
+  flex-shrink: 0;
+}
 
-            div.className =
-              'user-item' +
-              (
-                u._id === selectedUserId
-                  ? ' active'
-                  : ''
-              );
+.delete-user-btn:hover {
+  color: #e74c3c;
+}
 
 
-            const nombreNonLu =
-              unreadCounts[u._id] || 0;
+/* ==================================================
+   PANNEAU DROIT
+================================================== */
 
+.conversation {
+  width: 73.33%;
 
-            const badge =
-              nombreNonLu > 0
-                ? '<span class="unread-badge">' +
-                  (
-                    nombreNonLu > 99
-                      ? '99+'
-                      : nombreNonLu
-                  ) +
-                  '</span>'
-                : '';
+  display: flex;
 
+  flex-direction: column;
 
-            div.innerHTML =
+  min-width: 0;
 
-              '<span class="avatar">' +
-              initiale(u.username) +
-              '</span>' +
+  background: #ffffff;
+}
 
-              '<div class="user-name-container">' +
 
-              '<span class="user-name">' +
-              echapperHTML(u.username) +
-              '</span>' +
+/* ==================================================
+   PLACEHOLDER
+================================================== */
 
-              badge +
+.conv-placeholder {
+  flex: 1;
 
-              '</div>' +
+  display: flex;
 
-              '<span class="status-dot ' +
-              (
-                u.status === 'actif'
-                  ? 'actif'
-                  : 'inactif'
-              ) +
-              '"></span>' +
+  align-items: center;
 
-              (
-                estAdmin
-                  ? '<button ' +
-                    'class="delete-user-btn" ' +
-                    'data-id="' +
-                    u._id +
-                    '" ' +
-                    'type="button">🗑</button>'
-                  : ''
-              );
+  justify-content: center;
 
+  color: #999;
 
-            div.addEventListener(
-              'click',
-              () => {
+  padding: 25px;
 
-                ouvrirConversation(
-                  u._id
-                );
+  text-align: center;
 
-              }
-            );
+  font-size: 18px;
+}
 
 
-            const delBtn =
-              div.querySelector(
-                '.delete-user-btn'
-              );
+/* ==================================================
+   CONVERSATION ACTIVE
+================================================== */
 
+.conv-active {
+  flex: 1;
 
-            if (delBtn) {
+  display: flex;
 
-              delBtn.addEventListener(
-                'click',
-                (e) => {
+  flex-direction: column;
 
-                  e.stopPropagation();
+  position: relative;
 
-                  supprimerUtilisateur(
-                    u._id,
-                    u.username
-                  );
+  min-height: 0;
+}
 
-                }
-              );
 
-            }
+/* ==================================================
+   ENTÊTE DISCUSSION
+   RÉDUITE
+================================================== */
 
+.conv-header {
+  position: relative;
 
-            container.appendChild(
-              div
-            );
+  width: 100%;
 
-          }
-        );
+  min-height: 52px;
 
-    }
+  height: 52px;
 
+  display: flex;
 
-    /* =====================================================
-       SUPPRESSION UTILISATEUR
-    ====================================================== */
+  align-items: center;
 
-    async function supprimerUtilisateur(
-      userId,
-      username
-    ) {
+  justify-content: center;
 
-      const confirmation =
-        confirm(
-          'Supprimer définitivement le compte de ' +
-          username +
-          ' ?'
-        );
+  padding: 5px 10px;
 
+  border-bottom: 1px solid #eee;
 
-      if (!confirmation) {
-        return;
-      }
+  background: #ffffff;
 
+  flex-shrink: 0;
+}
 
-      try {
 
-        const res =
-          await fetch(
-            '/api/users/' + userId,
-            {
-              method: 'DELETE',
+/* ==================================================
+   PROFIL SÉLECTIONNÉ
+================================================== */
 
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          );
+.conv-header-center {
+  display: flex;
 
+  flex-direction: row;
 
-        if (!res.ok) {
+  align-items: center;
 
-          alert(
-            'Suppression impossible.'
-          );
+  justify-content: center;
 
-          return;
+  gap: 7px;
+}
 
-        }
+.conv-header .avatar {
+  width: 34px;
+  height: 34px;
 
+  font-size: 14px;
+}
 
-        if (
-          selectedUserId === userId
-        ) {
+.conv-user-info {
+  text-align: left;
 
-          selectedUserId = null;
+  min-width: 0;
+}
 
+.conv-username {
+  font-size: 15px;
 
-          document
-            .getElementById(
-              'convPlaceholder'
-            )
-            .style.display =
-              'flex';
+  font-weight: bold;
 
+  line-height: 1.1;
 
-          document
-            .getElementById(
-              'convActive'
-            )
-            .style.display =
-              'none';
+  white-space: nowrap;
 
-        }
+  overflow: hidden;
 
+  text-overflow: ellipsis;
+}
 
-        await chargerUtilisateurs();
+.conv-status {
+  font-size: 10px;
 
-      } catch (err) {
+  color: #666;
 
-        console.error(
-          'Erreur suppression:',
-          err
-        );
+  margin-top: 2px;
 
-        alert(
-          'Erreur lors de la suppression.'
-        );
+  white-space: nowrap;
+}
 
-      }
+.conv-status .status-dot {
+  width: 7px;
+  height: 7px;
 
-    }
+  vertical-align: middle;
+}
 
 
-    /* =====================================================
-       OUVRIR CONVERSATION
-    ====================================================== */
+/* ==================================================
+   BOUTON RETOUR
+================================================== */
 
-    async function ouvrirConversation(
-      userId
-    ) {
+.back-btn {
+  display: none;
 
-      selectedUserId =
-        userId;
+  position: absolute;
 
+  left: 8px;
 
-      const user =
-        usersData.find(
-          u => u._id === userId
-        );
+  top: 50%;
 
+  transform: translateY(-50%);
 
-      if (!user) {
-        return;
-      }
+  background: none;
 
+  border: none;
 
-      unreadCounts[userId] = 0;
+  font-size: 25px;
 
+  cursor: pointer;
+}
 
-      afficherUtilisateurs();
 
+/* ==================================================
+   ZONE DES MESSAGES
+================================================== */
 
-      document
-        .getElementById(
-          'convPlaceholder'
-        )
-        .style.display =
-          'none';
+.messages {
+  flex: 1;
 
+  overflow-y: auto;
 
-      document
-        .getElementById(
-          'convActive'
-        )
-        .style.display =
-          'flex';
+  padding:
+    15px
+    14px
+    100px
+    14px;
 
+  display: flex;
 
-      document
-        .getElementById(
-          'convUsername'
-        )
-        .textContent =
-          user.username;
+  flex-direction: column;
 
+  gap: 10px;
 
-      document
-        .getElementById(
-          'convAvatar'
-        )
-        .textContent =
-          initiale(
-            user.username
-          );
+  background: #ffffff;
 
+  min-height: 0;
+}
 
-      document
-        .getElementById(
-          'convStatus'
-        )
-        .innerHTML =
 
-          '<span class="status-dot ' +
-          (
-            user.status === 'actif'
-              ? 'actif'
-              : 'inactif'
-          ) +
-          '"></span> ' +
+/* ==================================================
+   LIGNES DES MESSAGES
+================================================== */
 
-          (
-            user.status === 'actif'
-              ? 'En ligne'
-              : 'Hors ligne'
-          );
+.message-line {
+  width: 100%;
 
+  display: flex;
+}
 
-      const box =
-        document.getElementById(
-          'messages'
-        );
+.message-line-recu {
+  justify-content: flex-start;
+}
 
+.message-line-envoye {
+  justify-content: flex-end;
+}
 
-      box.innerHTML = '';
 
+/* ==================================================
+   BULLES
+================================================== */
 
-      try {
+.bubble {
+  width: auto;
 
-        const res =
-          await fetch(
-            '/api/messages/' +
-            userId,
-            {
-              headers: {
-                'Authorization':
-                  'Bearer ' + token
-              }
-            }
-          );
+  max-width: 78%;
 
+  padding:
+    10px
+    13px
+    7px
+    13px;
 
-        if (!res.ok) {
-          return;
-        }
+  border-radius: 17px;
 
+  font-size: 16px;
 
-        const messages =
-          await res.json();
+  line-height: 1.4;
 
+  word-wrap: break-word;
 
-        messages.forEach(
-          msg => {
+  overflow-wrap: anywhere;
 
-            afficherMessage(
-              msg,
-              false
-            );
+  box-shadow: none;
+}
 
-          }
-        );
+.message-envoye {
+  background-color: #C6552A;
 
+  color: #ffffff;
 
-        box.scrollTop =
-          box.scrollHeight;
+  border-bottom-right-radius: 5px;
+}
 
-      } catch (err) {
+.message-recu {
+  background-color: #E9E4DD;
 
-        console.error(
-          'Erreur chargement messages:',
-          err
-        );
+  color: #333333;
 
-      }
+  border-bottom-left-radius: 5px;
+}
 
+.message-text {
+  white-space: pre-wrap;
+}
 
-      try {
 
-        await fetch(
-          '/api/messages/' +
-          userId +
-          '/read',
-          {
-            method: 'POST',
+/* ==================================================
+   HEURE
+================================================== */
 
-            headers: {
-              'Authorization':
-                'Bearer ' + token
-            }
-          }
-        );
+.bubble .time {
+  display: block;
 
-      } catch (err) {
+  font-size: 10px;
 
-        console.error(
-          'Erreur marquage lecture:',
-          err
-        );
+  opacity: 0.7;
 
-      }
+  margin-top: 4px;
 
-    }
+  text-align: right;
+}
 
 
-    /* =====================================================
-       AFFICHER MESSAGE
-    ====================================================== */
+/* ==================================================
+   INDICATEUR ÉCRITURE
+================================================== */
 
-    function afficherMessage(
-      msg,
-      scroll = true
-    ) {
+.typing-indicator {
+  position: absolute;
 
-      if (
-        msg.sender !== selectedUserId &&
-        msg.receiver !== selectedUserId
-      ) {
+  bottom: 78px;
 
-        return;
+  left: 20px;
 
-      }
+  padding: 4px 8px;
 
+  font-size: 11px;
 
-      const box =
-        document.getElementById(
-          'messages'
-        );
+  color: #999;
 
+  font-style: italic;
 
-      const ligne =
-        document.createElement(
-          'div'
-        );
+  background: rgba(
+    255,
+    255,
+    255,
+    0.95
+  );
 
+  border-radius: 10px;
 
-      const estMoi =
-        msg.sender === myUserId;
+  z-index: 5;
+}
 
 
-      ligne.className =
-        'message-line ' +
-        (
-          estMoi
-            ? 'message-line-envoye'
-            : 'message-line-recu'
-        );
+/* ==================================================
+   BARRE D'ÉCRITURE FLOTTANTE
+================================================== */
 
+.message-input-row {
+  position: absolute;
 
-      const bubble =
-        document.createElement(
-          'div'
-        );
+  left: 12px;
 
+  right: 12px;
 
-      bubble.className =
-        'bubble ' +
-        (
-          estMoi
-            ? 'message-envoye'
-            : 'message-recu'
-        );
+  bottom: 10px;
 
+  z-index: 10;
 
-      bubble.innerHTML =
+  display: flex;
 
-        '<span class="message-text">' +
-        echapperHTML(
-                msg.message
-        ) +
-        '</span>' +
+  gap: 8px;
 
-        '<span class="time">' +
-        formatHeure(
-          msg.timestamp
-        ) +
-        '</span>';
+  padding:
+    6px
+    7px
+    6px
+    13px;
 
-      ligne.appendChild(
-        bubble
-      );
+  align-items: center;
 
-      box.appendChild(
-        ligne
-      );
+  background: #ffffff;
 
-      if (scroll) {
+  border-radius: 30px;
 
-        box.scrollTop =
-          box.scrollHeight;
+  box-shadow:
+    0 4px 18px
+    rgba(0, 0, 0, 0.18);
 
-      }
+  border: 1px solid #e5e5e5;
+}
 
-    }
+.message-input-row input {
+  flex: 1;
 
+  min-width: 0;
 
-    /* =====================================================
-       ENVOYER MESSAGE
-    ====================================================== */
+  margin-bottom: 0;
 
-    function envoyerMessage() {
+  padding: 11px 3px;
 
-      const input =
-        document.getElementById(
-          'messageInput'
-        );
+  font-size: 16px;
 
-      const message =
-        input.value.trim();
+  border: none;
 
-      if (
-        !message ||
-        !selectedUserId
-      ) {
-        return;
-      }
+  outline: none;
 
-      socket.emit(
-        'sendMessage',
-        {
-          receiverId:
-            selectedUserId,
+  background: transparent;
+}
 
-          message:
-            message
-        }
-      );
+.message-input-row input:focus {
+  outline: none;
+}
 
-      input.value = '';
 
-    }
+/* ==================================================
+   BOUTON ENVOYER
+================================================== */
 
+.send-btn {
+  width: 46px;
+  height: 46px;
 
-    /* =====================================================
-       BOUTON ENVOYER
-    ====================================================== */
+  border-radius: 50%;
 
-    document
-      .getElementById(
-        'sendBtn'
-      )
-      .addEventListener(
-        'click',
-        envoyerMessage
-      );
+  background-color: #C6552A;
 
+  color: white;
 
-    /* =====================================================
-       CHAMP MESSAGE
-    ====================================================== */
+  border: none;
 
-    document
-      .getElementById(
-        'messageInput'
-      )
-      .addEventListener(
-        'keypress',
-        (e) => {
+  font-size: 19px;
 
-          if (
-            e.key === 'Enter'
-          ) {
+  cursor: pointer;
 
-            e.preventDefault();
+  flex-shrink: 0;
 
-            envoyerMessage();
+  display: flex;
 
-            return;
+  align-items: center;
+  justify-content: center;
+}
 
-          }
+.send-btn:active {
+  transform: scale(0.95);
+}
 
-          if (
-            selectedUserId
-          ) {
 
-            socket.emit(
-              'typing',
-              {
-                receiverId:
-                  selectedUserId
-              }
-            );
+/* ==================================================
+   MOBILE
+================================================== */
 
-          }
+@media (max-width: 700px) {
 
-        }
-      );
+  header {
+    height: 260px;
+  }
 
+  .logo-link {
+    width: 72vw;
+    max-width: 360px;
+  }
 
-    /* =====================================================
-       BOUTON RETOUR
-    ====================================================== */
+  .chat-app {
+    display: flex;
 
-    document
-      .getElementById(
-        'backBtn'
-      )
-      .addEventListener(
-        'click',
-        () => {
+    width: 100%;
 
-          selectedUserId =
-            null;
+    overflow: hidden;
+  }
 
-          document
-            .getElementById(
-              'convActive'
-            )
-            .style.display =
-              'none';
 
-          document
-            .getElementById(
-              'convPlaceholder'
-            )
-            .style.display =
-              'flex';
+  /* COLONNE GAUCHE */
 
-          afficherUtilisateurs();
+  .user-list {
+    width: 26.67%;
 
-        }
-      );
+    min-width: 0;
+  }
 
 
-    /* =====================================================
-       SOCKET — NOUVEAU MESSAGE
-    ====================================================== */
+  /* PROFIL PERSONNEL */
 
-    socket.on(
-      'newMessage',
-      (msg) => {
+  .my-profile {
+    margin: 6px;
 
-        /*
-         * Si le message appartient
-         * à la conversation ouverte,
-         * on l'affiche immédiatement.
-         */
+    padding: 8px 5px;
 
-        if (
-          msg.sender === selectedUserId ||
-          msg.receiver === selectedUserId
-        ) {
+    min-height: 65px;
 
-          afficherMessage(
-            msg,
-            true
-          );
+    gap: 5px;
 
-        }
+    border-radius: 13px;
+  }
 
+  .my-profile .avatar {
+    width: 40px;
+    height: 40px;
 
-        /*
-         * Si le message est reçu
-         * d'un autre utilisateur,
-         * on augmente son compteur.
-         */
+    font-size: 15px;
 
-        if (
-          msg.receiver === myUserId &&
-          msg.sender !== selectedUserId
-        ) {
+    border-width: 2px;
+  }
 
-          unreadCounts[msg.sender] =
-            (unreadCounts[msg.sender] || 0) + 1;
+  .my-profile-name strong {
+    font-size: 12px;
+  }
 
-          afficherUtilisateurs();
+  .logout-btn {
+    width: 27px;
+    height: 27px;
+  }
 
-        }
+  .logout-btn::before {
+    font-size: 15px;
+  }
 
-      }
-    );
+  .my-profile > .status-dot {
+    left: 37px;
+    bottom: 11px;
 
+    width: 11px;
+    height: 11px;
+  }
 
-    /* =====================================================
-       SOCKET — UTILISATEUR CONNECTÉ
-    ====================================================== */
 
-    socket.on(
-      'userStatus',
-      (data) => {
+  /* UTILISATEURS */
 
-        const user =
-          usersData.find(
-            u => u._id === data.userId
-          );
+  .user-item {
+    gap: 6px;
 
-        if (user) {
+    padding:
+      12px
+      5px;
 
-          user.status =
-            data.status;
+    font-size: 13px;
+  }
 
-          user.lastSeen =
-            data.lastSeen ||
-            new Date().toISOString();
+  .user-item .avatar {
+    width: 39px;
+    height: 39px;
 
-          afficherUtilisateurs();
+    font-size: 15px;
+  }
 
 
-          /*
-           * Met également à jour
-           * l'utilisateur actuellement
-           * sélectionné.
-           */
+  /* POINT SUR AVATAR */
 
-          if (
-            selectedUserId ===
-            data.userId
-          ) {
+  .user-item > .status-dot {
+    left: 31px;
 
-            document
-              .getElementById(
-                'convStatus'
-              )
-              .innerHTML =
+    bottom: 10px;
 
-                '<span class="status-dot ' +
-                (
-                  data.status === 'actif'
-                    ? 'actif'
-                    : 'inactif'
-                ) +
-                '"></span> ' +
+    width: 11px;
+    height: 11px;
 
-                (
-                  data.status === 'actif'
-                    ? 'En ligne'
-                    : 'Hors ligne'
-                );
+    border-width: 2px;
+  }
 
-          }
+  .user-name-container {
+    gap: 3px;
+  }
 
-        }
+  .unread-badge {
+    min-width: 16px;
+    height: 16px;
 
-      }
-    );
+    padding: 0 4px;
 
+    font-size: 9px;
+  }
 
-    /* =====================================================
-       SOCKET — INDICATEUR "ÉCRIT..."
-    ====================================================== */
 
-    socket.on(
-      'typing',
-      (data) => {
+  /* COLONNE DROITE */
 
-        if (
-          data.senderId !==
-          selectedUserId
-        ) {
+  .conversation {
+    position: relative;
 
-          return;
+    top: auto;
+    left: 0;
 
-        }
+    width: 73.33%;
 
+    height: auto;
 
-        const indicator =
-          document.getElementById(
-            'typingIndicator'
-          );
+    display: flex;
 
+    background: white;
+  }
 
-        indicator.style.display =
-          'block';
 
+  /* ENTÊTE */
 
-        clearTimeout(
-          typingTimeout
-        );
+  .conv-header {
+    min-height: 48px;
 
+    height: 48px;
 
-        typingTimeout =
-          setTimeout(
-            () => {
+    padding:
+      5px
+      5px;
+  }
 
-              indicator.style.display =
-                'none';
+  .conv-header-center {
+    gap: 5px;
+  }
 
-            },
-            1500
-          );
+  .conv-header .avatar {
+    width: 31px;
+    height: 31px;
 
-      }
-    );
+    font-size: 13px;
+  }
 
+  .conv-username {
+    font-size: 13px;
+  }
 
-    /* =====================================================
-       SERVICE WORKER
-    ====================================================== */
+  .conv-status {
+    font-size: 9px;
+  }
 
-    async function enregistrerServiceWorker() {
+  .conv-status .status-dot {
+    width: 6px;
+    height: 6px;
+  }
 
-      if (
-        !('serviceWorker' in navigator)
-      ) {
 
-        return;
+  /* MESSAGES */
 
-      }
+  .messages {
+    padding:
+      12px
+      8px
+      90px
+      8px;
 
-      try {
+    gap: 8px;
+  }
 
-        await navigator.serviceWorker.register(
-          '/service-worker.js'
-        );
+  .bubble {
+    max-width: 84%;
 
-        console.log(
-          'Service Worker enregistré.'
-        );
+    padding:
+      9px
+      11px
+      6px
+      11px;
 
-      } catch (err) {
+    font-size: 14px;
 
-        console.error(
-          'Erreur Service Worker:',
-          err
-        );
+    border-radius: 14px;
+  }
 
-      }
+  .bubble .time {
+    font-size: 9px;
+  }
 
-    }
 
+  /* BARRE MESSAGE */
 
-    /* =====================================================
-       DÉMARRAGE APPLICATION
-    ====================================================== */
+  .message-input-row {
+    left: 6px;
 
-    async function demarrerApplication() {
+    right: 6px;
 
-      if (!token) {
+    bottom: 7px;
 
-        return;
+    padding:
+      5px
+      5px
+      5px
+      10px;
 
-      }
+    gap: 5px;
+  }
 
+  .message-input-row input {
+    padding:
+      10px
+      2px;
 
-      await chargerMonProfil();
+    font-size: 14px;
+  }
 
+  .send-btn {
+    width: 40px;
+    height: 40px;
 
-      await Promise.all([
-        chargerUtilisateurs(),
-        chargerMessagesNonLus()
-      ]);
+    font-size: 17px;
+  }
 
 
-      enregistrerServiceWorker();
+  /* INDICATEUR */
 
-    }
+  .typing-indicator {
+    bottom: 68px;
 
+    left: 10px;
 
-    document.addEventListener(
-      'DOMContentLoaded',
-      demarrerApplication
-    );
+    font-size: 10px;
 
-  </script>
+    padding:
+      3px
+      7px;
+  }
 
-</body>
 
-</html>
+  .back-btn {
+    display: none;
+  }
+}
