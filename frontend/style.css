@@ -34,6 +34,17 @@ header {
 .logo-oval {
   position: relative;
   z-index: 2;
+
+  /* Le logo s'adapte automatiquement à la largeur du téléphone */
+  width: min(90vw, 520px);
+
+  /* La hauteur reste proportionnelle */
+  height: auto;
+
+  /* Évite tout dépassement horizontal */
+  max-width: 90vw;
+
+  display: block;
 }
 
 .wave {
