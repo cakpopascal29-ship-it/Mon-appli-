@@ -206,14 +206,41 @@ header {
 /* ==================================================
    AVATAR MON PROFIL
 ================================================== */
-
-.my-profile-avatar-wrapper {
+.my-profile {
   position: relative;
 
-  width: 42px;
-  height: 42px;
+  margin: 7px;
+
+  padding: 9px 7px;
+
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffaf7,
+      #f4e7df
+    );
+
+  border: 1px solid #e7d3c7;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.09);
+
+  font-size: 15px;
+
+  overflow: visible;
 
   flex-shrink: 0;
+
+  cursor: default;
 }
 
 .my-profile .avatar {
@@ -236,7 +263,29 @@ header {
 
   border: 2px solid white;
 }
+.my-profile-chat-btn {
+  border: none;
 
+  padding: 0;
+
+  cursor: pointer;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.my-profile-chat-btn:active {
+  transform: scale(0.94);
+}
+
+.my-profile-chat-btn:focus {
+  outline: none;
+}
 
 /* ==================================================
    COMPATIBILITÉ AVATAR ANCIEN HTML
@@ -356,6 +405,8 @@ header {
 
   padding: 0;
 
+  margin-left: auto;
+
   flex-shrink: 0;
 
   border: none;
@@ -374,7 +425,6 @@ header {
 
   font-size: 0;
 }
-
 .logout-btn::before {
   content: "↪";
 
