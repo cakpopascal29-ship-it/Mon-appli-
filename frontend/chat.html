@@ -591,134 +591,218 @@
     }
 
 
+/* =====================================================
+   MON PROFIL
+===================================================== */
 
-    /* =====================================================
-       MON PROFIL
-    ====================================================== */
+/* =====================================================
+   AUCUNE CONVERSATION SÉLECTIONNÉE
+===================================================== */
 
-    async function chargerMonProfil() {
+function afficherAucuneConversation() {
 
-      try {
-
-        const res =
-          await fetch(
-            '/api/auth/me',
-            {
-
-              headers: {
-
-                'Authorization':
-                  'Bearer ' + token
-
-              }
-
-            }
-          );
+  selectedUserId = null;
 
 
-        if (!res.ok) {
+  const placeholder =
+    document.getElementById(
+      'convPlaceholder'
+    );
 
-          localStorage.clear();
+  if (placeholder) {
 
-          window.location.href =
-            'index.html';
+    placeholder.style.display =
+      'flex';
 
-          return;
+  }
+
+
+  const convActive =
+    document.getElementById(
+      'convActive'
+    );
+
+  if (convActive) {
+
+    convActive.style.display =
+      'none';
+
+  }
+
+
+  const messages =
+    document.getElementById(
+      'messages'
+    );
+
+  if (messages) {
+
+    messages.innerHTML =
+      '';
+
+  }
+
+
+  afficherUtilisateurs();
+
+}
+
+
+/* =====================================================
+   CHARGER MON PROFIL
+===================================================== */
+
+async function chargerMonProfil() {
+
+  try {
+
+    const res =
+      await fetch(
+        '/api/auth/me',
+        {
+
+          headers: {
+
+            'Authorization':
+              'Bearer ' + token
+
+          }
 
         }
+      );
 
 
-        const me =
-          await res.json();
+    if (!res.ok) {
 
+      localStorage.clear();
 
-        myUserId =
-          me._id;
+      window.location.href =
+        'index.html';
 
-
-        localStorage.setItem(
-          'userId',
-          myUserId
-        );
-
-
-        const statut =
-          me.status === 'actif'
-            ? 'actif'
-            : 'inactif';
-
-
-        document
-          .getElementById(
-            'myProfile'
-          )
-          .innerHTML =
-
-          '<div class="my-profile-avatar-wrapper">' +
-
-            '<span class="avatar">' +
-
-              initiale(
-                me.username
-              ) +
-
-            '</span>' +
-
-            '<span class="status-dot ' +
-
-              statut +
-
-            '"></span>' +
-
-          '</div>' +
-
-          '<div class="my-profile-name">' +
-
-            '<strong>' +
-
-              echapperHTML(
-                me.username
-              ) +
-
-            '</strong>' +
-
-            '<span class="my-profile-label">' +
-
-              (
-                statut === 'actif'
-                  ? 'En ligne'
-                  : 'Hors ligne'
-              ) +
-
-            '</span>' +
-
-          '</div>' +
-
-          '<button ' +
-
-            'class="logout-btn" ' +
-
-            'onclick="seDeconnecter()" ' +
-
-            'type="button">' +
-
-            'Déconnexion' +
-
-          '</button>';
-
-
-      } catch (err) {
-
-        console.error(
-          'Erreur chargement profil :',
-          err
-        );
-
-      }
+      return;
 
     }
 
 
+    const me =
+      await res.json();
+
+
+    myUserId =
+      me._id;
+
+
+    localStorage.setItem(
+      'userId',
+      myUserId
+    );
+
+
+    const statut =
+      me.status === 'actif'
+        ? 'actif'
+        : 'inactif';
+
+
+    const myProfile =
+      document.getElementById(
+        'myProfile'
+      );
+
+
+    if (!myProfile) {
+
+      return;
+
+    }
+
+
+    myProfile.innerHTML =
+
+      '<div class="my-profile-avatar-wrapper">' +
+
+        '<button ' +
+          'class="avatar my-profile-chat-btn" ' +
+          'type="button" ' +
+          'title="Aucune conversation">' +
+
+          initiale(
+            me.username
+          ) +
+
+        '</button>' +
+
+        '<span class="status-dot ' +
+          statut +
+        '"></span>' +
+
+      '</div>' +
+
+
+      '<div class="my-profile-name">' +
+
+        '<strong>' +
+
+          echapperHTML(
+            me.username
+          ) +
+
+        '</strong>' +
+
+        '<span class="my-profile-label">' +
+
+          (
+            statut === 'actif'
+              ? 'En ligne'
+              : 'Hors ligne'
+          ) +
+
+        '</span>' +
+
+      '</div>' +
+
+
+      '<button ' +
+
+        'class="logout-btn" ' +
+
+        'type="button" ' +
+
+        'title="Déconnexion" ' +
+
+        'onclick="seDeconnecter()">' +
+
+        'Déconnexion' +
+
+      '</button>';
+
+
+    const avatarBouton =
+      myProfile.querySelector(
+        '.my-profile-chat-btn'
+      );
+
+
+    if (avatarBouton) {
+
+      avatarBouton.addEventListener(
+        'click',
+        afficherAucuneConversation
+      );
+
+    }
+
+
+  } catch (err) {
+
+    console.error(
+      'Erreur chargement profil :',
+      err
+    );
+
+  }
+
+}
 
     /* =====================================================
        DÉCONNEXION
