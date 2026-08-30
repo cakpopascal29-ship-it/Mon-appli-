@@ -25,7 +25,7 @@ body {
 header {
   position: relative;
   background-color: #C6552A;
-  height: 320px;
+  height: 285px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,16 +34,9 @@ header {
 .logo-oval {
   position: relative;
   z-index: 2;
-
-  /* Le logo s'adapte automatiquement à la largeur du téléphone */
-  width: min(90vw, 520px);
-
-  /* La hauteur reste proportionnelle */
+  width: min(82vw, 470px);
   height: auto;
-
-  /* Évite tout dépassement horizontal */
-  max-width: 90vw;
-
+  max-width: 82vw;
   display: block;
 }
 
@@ -52,7 +45,7 @@ header {
   bottom: -1px;
   left: 0;
   width: 100%;
-  height: 22px;
+  height: 20px;
 }
 
 
@@ -65,28 +58,28 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px;
+  padding: 20px;
 }
 
 .form-container {
   width: 100%;
-  max-width: 350px;
-  margin-top: 24px;
+  max-width: 330px;
+  margin-top: 20px;
 }
 
 input {
   width: 100%;
-  padding: 17px;
-  margin-bottom: 17px;
+  padding: 15px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .password-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
 .password-row input {
@@ -94,8 +87,8 @@ input {
 }
 
 .forgot-btn {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background-color: #E24B4A;
   color: white;
@@ -103,17 +96,17 @@ input {
   font-weight: bold;
   cursor: pointer;
   flex-shrink: 0;
-  margin-bottom: 17px;
+  margin-bottom: 15px;
 }
 
 button.primary-btn {
   width: 100%;
-  padding: 17px;
+  padding: 15px;
   background-color: #C6552A;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -124,8 +117,8 @@ button.primary-btn:hover {
 
 .switch-link {
   text-align: center;
-  margin-top: 18px;
-  font-size: 16px;
+  margin-top: 16px;
+  font-size: 15px;
 }
 
 .switch-link a {
@@ -142,18 +135,18 @@ footer.about {
   background-color: #C6552A;
   color: white;
   text-align: center;
-  padding: 24px 18px;
+  padding: 21px 16px;
   margin-top: auto;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 footer.about h3 {
-  margin-bottom: 12px;
-  font-size: 17px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 footer.about p {
-  margin: 5px 0;
+  margin: 4px 0;
 }
 
 footer.about a {
@@ -163,12 +156,12 @@ footer.about a {
 
 .about-desc {
   max-width: 500px;
-  margin: 0 auto 12px auto !important;
-  line-height: 1.6;
+  margin: 0 auto 10px auto !important;
+  line-height: 1.5;
 }
 
 .slogan {
-  margin-top: 12px !important;
+  margin-top: 10px !important;
   font-style: italic;
   font-weight: bold;
 }
@@ -190,7 +183,6 @@ footer.about a {
 
 /* ==================================================
    PANNEAU GAUCHE
-   26,67 %
 ================================================== */
 
 .user-list {
@@ -206,12 +198,12 @@ footer.about a {
 /* PROFIL PRINCIPAL */
 
 .my-profile {
-  padding: 25px 21px;
+  padding: 20px 16px;
   border-bottom: 1px solid #eee;
   display: flex;
   align-items: center;
-  gap: 13px;
-  font-size: 20px;
+  gap: 10px;
+  font-size: 18px;
 }
 
 .my-profile-name {
@@ -226,10 +218,10 @@ footer.about a {
   background: #C6552A;
   color: white;
   border: none;
-  padding: 10px 14px;
+  padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 13px;
   flex-shrink: 0;
 }
 
@@ -244,11 +236,11 @@ footer.about a {
 .user-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 23px 21px;
+  gap: 10px;
+  padding: 17px 15px;
   cursor: pointer;
   border-bottom: 1px solid #f5f5f5;
-  font-size: 20px;
+  font-size: 17px;
   min-width: 0;
 }
 
@@ -257,9 +249,13 @@ footer.about a {
   background-color: #F7EFEA;
 }
 
-.user-name {
+.user-name-container {
   flex: 1;
   min-width: 0;
+}
+
+.user-name {
+  display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -269,8 +265,8 @@ footer.about a {
 /* AVATAR */
 
 .avatar {
-  width: 66px;
-  height: 66px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background-color: #C6552A;
   color: white;
@@ -278,7 +274,7 @@ footer.about a {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 23px;
+  font-size: 19px;
   flex-shrink: 0;
 }
 
@@ -286,8 +282,8 @@ footer.about a {
 /* STATUT */
 
 .status-dot {
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
@@ -302,15 +298,33 @@ footer.about a {
 }
 
 
+/* BADGE NON LU */
+
+.unread-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: #C6552A;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+
 /* SUPPRESSION */
 
 .delete-user-btn {
   background: none;
   border: none;
   color: #999;
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
-  padding: 6px 8px;
+  padding: 4px 5px;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -322,7 +336,6 @@ footer.about a {
 
 /* ==================================================
    PANNEAU DROIT
-   73,33 %
 ================================================== */
 
 .conversation {
@@ -339,9 +352,9 @@ footer.about a {
   align-items: center;
   justify-content: center;
   color: #999;
-  padding: 25px;
+  padding: 20px;
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .conv-active {
@@ -360,67 +373,49 @@ footer.about a {
 .conv-header {
   position: relative;
   width: 100%;
-  min-height: 105px;
+  min-height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 20px;
+  padding: 12px 16px;
   border-bottom: 1px solid #eee;
   background: #ffffff;
   flex-shrink: 0;
 }
-
-
-/*
-   Tout le contenu de l'identité est
-   véritablement centré dans la section.
-*/
 
 .conv-header-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
 }
-
-
-/*
-   Avatar de la personne avec laquelle
-   on discute.
-*/
 
 .conv-header .avatar {
-  width: 55px;
-  height: 55px;
-  font-size: 20px;
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
 }
-
-
-/* NOM */
 
 .conv-user-info {
   text-align: center;
 }
 
 .conv-username {
-  font-size: 21px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.15;
 }
 
-
-/* STATUT */
-
 .conv-status {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .conv-status .status-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   vertical-align: middle;
 }
 
@@ -430,12 +425,12 @@ footer.about a {
 .back-btn {
   display: none;
   position: absolute;
-  left: 12px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 25px;
   cursor: pointer;
 }
 
@@ -448,16 +443,11 @@ footer.about a {
   flex: 1;
   overflow-y: auto;
 
-  /*
-     Espace supplémentaire en bas pour que
-     la barre flottante ne cache jamais le
-     dernier message.
-  */
-  padding: 20px 18px 105px 18px;
+  padding: 17px 15px 100px 15px;
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 
   background: #ffffff;
 
@@ -472,15 +462,9 @@ footer.about a {
   display: flex;
 }
 
-
-/* MESSAGE REÇU = GAUCHE */
-
 .message-line-recu {
   justify-content: flex-start;
 }
-
-
-/* MESSAGE ENVOYÉ = DROITE */
 
 .message-line-envoye {
   justify-content: flex-end;
@@ -494,12 +478,12 @@ footer.about a {
 .bubble {
   width: auto;
   max-width: 78%;
-  padding: 12px 16px 8px 16px;
+  padding: 10px 14px 7px 14px;
 
-  border-radius: 18px;
+  border-radius: 17px;
 
-  font-size: 18px;
-  line-height: 1.45;
+  font-size: 17px;
+  line-height: 1.4;
 
   word-wrap: break-word;
   overflow-wrap: anywhere;
@@ -507,41 +491,27 @@ footer.about a {
   box-shadow: none;
 }
 
-
-/* MESSAGE ENVOYÉ */
-
 .message-envoye {
   background-color: #C6552A;
   color: #ffffff;
-
   border-bottom-right-radius: 5px;
 }
-
-
-/* MESSAGE REÇU */
 
 .message-recu {
   background-color: #E9E4DD;
   color: #333333;
-
   border-bottom-left-radius: 5px;
 }
-
-
-/* TEXTE */
 
 .message-text {
   white-space: pre-wrap;
 }
 
-
-/* HEURE */
-
 .bubble .time {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.7;
-  margin-top: 5px;
+  margin-top: 4px;
   text-align: right;
 }
 
@@ -553,12 +523,12 @@ footer.about a {
 .typing-indicator {
   position: absolute;
 
-  bottom: 91px;
-  left: 28px;
+  bottom: 82px;
+  left: 23px;
 
-  padding: 5px 10px;
+  padding: 4px 8px;
 
-  font-size: 13px;
+  font-size: 12px;
 
   color: #999;
 
@@ -566,7 +536,7 @@ footer.about a {
 
   background: rgba(255, 255, 255, 0.95);
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   z-index: 5;
 }
@@ -577,35 +547,28 @@ footer.about a {
 ================================================== */
 
 .message-input-row {
-
-  /*
-     IMPORTANT :
-     La barre est maintenant flottante.
-     Elle ne fait plus partie du flux des messages.
-  */
-
   position: absolute;
 
-  left: 18px;
-  right: 18px;
-  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 13px;
 
   z-index: 10;
 
   display: flex;
 
-  gap: 12px;
+  gap: 9px;
 
-  padding: 8px 9px 8px 17px;
+  padding: 7px 8px 7px 14px;
 
   align-items: center;
 
   background: #ffffff;
 
-  border-radius: 35px;
+  border-radius: 32px;
 
   box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.18);
+    0 4px 16px rgba(0, 0, 0, 0.16);
 
   border: 1px solid #e5e5e5;
 }
@@ -614,16 +577,15 @@ footer.about a {
 /* CHAMP */
 
 .message-input-row input {
-
   flex: 1;
 
   min-width: 0;
 
   margin-bottom: 0;
 
-  padding: 14px 4px;
+  padding: 12px 3px;
 
-  font-size: 18px;
+  font-size: 17px;
 
   border: none;
 
@@ -642,9 +604,8 @@ footer.about a {
 ================================================== */
 
 .send-btn {
-
-  width: 56px;
-  height: 56px;
+  width: 51px;
+  height: 51px;
 
   border-radius: 50%;
 
@@ -654,7 +615,7 @@ footer.about a {
 
   border: none;
 
-  font-size: 22px;
+  font-size: 20px;
 
   cursor: pointer;
 
@@ -684,16 +645,10 @@ footer.about a {
     overflow: hidden;
   }
 
-
-  /* GAUCHE */
-
   .user-list {
     width: 26.67%;
     min-width: 0;
   }
-
-
-  /* DROITE */
 
   .conversation {
     position: relative;
@@ -709,22 +664,22 @@ footer.about a {
   /* ENTÊTE */
 
   .conv-header {
-    min-height: 95px;
-    padding: 10px 8px;
+    min-height: 82px;
+    padding: 8px 6px;
   }
 
   .conv-header .avatar {
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
+    width: 43px;
+    height: 43px;
+    font-size: 17px;
   }
 
   .conv-username {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .conv-status {
-    font-size: 12px;
+    font-size: 11px;
   }
 
 
@@ -732,63 +687,56 @@ footer.about a {
 
   .messages {
     padding:
-      15px
-      10px
-      100px
-      10px;
+      13px
+      8px
+      94px
+      8px;
 
-    gap: 10px;
+    gap: 8px;
   }
-
 
   .bubble {
     max-width: 82%;
-    padding: 11px 13px 7px 13px;
-    font-size: 17px;
-    border-radius: 16px;
+    padding: 9px 12px 6px 12px;
+    font-size: 16px;
+    border-radius: 15px;
   }
 
-
   .bubble .time {
-    font-size: 11px;
+    font-size: 10px;
   }
 
 
   /* BARRE FLOTTANTE */
 
   .message-input-row {
-    left: 8px;
-    right: 8px;
-    bottom: 10px;
+    left: 7px;
+    right: 7px;
+    bottom: 9px;
 
-    padding: 6px 7px 6px 14px;
+    padding: 5px 6px 5px 12px;
 
-    gap: 7px;
+    gap: 6px;
   }
-
 
   .message-input-row input {
-    padding: 12px 2px;
-    font-size: 16px;
+    padding: 10px 2px;
+    font-size: 15px;
   }
-
 
   .send-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 19px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
   }
-
 
   .typing-indicator {
-    bottom: 78px;
-    left: 15px;
-    font-size: 12px;
+    bottom: 73px;
+    left: 12px;
+    font-size: 11px;
   }
-
 
   .back-btn {
     display: none;
   }
-
   }
