@@ -1437,15 +1437,31 @@ function envoyerMessage() {
   console.log('Destinataire :', selectedUserId);
   console.log('Message :', message);
 
-  socket.emit(
-    'sendMessage',
-    {
-      receiverId: String(selectedUserId),
-      message: message
-    }
-  );
+  console.log('ENVOI MESSAGE');
+console.log('Socket connecté :', socket.connected);
+console.log('Socket ID :', socket.id);
+console.log('Destinataire :', selectedUserId);
+console.log('Message :', message);
 
+socket.emit(
+  'sendMessage',
+  {
+    receiverId: String(selectedUserId),
+    message: message
+  },
+  (response) => {
+
+    console.log(
+      'Réponse serveur :',
+      response
+    );
+
+  }
+);
+
+if (socket.connected) {
   input.value = '';
+  }
 
   }/* =====================================================
    ENVOYER MESSAGE
