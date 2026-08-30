@@ -1,20 +1,25 @@
 {
+"id": "/",
 "name": "AFRIQ'Sender",
-"short_name": "AFRIQ'S",
+"short_name": "AFRIQ'Sender",
 "start_url": "/index.html",
+"scope": "/",
 "display": "standalone",
+"display_override": [
+"standalone"
+],
 "background_color": "#F7EFEA",
 "theme_color": "#C6552A",
 "description": "Messagerie africaine en temps réel",
 "icons": [
 {
-"src": "icon-192.png",
+"src": "/icon-192.png",
 "sizes": "192x192",
 "type": "image/png",
 "purpose": "any maskable"
 },
 {
-"src": "icon-512.png",
+"src": "/icon-512.png",
 "sizes": "512x512",
 "type": "image/png",
 "purpose": "any maskable"
