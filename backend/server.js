@@ -482,11 +482,16 @@ try {
 
   /* Notification Android */
 
-  await envoyerNotificationPush(
-    data.receiverId,
-    socket.username,
-    data.message
+  envoyerNotificationPush(
+  data.receiverId,
+  socket.username,
+  data.message
+).catch(err => {
+  console.error(
+    'Erreur notification Push:',
+    err.message
   );
+});
 
 } catch (err) {
 
