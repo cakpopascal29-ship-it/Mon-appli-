@@ -18,14 +18,15 @@ body {
 }
 
 
-/* =========================
+/* ==================================================
    HEADER
-========================= */
+================================================== */
 
 header {
   position: relative;
   background-color: #C6552A;
-  height: 285px;
+  height: 320px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,52 +35,63 @@ header {
 .logo-oval {
   position: relative;
   z-index: 2;
-  width: min(82vw, 470px);
+
+  width: min(90vw, 520px);
   height: auto;
-  max-width: 82vw;
+  max-width: 90vw;
+
   display: block;
 }
 
 .wave {
   position: absolute;
+
   bottom: -1px;
   left: 0;
+
   width: 100%;
-  height: 20px;
+  height: 22px;
 }
 
 
-/* =========================
+/* ==================================================
    PAGE PRINCIPALE
-========================= */
+================================================== */
 
 main {
   flex: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+
+  padding: 24px;
 }
 
 .form-container {
   width: 100%;
-  max-width: 330px;
-  margin-top: 20px;
+  max-width: 350px;
+
+  margin-top: 24px;
 }
 
 input {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 15px;
+
+  padding: 17px;
+  margin-bottom: 17px;
+
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 17px;
+
+  font-size: 18px;
 }
 
 .password-row {
   display: flex;
   align-items: center;
-  gap: 9px;
+
+  gap: 10px;
 }
 
 .password-row input {
@@ -87,27 +99,38 @@ input {
 }
 
 .forgot-btn {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+
   border-radius: 50%;
+
   background-color: #E24B4A;
   color: white;
+
   border: none;
+
   font-weight: bold;
   cursor: pointer;
+
   flex-shrink: 0;
-  margin-bottom: 15px;
+
+  margin-bottom: 17px;
 }
 
 button.primary-btn {
   width: 100%;
-  padding: 15px;
+
+  padding: 17px;
+
   background-color: #C6552A;
   color: white;
+
   border: none;
   border-radius: 8px;
-  font-size: 18px;
+
+  font-size: 19px;
   font-weight: bold;
+
   cursor: pointer;
 }
 
@@ -117,8 +140,10 @@ button.primary-btn:hover {
 
 .switch-link {
   text-align: center;
-  margin-top: 16px;
-  font-size: 15px;
+
+  margin-top: 18px;
+
+  font-size: 16px;
 }
 
 .switch-link a {
@@ -127,56 +152,70 @@ button.primary-btn:hover {
 }
 
 
-/* =========================
+/* ==================================================
    FOOTER
-========================= */
+================================================== */
 
 footer.about {
   background-color: #C6552A;
   color: white;
+
   text-align: center;
-  padding: 21px 16px;
+
+  padding: 24px 18px;
+
   margin-top: auto;
-  font-size: 14px;
+
+  font-size: 15px;
 }
 
 footer.about h3 {
-  margin-bottom: 10px;
-  font-size: 16px;
+  margin-bottom: 12px;
+
+  font-size: 17px;
 }
 
 footer.about p {
-  margin: 4px 0;
+  margin: 5px 0;
 }
 
 footer.about a {
   color: white;
+
   text-decoration: underline;
 }
 
 .about-desc {
   max-width: 500px;
-  margin: 0 auto 10px auto !important;
-  line-height: 1.5;
+
+  margin: 0 auto 12px auto !important;
+
+  line-height: 1.6;
 }
 
 .slogan {
-  margin-top: 10px !important;
+  margin-top: 12px !important;
+
   font-style: italic;
   font-weight: bold;
 }
 
 
 /* ==================================================
-   CHAT APP
+   APPLICATION CHAT
 ================================================== */
 
 .chat-app {
   flex: 1;
+
   display: flex;
+
   width: 100%;
+
   min-height: 500px;
+
   background: white;
+
   overflow: hidden;
 }
 
@@ -187,60 +226,92 @@ footer.about a {
 
 .user-list {
   width: 26.67%;
+
   min-width: 0;
+
   border-right: 1px solid #eee;
+
   display: flex;
   flex-direction: column;
+
   background: #ffffff;
 }
 
 
-/* PROFIL PRINCIPAL */
+/* ==================================================
+   MON PROFIL
+================================================== */
 
 .my-profile {
-  padding: 20px 16px;
+  padding: 25px 21px;
+
   border-bottom: 1px solid #eee;
+
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
+
+  gap: 13px;
+
+  font-size: 20px;
 }
 
 .my-profile-name {
   flex: 1;
+
   min-width: 0;
+
   overflow: hidden;
+
   white-space: nowrap;
+
   text-overflow: ellipsis;
 }
 
 .logout-btn {
   background: #C6552A;
+
   color: white;
+
   border: none;
-  padding: 8px 10px;
+
+  padding: 10px 14px;
+
   border-radius: 8px;
+
   cursor: pointer;
-  font-size: 13px;
+
+  font-size: 15px;
+
   flex-shrink: 0;
 }
 
 
-/* LISTE */
+/* ==================================================
+   LISTE UTILISATEURS
+================================================== */
 
 .users-scroll {
   overflow-y: auto;
+
   flex: 1;
 }
 
 .user-item {
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 17px 15px;
+
+  gap: 15px;
+
+  padding: 23px 21px;
+
   cursor: pointer;
+
   border-bottom: 1px solid #f5f5f5;
-  font-size: 17px;
+
+  font-size: 20px;
+
   min-width: 0;
 }
 
@@ -251,42 +322,73 @@ footer.about a {
 
 .user-name-container {
   flex: 1;
+
   min-width: 0;
 }
 
 .user-name {
   display: block;
+
   overflow: hidden;
+
   white-space: nowrap;
+
   text-overflow: ellipsis;
 }
 
 
-/* AVATAR */
+/* ==================================================
+   AVATAR
+================================================== */
 
 .avatar {
-  width: 52px;
-  height: 52px;
+  width: 66px;
+  height: 66px;
+
   border-radius: 50%;
+
   background-color: #C6552A;
+
   color: white;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   font-weight: bold;
-  font-size: 19px;
+
+  font-size: 23px;
+
   flex-shrink: 0;
+
+  position: relative;
 }
 
 
-/* STATUT */
+/* ==================================================
+   STATUT SUR LE BORD DE L'AVATAR
+================================================== */
 
-.status-dot {
-  width: 12px;
-  height: 12px;
+.user-item .status-dot {
+  position: absolute;
+
+  /*
+     Positionnement sur le bord
+     inférieur droit de l'avatar
+  */
+
+  left: 70px;
+  bottom: 22px;
+
+  width: 15px;
+  height: 15px;
+
   border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
+
+  border: 3px solid #ffffff;
+
+  z-index: 5;
 }
 
 .status-dot.actif {
@@ -298,34 +400,54 @@ footer.about a {
 }
 
 
-/* BADGE NON LU */
+/* ==================================================
+   COMPTEUR MESSAGES NON LUS
+================================================== */
 
 .unread-badge {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
-  min-width: 19px;
-  height: 19px;
-  padding: 0 5px;
-  border-radius: 10px;
-  background: #C6552A;
+
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 6px;
+
+  margin-left: 6px;
+
+  border-radius: 12px;
+
+  background-color: #C6552A;
+
   color: white;
-  font-size: 11px;
+
+  font-size: 12px;
+
   font-weight: bold;
-  margin-left: 4px;
 }
 
 
-/* SUPPRESSION */
+/* ==================================================
+   SUPPRESSION UTILISATEUR
+================================================== */
 
 .delete-user-btn {
   background: none;
+
   border: none;
+
   color: #999;
-  font-size: 17px;
+
+  font-size: 20px;
+
   cursor: pointer;
-  padding: 4px 5px;
+
+  padding: 6px 8px;
+
   margin-left: auto;
+
   flex-shrink: 0;
 }
 
@@ -340,28 +462,40 @@ footer.about a {
 
 .conversation {
   width: 73.33%;
+
   display: flex;
   flex-direction: column;
+
   min-width: 0;
+
   background: #ffffff;
 }
 
 .conv-placeholder {
   flex: 1;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   color: #999;
-  padding: 20px;
+
+  padding: 25px;
+
   text-align: center;
-  font-size: 17px;
+
+  font-size: 20px;
 }
 
 .conv-active {
   flex: 1;
+
   display: flex;
   flex-direction: column;
+
   position: relative;
+
   min-height: 0;
 }
 
@@ -372,65 +506,103 @@ footer.about a {
 
 .conv-header {
   position: relative;
+
   width: 100%;
-  min-height: 90px;
+
+  min-height: 95px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  padding: 12px 16px;
+
+  padding: 10px 15px;
+
   border-bottom: 1px solid #eee;
+
   background: #ffffff;
+
   flex-shrink: 0;
 }
 
+
+/* CONTENU CENTRÉ */
+
 .conv-header-center {
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   gap: 4px;
 }
+
+
+/* AVATAR DE LA DISCUSSION */
 
 .conv-header .avatar {
   width: 48px;
   height: 48px;
+
   font-size: 18px;
 }
+
+
+/* NOM */
 
 .conv-user-info {
   text-align: center;
 }
 
 .conv-username {
-  font-size: 18px;
+  font-size: 19px;
+
   font-weight: bold;
+
   line-height: 1.15;
 }
 
+
+/* STATUT */
+
 .conv-status {
   font-size: 12px;
+
   color: #666;
-  margin-top: 2px;
+
+  margin-top: 3px;
 }
 
 .conv-status .status-dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
+
   vertical-align: middle;
 }
 
 
-/* BOUTON RETOUR */
+/* ==================================================
+   BOUTON RETOUR
+================================================== */
 
 .back-btn {
   display: none;
+
   position: absolute;
-  left: 10px;
+
+  left: 12px;
   top: 50%;
+
   transform: translateY(-50%);
+
   background: none;
+
   border: none;
-  font-size: 25px;
+
+  font-size: 28px;
+
   cursor: pointer;
 }
 
@@ -441,13 +613,20 @@ footer.about a {
 
 .messages {
   flex: 1;
+
   overflow-y: auto;
 
-  padding: 17px 15px 100px 15px;
+  padding:
+    20px
+    18px
+    105px
+    18px;
 
   display: flex;
+
   flex-direction: column;
-  gap: 10px;
+
+  gap: 12px;
 
   background: #ffffff;
 
@@ -455,10 +634,11 @@ footer.about a {
 }
 
 
-/* LIGNE DU MESSAGE */
+/* LIGNE MESSAGE */
 
 .message-line {
   width: 100%;
+
   display: flex;
 }
 
@@ -477,58 +657,87 @@ footer.about a {
 
 .bubble {
   width: auto;
+
   max-width: 78%;
-  padding: 10px 14px 7px 14px;
 
-  border-radius: 17px;
+  padding:
+    12px
+    16px
+    8px
+    16px;
 
-  font-size: 17px;
-  line-height: 1.4;
+  border-radius: 18px;
+
+  font-size: 18px;
+
+  line-height: 1.45;
 
   word-wrap: break-word;
+
   overflow-wrap: anywhere;
 
   box-shadow: none;
 }
 
+
+/* MESSAGE ENVOYÉ */
+
 .message-envoye {
   background-color: #C6552A;
+
   color: #ffffff;
+
   border-bottom-right-radius: 5px;
 }
 
+
+/* MESSAGE REÇU */
+
 .message-recu {
   background-color: #E9E4DD;
+
   color: #333333;
+
   border-bottom-left-radius: 5px;
 }
+
+
+/* TEXTE */
 
 .message-text {
   white-space: pre-wrap;
 }
 
+
+/* HEURE */
+
 .bubble .time {
   display: block;
-  font-size: 11px;
+
+  font-size: 12px;
+
   opacity: 0.7;
-  margin-top: 4px;
+
+  margin-top: 5px;
+
   text-align: right;
 }
 
 
 /* ==================================================
-   INDICATEUR "ÉCRIT..."
+   INDICATEUR ÉCRIT...
 ================================================== */
 
 .typing-indicator {
   position: absolute;
 
-  bottom: 82px;
-  left: 23px;
+  bottom: 91px;
 
-  padding: 4px 8px;
+  left: 28px;
 
-  font-size: 12px;
+  padding: 5px 10px;
+
+  font-size: 13px;
 
   color: #999;
 
@@ -536,39 +745,44 @@ footer.about a {
 
   background: rgba(255, 255, 255, 0.95);
 
-  border-radius: 9px;
+  border-radius: 10px;
 
   z-index: 5;
 }
 
 
 /* ==================================================
-   BARRE D'ÉCRITURE FLOTTANTE
+   BARRE D'ÉCRITURE
 ================================================== */
 
 .message-input-row {
   position: absolute;
 
-  left: 15px;
-  right: 15px;
-  bottom: 13px;
+  left: 18px;
+  right: 18px;
+
+  bottom: 15px;
 
   z-index: 10;
 
   display: flex;
 
-  gap: 9px;
+  gap: 12px;
 
-  padding: 7px 8px 7px 14px;
+  padding:
+    8px
+    9px
+    8px
+    17px;
 
   align-items: center;
 
   background: #ffffff;
 
-  border-radius: 32px;
+  border-radius: 35px;
 
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.16);
+    0 4px 18px rgba(0, 0, 0, 0.18);
 
   border: 1px solid #e5e5e5;
 }
@@ -583,9 +797,9 @@ footer.about a {
 
   margin-bottom: 0;
 
-  padding: 12px 3px;
+  padding: 14px 4px;
 
-  font-size: 17px;
+  font-size: 18px;
 
   border: none;
 
@@ -604,8 +818,8 @@ footer.about a {
 ================================================== */
 
 .send-btn {
-  width: 51px;
-  height: 51px;
+  width: 56px;
+  height: 56px;
 
   border-radius: 50%;
 
@@ -615,7 +829,7 @@ footer.about a {
 
   border: none;
 
-  font-size: 20px;
+  font-size: 22px;
 
   cursor: pointer;
 
@@ -624,7 +838,6 @@ footer.about a {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 }
 
@@ -639,47 +852,143 @@ footer.about a {
 
 @media (max-width: 700px) {
 
+  /* APPLICATION */
+
   .chat-app {
     display: flex;
+
     width: 100%;
+
     overflow: hidden;
   }
 
+
+  /* PANNEAU GAUCHE */
+
   .user-list {
     width: 26.67%;
+
     min-width: 0;
   }
 
+
+  /* PANNEAU DROIT */
+
   .conversation {
     position: relative;
+
     top: auto;
     left: 0;
+
     width: 73.33%;
+
     height: auto;
+
     display: flex;
+
     background: white;
   }
 
 
-  /* ENTÊTE */
+  /* PROFIL GAUCHE */
+
+  .my-profile {
+    padding: 15px 8px;
+
+    gap: 7px;
+
+    font-size: 13px;
+  }
+
+  .my-profile .avatar {
+    width: 42px;
+    height: 42px;
+
+    font-size: 16px;
+  }
+
+  .logout-btn {
+    padding: 6px 7px;
+
+    font-size: 10px;
+
+    border-radius: 6px;
+  }
+
+
+  /* UTILISATEURS */
+
+  .user-item {
+    gap: 6px;
+
+    padding:
+      14px
+      7px;
+
+    font-size: 13px;
+  }
+
+  .user-item .avatar {
+    width: 42px;
+    height: 42px;
+
+    font-size: 16px;
+  }
+
+
+  /* POINT STATUT */
+
+  .user-item .status-dot {
+    left: 40px;
+    bottom: 14px;
+
+    width: 12px;
+    height: 12px;
+
+    border-width: 2px;
+  }
+
+
+  /* NOM */
+
+  .user-name {
+    font-size: 12px;
+  }
+
+
+  /* COMPTEUR */
+
+  .unread-badge {
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 4px;
+
+    font-size: 10px;
+  }
+
+
+  /* ENTÊTE DISCUSSION */
 
   .conv-header {
-    min-height: 82px;
-    padding: 8px 6px;
+    min-height: 95px;
+
+    padding: 10px 8px;
   }
 
   .conv-header .avatar {
-    width: 43px;
-    height: 43px;
-    font-size: 17px;
+    width: 48px;
+    height: 48px;
+
+    font-size: 18px;
   }
 
   .conv-username {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .conv-status {
-    font-size: 11px;
+    font-size: 12px;
   }
 
 
@@ -687,56 +996,85 @@ footer.about a {
 
   .messages {
     padding:
-      13px
-      8px
-      94px
-      8px;
+      15px
+      10px
+      100px
+      10px;
 
-    gap: 8px;
+    gap: 10px;
   }
+
 
   .bubble {
     max-width: 82%;
-    padding: 9px 12px 6px 12px;
-    font-size: 16px;
-    border-radius: 15px;
+
+    padding:
+      11px
+      13px
+      7px
+      13px;
+
+    font-size: 17px;
+
+    border-radius: 16px;
   }
 
+
   .bubble .time {
-    font-size: 10px;
+    font-size: 11px;
   }
 
 
   /* BARRE FLOTTANTE */
 
   .message-input-row {
-    left: 7px;
-    right: 7px;
-    bottom: 9px;
+    left: 8px;
+    right: 8px;
 
-    padding: 5px 6px 5px 12px;
+    bottom: 10px;
 
-    gap: 6px;
+    padding:
+      6px
+      7px
+      6px
+      14px;
+
+    gap: 7px;
   }
+
 
   .message-input-row input {
-    padding: 10px 2px;
-    font-size: 15px;
+    padding:
+      12px
+      2px;
+
+    font-size: 16px;
   }
+
 
   .send-btn {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
+    width: 48px;
+    height: 48px;
+
+    font-size: 19px;
   }
 
+
+  /* ÉCRITURE */
+
   .typing-indicator {
-    bottom: 73px;
-    left: 12px;
-    font-size: 11px;
+    bottom: 78px;
+
+    left: 15px;
+
+    font-size: 12px;
   }
+
+
+  /* RETOUR */
 
   .back-btn {
     display: none;
   }
+
   }
