@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-<head>
   <meta charset="UTF-8">
 
   <meta
@@ -25,6 +24,13 @@
 </head>
 
 <body class="auth-page">
+
+<div id="sessionLoading">
+  <div class="session-logo">AFRIQ'S</div>
+  <div class="session-text">Chargement...</div>
+</div>
+
+<div id="pageContent">
 
 <header>
 
@@ -243,8 +249,24 @@
 
 </footer>
 
+</div>
 
 <script>
+
+const sessionLoading =
+  document.getElementById('sessionLoading');
+
+const pageContent =
+  document.getElementById('pageContent');
+
+if (localStorage.getItem('token')) {
+  pageContent.style.display = 'none';
+  sessionLoading.style.display = 'flex';
+} else {
+  sessionLoading.style.display = 'none';
+  pageContent.style.display = 'block';
+}
+
 
 /* =========================
    RETOUR À L'ACCUEIL
@@ -430,19 +452,22 @@ function motDePasseOublie() {
 
       if (res.ok) {
 
-        window.location.href =
-          'chat.html';
+        window.location.replace('chat.html');
 
       } else {
 
         localStorage.clear();
+
+        sessionLoading.style.display = 'none';
+        pageContent.style.display = 'block';
 
       }
 
 
     } catch (err) {
 
-      /* Le serveur est peut-être temporairement indisponible */
+      sessionLoading.style.display = 'none';
+      pageContent.style.display = 'block';
 
     }
 

@@ -1657,3 +1657,40 @@ footer.about a {
     font-size: 15px;
   }
 }
+
+/* ==================================================
+   ÉCRAN DE VÉRIFICATION DE SESSION
+================================================== */
+
+#sessionLoading {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #F7EFEA;
+}
+
+.session-logo {
+  font-family: 'Segoe Script', 'Brush Script MT', cursive;
+  font-size: 42px;
+  font-weight: bold;
+
+  color: #C6552A;
+
+  margin-bottom: 14px;
+}
+
+.session-text {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+
+  color: #777;
+
+  letter-spacing: 0.3px;
+}
+
