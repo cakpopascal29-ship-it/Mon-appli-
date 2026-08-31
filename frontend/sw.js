@@ -1,110 +1,170 @@
 self.addEventListener('install', (event) => {
-self.skipWaiting();
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-event.waitUntil(
-self.clients.claim()
-);
+  event.waitUntil(
+    self.clients.claim()
+  );
 });
 
+
 /* =========================================================
-NOTIFICATION PUSH
+   NOTIFICATION PUSH
 ========================================================= */
 
 self.addEventListener('push', (event) => {
 
-if (!event.data) {
-return;
-}
-
-const data = event.data.json();
-
-const title = data.title || "AFRIQ'Sender";
-
-const options = {
-body: data.body || 'Nouveau message',
-icon: data.icon || '/icon-192.png',
-badge: data.badge || '/icon-192.png',
-vibrate: [200, 100, 200],
-tag: 'afriqs-message',
-renotify: true,
-data: {
-url: data.url || '/chat.html'
-}
-};
-
-event.waitUntil(
-
-self.clients.matchAll({
-  type: 'window',
-  includeUncontrolled: true
-}).then((clients) => {
-
-  const applicationVisible = clients.some(
-    client => client.visibilityState === 'visible'
-  );
-
-  /*
-   * Si AFRIQ'Sender est déjà visible,
-   * chat.html gère le message.
-   *
-   * On évite donc une deuxième notification.
-   */
-
-  if (applicationVisible) {
+  if (!event.data) {
     return;
   }
 
-  return self.registration.showNotification(
-    title,
-    options
-  );
-})
+  let data = {};
 
-);
-});
+  try {
+    data = event.data.json();
+  } catch (err) {
+    data = {
+      body: event.data.text()
+    };
+  }
 
-/* =========================================================
-CLIC SUR NOTIFICATION
-========================================================= */
+  const title =
+    data.title || "AFRIQ'Sender";
 
-self.addEventListener('notificationclick', (event) => {
+  const options = {
 
-event.notification.close();
+    body:
+      data.body ||
+      '💬 Vous avez reçu un nouveau message',
 
-const url =
-event.notification.data &&
-event.notification.data.url
-? event.notification.data.url
-: '/chat.html';
+    icon:
+      data.icon ||
+      '/icon-192.png',
 
-event.waitUntil(
+    badge:
+      data.badge ||
+      '/icon-192.png',
 
-self.clients.matchAll({
-  type: 'window',
-  includeUncontrolled: true
-}).then((clients) => {
+    vibrate:
+      [200, 100, 200],
 
-  for (const client of clients) {
+    tag:
+      'afriqs-message',
 
-    if ('focus' in client) {
+    renotify:
+      true,
 
-      client.focus();
+    requireInteraction:
+      false,
 
-      if ('navigate' in client) {
-        return client.navigate(url);
+    data: {
+      url:
+        data.url ||
+        '/chat.html'
+    }
+
+  };
+
+
+  event.waitUntil(
+
+    self.clients.matchAll({
+
+      type:
+        'window',
+
+      includeUncontrolled:
+        true
+
+    }).then((clients) => {
+
+      const applicationVisible =
+        clients.some(
+          client =>
+            client.visibilityState === 'visible'
+        );
+
+
+      /*
+       * Si AFRIQ'Sender est déjà visible,
+       * on ne crée pas de notification supplémentaire.
+       */
+
+      if (applicationVisible) {
+        return;
       }
 
-      return client;
-    }
-  }
 
-  if (self.clients.openWindow) {
-    return self.clients.openWindow(url);
-  }
+      return self.registration.showNotification(
+        title,
+        options
+      );
 
-})
+    })
 
-);
+  );
+
 });
+
+
+/* =========================================================
+   CLIC SUR LA NOTIFICATION
+========================================================= */
+
+self.addEventListener(
+  'notificationclick',
+  (event) => {
+
+    event.notification.close();
+
+    const url =
+      event.notification.data &&
+      event.notification.data.url
+        ? event.notification.data.url
+        : '/chat.html';
+
+
+    event.waitUntil(
+
+      self.clients.matchAll({
+
+        type:
+          'window',
+
+        includeUncontrolled:
+          true
+
+      }).then((clients) => {
+
+        for (const client of clients) {
+
+          if ('focus' in client) {
+
+            client.focus();
+
+            if ('navigate' in client) {
+
+              return client.navigate(url);
+
+            }
+
+            return client;
+
+          }
+
+        }
+
+
+        if (self.clients.openWindow) {
+
+          return self.clients.openWindow(url);
+
+        }
+
+      })
+
+    );
+
+  }
+);
