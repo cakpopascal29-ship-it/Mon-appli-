@@ -605,7 +605,7 @@ const server =
   http.createServer(app);
 
 const io =
-  socketio(server);
+  socketio(server, { cors: { origin: true, credentials: true } });
 
 const onlineUsers =
   new Map();
