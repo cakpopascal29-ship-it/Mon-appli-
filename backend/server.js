@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
@@ -11,6 +12,7 @@ const User = require('./models/User');
 const Message = require('./models/Message');
 
 const app = express();
+app.use(cors({ origin: true, credentials: true }));
 
 /* =========================================================
 EXPRESS
@@ -232,7 +234,58 @@ app.delete(
 );
 
 /* =========================================================
-UTILISATEURS
+   FIREBASE CLOUD MESSAGING — ENREGISTRER UN TOKEN
+========================================================= */
+
+app.post(
+  '/api/notifications/fcm-token',
+  verifierToken,
+  async (req, res) => {
+    try {
+      const { token } = req.body;
+
+      if (!token || typeof token !== 'string') {
+        return res.status(400).json({
+          error: 'Token FCM invalide'
+        });
+      }
+
+      const user = await User.findById(req.user.id);
+
+      if (!user) {
+        return res.status(404).json({
+          error: 'Utilisateur introuvable'
+        });
+      }
+
+      if (!user.fcmTokens) {
+        user.fcmTokens = [];
+      }
+
+      if (!user.fcmTokens.includes(token)) {
+        user.fcmTokens.push(token);
+        await user.save();
+      }
+
+      res.json({
+        message: 'Token FCM enregistré'
+      });
+
+    } catch (err) {
+      console.error(
+        'Erreur enregistrement token FCM:',
+        err
+      );
+
+      res.status(500).json({
+        error: err.message
+      });
+    }
+  }
+);
+
+/* =========================================================
+   UTILISATEURS
 ========================================================= */
 
 app.get(
