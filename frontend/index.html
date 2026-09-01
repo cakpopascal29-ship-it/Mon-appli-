@@ -2,6 +2,18 @@
 <html lang="fr">
 
 <head>
+  <style>
+html.session-checking body {
+  visibility: hidden;
+}
+  </style>
+
+  <script>
+if (localStorage.getItem('token')) {
+  document.documentElement.classList.add('session-checking');
+}
+  </script>
+
   <meta charset="UTF-8">
 
   <meta
@@ -430,49 +442,65 @@ function motDePasseOublie() {
 ========================= */
 
 (async function verifierSessionExistante() {
+  const token = localStorage.getItem('token');
 
-  const token =
-    localStorage.getItem('token');
+  // Pas de token : afficher immédiatement la page de connexion
+  if (!token) {
+    document.documentElement.classList.remove('session-checking');
 
-
-  if (token) {
-
-    try {
-
-      const res = await fetch(
-        '/api/auth/me',
-        {
-          headers: {
-            'Authorization':
-              'Bearer ' + token
-          }
-        }
-      );
-
-
-      if (res.ok) {
-
-        window.location.replace('chat.html');
-
-      } else {
-
-        localStorage.clear();
-
-        sessionLoading.style.display = 'none';
-        pageContent.style.display = 'block';
-
-      }
-
-
-    } catch (err) {
-
+    if (typeof sessionLoading !== 'undefined' && sessionLoading) {
       sessionLoading.style.display = 'none';
-      pageContent.style.display = 'block';
-
     }
 
+    if (typeof pageContent !== 'undefined' && pageContent) {
+      pageContent.style.display = 'block';
+    }
+
+    return;
   }
 
+  try {
+    const res = await fetch('/api/auth/me', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    // Session valide : aller directement au chat
+    if (res.ok) {
+      window.location.replace('chat.html');
+      return;
+    }
+
+    // Token invalide
+    localStorage.clear();
+    document.documentElement.classList.remove('session-checking');
+
+    if (typeof sessionLoading !== 'undefined' && sessionLoading) {
+      sessionLoading.style.display = 'none';
+    }
+
+    if (typeof pageContent !== 'undefined' && pageContent) {
+      pageContent.style.display = 'block';
+    }
+
+  } catch (err) {
+    console.warn(
+      'Vérification de session impossible pour le moment :',
+      err
+    );
+
+    // Ne jamais laisser la page invisible en cas d'erreur réseau
+    document.documentElement.classList.remove('session-checking');
+
+    if (typeof sessionLoading !== 'undefined' && sessionLoading) {
+      sessionLoading.style.display = 'none';
+    }
+
+    if (typeof pageContent !== 'undefined' && pageContent) {
+      pageContent.style.display = 'block';
+    }
+  }
 })();
 
 </script>
