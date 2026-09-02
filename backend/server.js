@@ -5,11 +5,66 @@ const socketio = require('socket.io');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const webpush = require('web-push');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const authRoutes = require('./routes/auth');
 const verifierToken = require('./middleware/auth');
 const User = require('./models/User');
 const Message = require('./models/Message');
+
+const audioUploadDir = path.join(
+  __dirname,
+  'uploads',
+  'audio'
+);
+
+if (!fs.existsSync(audioUploadDir)) {
+  fs.mkdirSync(
+    audioUploadDir,
+    { recursive: true }
+  );
+}
+
+const audioStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, audioUploadDir);
+  },
+
+  filename: (req, file, cb) => {
+    const extension =
+      path.extname(file.originalname) || '.webm';
+
+    const filename =
+      `audio-${Date.now()}-${Math.random()
+        .toString(36)
+        .slice(2, 10)}${extension}`;
+
+    cb(null, filename);
+  }
+});
+
+const audioUpload = multer({
+  storage: audioStorage,
+
+  limits: {
+    fileSize: 10 * 1024 * 1024
+  },
+
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype &&
+      file.mimetype.startsWith('audio/')
+    ) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error('Fichier audio uniquement')
+      );
+    }
+  }
+});
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -21,7 +76,69 @@ EXPRESS
 app.use(express.static('../frontend'));
 app.use(express.json());
 
+app.use(
+  '/uploads/audio',
+  express.static(
+    path.join(__dirname, 'uploads', 'audio')
+  )
+);
+
+
+
 app.use('/api/auth', authRoutes);
+
+/* =========================================================
+   UPLOAD MESSAGE AUDIO
+   ========================================================= */
+
+app.post(
+  '/api/audio/upload',
+  verifierToken,
+  (req, res) => {
+
+    audioUpload.single('audio')(
+      req,
+      res,
+      (err) => {
+
+        if (err) {
+          console.error(
+            'Erreur upload audio:',
+            err.message
+          );
+
+          return res.status(400).json({
+            ok: false,
+            error: err.message
+          });
+        }
+
+        if (!req.file) {
+          return res.status(400).json({
+            ok: false,
+            error: 'Aucun fichier audio reçu'
+          });
+        }
+
+        const audioUrl =
+          `/uploads/audio/${req.file.filename}`;
+
+        console.log(
+          'Audio reçu:',
+          req.file.filename
+        );
+
+        return res.json({
+          ok: true,
+          audioUrl,
+          filename: req.file.filename
+        });
+      }
+    );
+  }
+);
+
+
 
 /* =========================================================
 WEB PUSH / VAPID
@@ -1115,6 +1232,184 @@ io.on(
     /* =====================================================
        INDICATEUR "ÉCRIT..."
     ===================================================== */
+
+      /* =====================================================
+         ENVOYER MESSAGE AUDIO
+      ===================================================== */
+
+      socket.on(
+        'sendAudioMessage',
+        async (data, callback) => {
+
+          try {
+
+            if (
+              !data ||
+              !data.receiverId ||
+              !data.audioUrl
+            ) {
+
+              if (
+                typeof callback ===
+                'function'
+              ) {
+
+                callback({
+                  ok:
+                    false,
+
+                  error:
+                    'Données du message audio invalides'
+                });
+
+              }
+
+              return;
+
+            }
+
+            const receiverId =
+              String(
+                data.receiverId
+              );
+
+            const audioUrl =
+              String(
+                data.audioUrl
+              ).trim();
+
+            if (!audioUrl) {
+
+              if (
+                typeof callback ===
+                'function'
+              ) {
+
+                callback({
+                  ok:
+                    false,
+
+                  error:
+                    'URL audio manquante'
+                });
+
+              }
+
+              return;
+
+            }
+
+            /* ===============================================
+               ENREGISTRER LE MESSAGE AUDIO
+            =============================================== */
+
+            const newMessage =
+              new Message({
+
+                sender:
+                  userId,
+
+                receiver:
+                  receiverId,
+
+                message:
+                  '🎙️ Message vocal',
+
+                messageType:
+                  'audio',
+
+                audioUrl:
+                  audioUrl,
+
+                timestamp:
+                  new Date()
+
+              });
+
+            await newMessage.save();
+
+            /* ===============================================
+               ENVOYER AU DESTINATAIRE
+            =============================================== */
+
+            const receiverSocketId =
+              onlineUsers.get(
+                receiverId
+              );
+
+            if (
+              receiverSocketId
+            ) {
+
+              io.to(
+                receiverSocketId
+              ).emit(
+                'receiveMessage',
+                newMessage
+              );
+
+            }
+
+            /* ===============================================
+               AFFICHER CHEZ L'EXPÉDITEUR
+            =============================================== */
+
+            socket.emit(
+              'receiveMessage',
+              newMessage
+            );
+
+            /* ===============================================
+               CONFIRMATION AU FRONTEND
+            =============================================== */
+
+            if (
+              typeof callback ===
+              'function'
+            ) {
+
+              callback({
+
+                ok:
+                  true,
+
+                messageId:
+                  String(
+                    newMessage._id
+                  )
+
+              });
+
+            }
+
+          } catch (err) {
+
+            console.error(
+              'Erreur sendAudioMessage:',
+              err
+            );
+
+            if (
+              typeof callback ===
+              'function'
+            ) {
+
+              callback({
+
+                ok:
+                  false,
+
+                error:
+                  'Erreur lors de l’envoi du message audio'
+
+              });
+
+            }
+
+          }
+
+        }
+      );
 
     socket.on(
       'typing',
