@@ -4,6 +4,18 @@ const messageSchema = new mongoose.Schema({
   sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   message: { type: String, required: true },
+
+  messageType: {
+    type: String,
+    enum: ['text', 'audio'],
+    default: 'text'
+  },
+
+  audioUrl: {
+    type: String,
+    default: null
+  },
+
   timestamp: { type: Date, default: Date.now },
   readAt: { type: Date, default: null }
 });

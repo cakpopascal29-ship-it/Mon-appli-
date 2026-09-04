@@ -12,6 +12,7 @@
   <link rel="icon" href="favicon.ico">
 
   <meta name="theme-color" content="#C6552A">
+  <script src="api-config.js"></script>
 </head>
 
 <body class="auth-page">
@@ -34,64 +35,11 @@
     onclick="allerAccueil(event)"
     style="display:block; text-decoration:none;"
   >
-
-    <svg
-      class="logo-oval"
-      width="520"
-      height="260"
-      viewBox="0 0 260 130"
+    <img
+      src="logo-afriqs-detoure.png"
+      alt="AFRIQ'Sender"
+      class="auth-logo"
     >
-
-      <ellipse
-        cx="130"
-        cy="65"
-        rx="112"
-        ry="52"
-        fill="#FFFFFF"
-      />
-
-
-      <text
-        x="130"
-        y="73"
-        text-anchor="middle"
-        font-size="37"
-        font-family="'Segoe Script','Brush Script MT',cursive"
-        font-weight="bold"
-        fill="#C6552A"
-      >
-        AFRIQ'S
-      </text>
-
-
-      <path
-        d="
-          M45 84
-          C75 96 105 96 130 94
-          C160 92 188 88 215 76
-        "
-        fill="none"
-        stroke="#C6552A"
-        stroke-width="3"
-        stroke-linecap="round"
-      />
-
-
-      <text
-        x="130"
-        y="108"
-        text-anchor="middle"
-        font-size="13"
-        font-family="Arial, sans-serif"
-        font-weight="bold"
-        letter-spacing="3"
-        fill="#C6552A"
-      >
-        ender
-      </text>
-
-    </svg>
-
   </a>
 
 
@@ -167,6 +115,14 @@
       </button>
 
     </div>
+
+
+    <div
+      id="registerMessage"
+      class="register-message"
+      role="alert"
+      aria-live="polite"
+    ></div>
 
 
     <button
@@ -318,7 +274,7 @@ async function sInscrire() {
 
     const res =
       await fetch(
-        '/api/auth/register',
+        API_BASE_URL + '/api/auth/register',
         {
           method: 'POST',
 
@@ -341,28 +297,33 @@ async function sInscrire() {
 
     if (res.ok) {
 
-      alert(
-        'Compte créé avec succès. Vous pouvez vous connecter.'
-      );
+      const registerMessage = document.getElementById('registerMessage');
+      if (registerMessage) {
+        registerMessage.textContent = 'Compte créé avec succès. Vous pouvez vous connecter.';
+        registerMessage.className = 'register-message success show';
+      }
 
       window.location.href =
         'index.html';
 
     } else {
 
-      alert(
-        data.error ||
-        "Erreur lors de l'inscription"
-      );
+      const registerMessage = document.getElementById('registerMessage');
+      if (registerMessage) {
+        registerMessage.textContent = data.error || "Erreur lors de l'inscription";
+        registerMessage.className = 'register-message error show';
+      }
 
     }
 
 
   } catch (err) {
 
-    alert(
-      'Impossible de contacter le serveur'
-    );
+    const registerMessage = document.getElementById('registerMessage');
+    if (registerMessage) {
+      registerMessage.textContent = 'Impossible de contacter le serveur';
+      registerMessage.className = 'register-message error show';
+    }
 
   }
 

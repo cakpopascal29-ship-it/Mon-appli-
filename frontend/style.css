@@ -13,6 +13,10 @@ body {
 
 body {
   background-color: #F7EFEA;
+  background-image: url("assets/branding/file_000000001a2c81f493b746a9e121063d.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,14 +29,18 @@ body {
 
 header {
   position: relative;
-  background-color: #C6552A;
+  background-color: transparent;
+  background-image: url("assets/branding/IMAGE D'ENTÊTE.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
 
   height: 205px;
   min-height: 205px;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+      align-items: center;
 
   overflow: hidden;
   flex-shrink: 0;
@@ -107,6 +115,20 @@ header {
 
 
 /* ==================================================
+   LOGO HEADER CHAT
+================================================== */
+
+.afriqs-header-logo {
+  display: block;
+  width: min(72vw, 300px);
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==================================================
    VAGUE
 ================================================== */
 
@@ -130,13 +152,14 @@ header {
 .chat-app {
   width: 100%;
 
-  height: calc(100vh - 205px);
+  height: calc(100dvh - 205px);
 
-  min-height: 500px;
+  min-height: 0;
 
   display: flex;
+  flex-direction: row;
 
-  background: #ffffff;
+  background: transparent;
 
   overflow: hidden;
 
@@ -149,7 +172,7 @@ header {
 ================================================== */
 
 .user-list {
-  width: 26.67%;
+  
 
   min-width: 0;
   height: 100%;
@@ -177,7 +200,7 @@ header {
   min-height: 68px;
 
   display: flex;
-  align-items: center;
+      align-items: center;
 
   gap: 7px;
 
@@ -215,12 +238,12 @@ header {
 
   border-radius: 50%;
 
-  background-color: #C6552A;
+  background-color: #16A34A;
 
   color: white;
 
   display: flex;
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   font-weight: bold;
@@ -264,12 +287,12 @@ header {
 
   border-radius: 50%;
 
-  background-color: #C6552A;
+  background-color: #012A86;
 
   color: white;
 
   display: flex;
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   font-weight: bold;
@@ -372,7 +395,7 @@ header {
 
   padding: 0;
 
-  margin-left: auto;
+  margin-left: 0;
 
   flex-shrink: 0;
 
@@ -387,7 +410,7 @@ header {
   cursor: pointer;
 
   display: flex;
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   font-size: 0;
@@ -426,7 +449,7 @@ header {
   position: relative;
 
   display: flex;
-  align-items: center;
+      align-items: center;
 
   gap: 8px;
 
@@ -472,7 +495,7 @@ header {
   color: white;
 
   display: flex;
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   font-weight: bold;
@@ -532,8 +555,7 @@ header {
   overflow: hidden;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
 
   gap: 4px;
 }
@@ -562,8 +584,7 @@ header {
   padding: 0 4px;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   border-radius: 10px;
@@ -595,7 +616,7 @@ header {
 
   padding: 4px;
 
-  margin-left: auto;
+  margin-left: 0;
 
   flex-shrink: 0;
 }
@@ -610,7 +631,7 @@ header {
 ================================================== */
 
 .conversation {
-  width: 73.33%;
+  
 
   height: 100%;
 
@@ -634,8 +655,7 @@ header {
   min-height: 0;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   color: #999;
@@ -678,8 +698,7 @@ header {
   height: 52px;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   padding: 4px 8px;
@@ -700,8 +719,7 @@ header {
   display: flex;
 
   flex-direction: row;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   gap: 6px;
@@ -718,8 +736,7 @@ header {
   color: white;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   font-size: 13px;
@@ -874,7 +891,7 @@ header {
 .message-sent {
   align-self: flex-end;
 
-  background-color: #C6552A;
+  background-color: #012A86;
 
   color: #ffffff;
 
@@ -976,14 +993,17 @@ header {
   display: flex;
 
   gap: 7px;
+  flex-wrap: nowrap;
+
+  min-height: 94px;
+  overflow: visible;
 
   padding:
     5px
     6px
     5px
     12px;
-
-  align-items: center;
+      align-items: center;
 
   background: #ffffff;
 
@@ -1018,40 +1038,6 @@ header {
 }
 
 
-/* ==================================================
-   BOUTON ENVOYER
-================================================== */
-
-.send-btn {
-  width: 44px;
-  height: 44px;
-
-  border-radius: 50%;
-
-  background-color: #C6552A;
-
-  color: white;
-
-  border: none;
-
-  font-size: 18px;
-
-  cursor: pointer;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-}
-
-.send-btn:active {
-  transform: scale(0.95);
-}
-
-
-/* ==================================================
    FOOTER / À PROPOS
 ================================================== */
 
@@ -1144,7 +1130,7 @@ footer.about a {
   ================================================== */
 
   .user-list {
-    width: 26.67%;
+    
 
     height: 100%;
 
@@ -1280,7 +1266,7 @@ footer.about a {
   ================================================== */
 
   .conversation {
-    width: 73.33%;
+    
 
     height: 100%;
 
@@ -1351,6 +1337,7 @@ footer.about a {
       7px;
 
     gap: 7px;
+      flex-wrap: nowrap;
 
     min-height: 0;
   }
@@ -1391,40 +1378,7 @@ footer.about a {
 
 
   /* ==================================================
-     BARRE D'ÉCRITURE
-  ================================================== */
 
-  .message-input-row {
-    left: 5px;
-    right: 5px;
-
-    bottom: 6px;
-
-    padding:
-      4px
-      4px
-      4px
-      9px;
-
-    gap: 4px;
-  }
-
-
-  .message-input-row input {
-    padding:
-      9px
-      2px;
-
-    font-size: 13px;
-  }
-
-
-  .send-btn {
-    width: 38px;
-    height: 38px;
-
-    font-size: 16px;
-  }
 
 
   /* ==================================================
@@ -1462,8 +1416,7 @@ footer.about a {
   width: 100%;
 
   display: flex;
-
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   padding:
@@ -1669,7 +1622,7 @@ footer.about a {
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+      align-items: center;
   justify-content: center;
 
   background-color: #F7EFEA;
@@ -1692,5 +1645,695 @@ footer.about a {
   color: #777;
 
   letter-spacing: 0.3px;
+}
+
+
+/* ==================================================
+   APERCU MESSAGE VOCAL
+================================================== */
+
+.audio-preview-container {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #F7EFEA;
+  box-sizing: border-box;
+}
+
+.audio-preview-container audio {
+  width: 100%;
+  display: block;
+}
+
+.audio-preview-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.audio-preview-delete,
+.audio-preview-send {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.audio-preview-delete {
+  background: #e5e5e5;
+  color: #333;
+}
+
+.audio-preview-send {
+  background: #C6552A;
+  color: #fff;
+}
+
+.audio-preview-delete:active,
+.audio-preview-send:active {
+  transform: scale(0.96);
+}
+
+/* ==================================================
+   BOUTON DÉCONNEXION — POSITION FINALE
+================================================== */
+
+.user-list {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+}
+
+.my-profile {
+  flex-shrink: 0 !important;
+}
+
+.users-toggle-btn {
+  flex-shrink: 0 !important;
+}
+
+.users-scroll {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+}
+
+.logout-container {
+  width: fit-content !important;
+  flex-shrink: 0 !important;
+  align-self: flex-start !important;
+  position: absolute !important;
+  left: 5px !important;
+  bottom: 6px !important;
+  margin: 0 !important;
+  z-index: 20 !important;
+}
+
+.logout-btn {
+  width: 82px !important;
+  min-width: 82px !important;
+  height: 34px !important;
+  margin: 0 !important;
+  padding: 0 6px !important;
+  border-radius: 8px !important;
+  background: #DC2626 !important;
+  color: white !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+
+
+/* ==================================================
+   BARRE PLIER / DÉPLIER LES UTILISATEURS
+================================================== */
+
+.users-toggle-btn {
+  display: block !important;
+  width: 72% !important;
+  height: 5px !important;
+  min-height: 5px !important;
+  margin: 5px auto 6px auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #BDBDBD !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.users-toggle-btn:hover,
+.users-toggle-btn:focus {
+  background: #9E9E9E !important;
+  outline: none !important;
+}
+
+.user-list.users-collapsed .users-scroll {
+  display: none !important;
+}
+
+/* Le profil et la déconnexion restent visibles */
+.user-list.users-collapsed .my-profile,
+.user-list.users-collapsed .users-toggle-btn,
+.user-list.users-collapsed .logout-container {
+  flex-shrink: 0 !important;
+}
+
+
+/* ==================================================
+   VUE HORIZONTALE : CHAT ↔ À PROPOS
+================================================== */
+
+.horizontal-viewport {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  flex: 1 1 auto !important;
+}
+
+.horizontal-track {
+  width: 200% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  transition: transform 0.28s ease !important;
+  will-change: transform;
+}
+
+.horizontal-panel {
+  flex: 0 0 50% !important;
+  width: 50% !important;
+  min-width: 50% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.chat-panel {
+  overflow: hidden !important;
+  position: relative !important;
+  min-height: 0 !important;
+}
+
+.about-panel {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 20px 16px !important;
+  box-sizing: border-box !important;
+  touch-action: pan-y !important;
+}
+
+.horizontal-track.show-about {
+  transform: translateX(-50%) !important;
+}
+
+/* Le chat conserve sa structure interne */
+.chat-panel .chat-app {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.chat-panel .user-list {
+  
+  
+  min-height: 0 !important;
+}
+
+.chat-panel .conversation {
+  
+  
+  min-height: 0 !important;
+}
+
+/* Quand on replie : seule la liste des utilisateurs disparaît */
+.chat-panel .user-list.users-collapsed {
+  
+  
+}
+
+.chat-panel .user-list.users-collapsed .users-scroll {
+  display: none !important;
+}
+
+/* Profil + barre + déconnexion restent visibles */
+.chat-panel .user-list.users-collapsed .my-profile,
+.chat-panel .user-list.users-collapsed .users-toggle-btn,
+.chat-panel .user-list.users-collapsed .logout-container {
+  display: block !important;
+}
+
+/* ==================================================
+   À PROPOS
+================================================== */
+
+.about-panel .about {
+  width: 100% !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+
+
+
+/* ==================================================
+   FOND AFRIQ'S — DESIGN VISUEL
+================================================== */
+
+.chat-app {
+  position: relative;
+  background-color: transparent !important;
+  background-image: url("assets/branding/fond-afriqs-propre.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center bottom !important;
+  background-size: cover !important;
+}
+
+.user-list,
+.conversation {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* ==================================================
+   FOND AFRIQ'S — VISIBILITÉ + FLOU
+================================================== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image: url("assets/branding/file_000000001a2c81f493b746a9e121063d.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  filter: blur(3px);
+  transform: scale(1.03);
+
+  opacity: 0.72;
+}
+
+
+
+/* IDENTITE AFRIQ'S — CONNEXION + INSCRIPTION */
+.auth-page main {
+  background: linear-gradient(
+    135deg,
+    rgba(1, 42, 134, 0.18),
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+}
+
+.auth-page .form-container {
+  border-top: 5px solid #012A86;
+}
+
+
+/* IDENTITE BLEUE AFRIQ'S — AUTHENTIFICATION */
+.auth-page .primary-btn {
+  background-color: #012A86 !important;
+  border-color: #012A86 !important;
+}
+
+.auth-page .primary-btn:hover,
+.auth-page .primary-btn:focus {
+  background-color: #012A86 !important;
+  border-color: #012A86 !important;
+}
+
+.auth-page footer.about {
+  background-color: #012A86 !important;
+  color: #ffffff !important;
+}
+
+.auth-page footer.about h3,
+.auth-page footer.about p,
+.auth-page footer.about a {
+  color: #ffffff !important;
+}
+
+/* ==================================================
+   CORRECTION FINALE ANDROID — CHAT + LOGO + COLONNE
+================================================== */
+
+@media (max-width: 700px) {
+
+  /* Le logo descend de 0,5 cm et part à gauche de 0,5 cm */
+  .afriqs-header-logo {
+    transform: translate(-19px, 19px) !important;
+  }
+
+  .logo-oval {
+    transform: translate(-19px, 19px) !important;
+  }
+
+  /* Hauteur réelle disponible sur Android */
+  .horizontal-viewport {
+    height: calc(100dvh - 205px) !important;
+    max-height: calc(100dvh - 205px) !important;
+  }
+
+  .chat-panel,
+  .chat-panel .chat-app,
+  .conversation,
+  .user-list {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* Animation ouverture / fermeture */
+  .user-list {
+    
+    
+    overflow: hidden !important;
+    transition:
+      width 0.28s ease,
+      flex-basis 0.28s ease !important;
+  }
+
+  .conversation {
+    
+    
+    transition:
+      width 0.28s ease,
+      flex-basis 0.28s ease !important;
+  }
+
+  /* Colonne utilisateurs fermée */
+  .chat-app.users-collapsed .user-list {
+    width: 0 !important;
+    flex-basis: 0 !important;
+    border-right: 0 !important;
+  }
+
+  .chat-app.users-collapsed .conversation {
+    width: 100% !important;
+    flex-basis: 100% !important;
+  }
+
+  /* Empêche le contenu de la colonne fermée de dépasser */
+  .chat-app.users-collapsed .user-list > * {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Quand elle est ouverte */
+  .chat-app:not(.users-collapsed) .user-list > * {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .user-list > * {
+    transition: opacity 0.15s ease !important;
+  }
+
+}
+
+
+/* ==================================================
+   HAUTEUR VERTICALE MOBILE — EXPERIENCE APPLICATION
+================================================== */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* Structure générale */
+.horizontal-viewport {
+  height: calc(100dvh - 205px) !important;
+  max-height: calc(100dvh - 205px) !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+/* Toute la zone active utilise exactement la hauteur disponible */
+.horizontal-track,
+.horizontal-panel,
+.chat-panel,
+.chat-panel .chat-app {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+
+/* Chat sans dépassement vertical */
+.chat-app {
+  overflow: hidden !important;
+}
+
+/* Conversation */
+.conversation,
+.conv-active {
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Les messages occupent tout l'espace restant */
+.messages {
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+}
+
+/* Colonne utilisateurs */
+.user-list {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.users-scroll {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+}
+
+
+/* ==================================================
+   COULEURS FINALES AFRIQ'S
+================================================== */
+
+/* Mon avatar */
+.my-profile .avatar,
+.my-profile > .avatar {
+  background-color: #16A34A !important;
+}
+
+/* Mes messages */
+.message-sent {
+  background-color: #012A86 !important;
+}
+
+/* Bouton envoyer */
+.send-btn {
+  background-color: #012A86 !important;
+}
+
+/* Petit symbole vocal */
+.send-btn .voice-icon {
+  color: #012A86 !important;
+}
+
+
+
+
+
+.my-profile {
+  flex: 0 0 auto !important;
+}
+
+.users-scroll {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  padding-bottom: 48px !important;
+}
+
+.logout-container {
+  position: absolute !important;
+  left: 8px !important;
+  bottom: 8px !important;
+  width: auto !important;
+  z-index: 50 !important;
+}
+
+.logout-btn {
+  width: 90px !important;
+  min-width: 90px !important;
+  height: 36px !important;
+  padding: 0 8px !important;
+  font-size: 11px !important;
+  border-radius: 9px !important;
+  white-space: nowrap !important;
+}
+
+.messages {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-bottom: 110px !important;
+}
+
+
+/* ===== AFRIQ'S — PARTIE 2 : MODE VOCAL ===== */
+
+.message-input-row {
+  position: absolute !important;
+  left: 10px !important;
+  right: 10px !important;
+  bottom: 9px !important;
+  min-height: 64px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  padding: 8px 10px !important;
+  overflow: visible !important;
+  z-index: 100 !important;
+}
+
+.message-input-row input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 46px !important;
+  margin: 0 !important;
+  padding: 0 8px !important;
+}
+
+.call-btn,
+.message-input-row .send-btn,
+.voice-record-btn {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  flex: 0 0 50px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+.send-call-group {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+}
+
+/* MICROPHONE : aucun fond bleu */
+.message-input-row .voice-record-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #C6552A !important;
+}
+
+.message-input-row .voice-record-btn .voice-icon {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  color: #C6552A !important;
+  font-size: 25px !important;
+  line-height: 1 !important;
+}
+
+/* MODE ENREGISTREMENT */
+.message-input-row.recording-mode {
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+.message-input-row.recording-mode #callBtn,
+.message-input-row.recording-mode #messageInput,
+.message-input-row.recording-mode #sendBtn,
+.message-input-row.recording-mode #recordAudioBtn {
+  display: none !important;
+}
+
+/* CONTROLES VOCAUX */
+.message-input-row.recording-mode .audio-recording-controls {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  gap: 12px !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+}
+
+.audio-recording-timer {
+  flex: 0 0 auto !important;
+  min-width: 48px !important;
+  text-align: center !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.message-input-row.recording-mode
+.audio-recording-controls button {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  flex: 0 0 50px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 21px !important;
+  box-sizing: border-box !important;
+}
+
+#pauseAudioBtn,
+#resumeAudioBtn,
+#stopAudioBtn {
+  background: #eeeeee !important;
+  color: #333333 !important;
+}
+
+#sendRecordingBtn {
+  background: #012A86 !important;
+  color: #ffffff !important;
+}
+
+.call-btn:active,
+.message-input-row .send-btn:active,
+.voice-record-btn:active,
+.audio-recording-controls button:active {
+  transform: scale(0.95) !important;
+}
+
+
+/* ===== AFRIQ'S — PARTIE 3 : COLONNES ===== */
+
+.chat-app {
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.user-list {
+  width: 33.333333% !important;
+  flex: 0 0 33.333333% !important;
+  min-width: 0 !important;
+  max-width: 33.333333% !important;
+}
+
+.conversation {
+  width: 66.666667% !important;
+  flex: 0 0 66.666667% !important;
+  min-width: 0 !important;
+  max-width: 66.666667% !important;
 }
 
